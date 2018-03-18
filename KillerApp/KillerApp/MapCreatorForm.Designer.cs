@@ -28,144 +28,153 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.tbSize = new System.Windows.Forms.TrackBar();
+            this.cbGroundType = new System.Windows.Forms.ComboBox();
+            this.cbRivers = new System.Windows.Forms.CheckBox();
+            this.cbLakes = new System.Windows.Forms.CheckBox();
+            this.cbMapType = new System.Windows.Forms.ComboBox();
+            this.btGenerateMap = new System.Windows.Forms.Button();
+            this.btSaveMap = new System.Windows.Forms.Button();
+            this.btDeleteMap = new System.Windows.Forms.Button();
+            this.pbMap = new System.Windows.Forms.PictureBox();
+            this.lbMaps = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.btMenu = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lbSize = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMap)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // tbName
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(356, 272);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(337, 45);
-            this.textBox1.TabIndex = 0;
+            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Location = new System.Drawing.Point(356, 272);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(337, 45);
+            this.tbName.TabIndex = 0;
             // 
-            // trackBar1
+            // tbSize
             // 
-            this.trackBar1.LargeChange = 2;
-            this.trackBar1.Location = new System.Drawing.Point(356, 343);
-            this.trackBar1.Maximum = 8;
-            this.trackBar1.Minimum = 2;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(337, 56);
-            this.trackBar1.TabIndex = 1;
-            this.trackBar1.Value = 8;
+            this.tbSize.LargeChange = 100;
+            this.tbSize.Location = new System.Drawing.Point(356, 343);
+            this.tbSize.Maximum = 800;
+            this.tbSize.Minimum = 200;
+            this.tbSize.Name = "tbSize";
+            this.tbSize.Size = new System.Drawing.Size(337, 56);
+            this.tbSize.SmallChange = 100;
+            this.tbSize.TabIndex = 1;
+            this.tbSize.TickFrequency = 100;
+            this.tbSize.Value = 200;
             // 
-            // comboBox1
+            // cbGroundType
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbGroundType.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbGroundType.FormattingEnabled = true;
+            this.cbGroundType.Items.AddRange(new object[] {
+            "Water",
             "Grass",
-            "Desert",
-            "Snow"});
-            this.comboBox1.Location = new System.Drawing.Point(356, 415);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(337, 46);
-            this.comboBox1.TabIndex = 2;
+            "Snow",
+            "Desert"});
+            this.cbGroundType.Location = new System.Drawing.Point(356, 415);
+            this.cbGroundType.Name = "cbGroundType";
+            this.cbGroundType.Size = new System.Drawing.Size(337, 46);
+            this.cbGroundType.TabIndex = 2;
             // 
-            // checkBox1
+            // cbRivers
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(557, 483);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(133, 42);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Rivers";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbRivers.AutoSize = true;
+            this.cbRivers.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbRivers.Location = new System.Drawing.Point(560, 555);
+            this.cbRivers.Name = "cbRivers";
+            this.cbRivers.Size = new System.Drawing.Size(133, 42);
+            this.cbRivers.TabIndex = 3;
+            this.cbRivers.Text = "Rivers";
+            this.cbRivers.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // cbLakes
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(356, 483);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(127, 42);
-            this.checkBox2.TabIndex = 4;
-            this.checkBox2.Text = "Lakes";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.cbLakes.AutoSize = true;
+            this.cbLakes.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbLakes.Location = new System.Drawing.Point(356, 555);
+            this.cbLakes.Name = "cbLakes";
+            this.cbLakes.Size = new System.Drawing.Size(127, 42);
+            this.cbLakes.TabIndex = 4;
+            this.cbLakes.Text = "Lakes";
+            this.cbLakes.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // cbMapType
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.cbMapType.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbMapType.FormattingEnabled = true;
+            this.cbMapType.Items.AddRange(new object[] {
             "Continent",
             "Island"});
-            this.comboBox2.Location = new System.Drawing.Point(356, 546);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(337, 46);
-            this.comboBox2.TabIndex = 5;
+            this.cbMapType.Location = new System.Drawing.Point(356, 488);
+            this.cbMapType.Name = "cbMapType";
+            this.cbMapType.Size = new System.Drawing.Size(337, 46);
+            this.cbMapType.TabIndex = 5;
             // 
-            // button1
+            // btGenerateMap
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(35, 899);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(292, 100);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Generate Map";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btGenerateMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btGenerateMap.Location = new System.Drawing.Point(35, 899);
+            this.btGenerateMap.Name = "btGenerateMap";
+            this.btGenerateMap.Size = new System.Drawing.Size(292, 100);
+            this.btGenerateMap.TabIndex = 6;
+            this.btGenerateMap.Text = "Generate Map";
+            this.btGenerateMap.UseVisualStyleBackColor = true;
+            this.btGenerateMap.Click += new System.EventHandler(this.btGenerateMap_Click);
             // 
-            // button2
+            // btSaveMap
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(376, 899);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(292, 100);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Save Map";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btSaveMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSaveMap.Location = new System.Drawing.Point(376, 899);
+            this.btSaveMap.Name = "btSaveMap";
+            this.btSaveMap.Size = new System.Drawing.Size(292, 100);
+            this.btSaveMap.TabIndex = 7;
+            this.btSaveMap.Text = "Save Map";
+            this.btSaveMap.UseVisualStyleBackColor = true;
+            this.btSaveMap.Click += new System.EventHandler(this.btSaveMap_Click);
             // 
-            // button3
+            // btDeleteMap
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(720, 899);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(292, 100);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Delete Map";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btDeleteMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDeleteMap.Location = new System.Drawing.Point(720, 899);
+            this.btDeleteMap.Name = "btDeleteMap";
+            this.btDeleteMap.Size = new System.Drawing.Size(292, 100);
+            this.btDeleteMap.TabIndex = 8;
+            this.btDeleteMap.Text = "Delete Map";
+            this.btDeleteMap.UseVisualStyleBackColor = true;
+            this.btDeleteMap.Click += new System.EventHandler(this.btDeleteMap_Click);
             // 
-            // pictureBox1
+            // pbMap
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(1432, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(450, 450);
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
+            this.pbMap.Location = new System.Drawing.Point(1432, 12);
+            this.pbMap.Name = "pbMap";
+            this.pbMap.Size = new System.Drawing.Size(450, 450);
+            this.pbMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbMap.TabIndex = 9;
+            this.pbMap.TabStop = false;
             // 
-            // listBox1
+            // lbMaps
             // 
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 31;
-            this.listBox1.Location = new System.Drawing.Point(1432, 468);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(450, 531);
-            this.listBox1.TabIndex = 10;
+            this.lbMaps.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMaps.FormattingEnabled = true;
+            this.lbMaps.ItemHeight = 31;
+            this.lbMaps.Location = new System.Drawing.Point(1432, 468);
+            this.lbMaps.Name = "lbMaps";
+            this.lbMaps.Size = new System.Drawing.Size(450, 531);
+            this.lbMaps.TabIndex = 10;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(233, 275);
+            this.label1.Location = new System.Drawing.Point(217, 275);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 38);
             this.label1.TabIndex = 11;
@@ -175,7 +184,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(257, 343);
+            this.label2.Location = new System.Drawing.Point(241, 343);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 38);
             this.label2.TabIndex = 12;
@@ -185,46 +194,70 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(126, 418);
+            this.label3.Location = new System.Drawing.Point(110, 418);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(217, 38);
             this.label3.TabIndex = 13;
             this.label3.Text = "Ground Type:";
             // 
-            // button4
+            // btMenu
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(1060, 899);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(292, 100);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "Menu";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btMenu.Location = new System.Drawing.Point(1060, 899);
+            this.btMenu.Name = "btMenu";
+            this.btMenu.Size = new System.Drawing.Size(292, 100);
+            this.btMenu.TabIndex = 14;
+            this.btMenu.Text = "Menu";
+            this.btMenu.UseVisualStyleBackColor = true;
             // 
-            // MapCreator
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(156, 491);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(171, 38);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Map Type:";
+            // 
+            // lbSize
+            // 
+            this.lbSize.AutoSize = true;
+            this.lbSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSize.Location = new System.Drawing.Point(713, 343);
+            this.lbSize.Name = "lbSize";
+            this.lbSize.Size = new System.Drawing.Size(71, 38);
+            this.lbSize.TabIndex = 16;
+            this.lbSize.Text = "200";
+            // 
+            // MapCreatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.lbSize);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btMenu);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.textBox1);
-            this.Name = "MapCreator";
+            this.Controls.Add(this.lbMaps);
+            this.Controls.Add(this.pbMap);
+            this.Controls.Add(this.btDeleteMap);
+            this.Controls.Add(this.btSaveMap);
+            this.Controls.Add(this.btGenerateMap);
+            this.Controls.Add(this.cbMapType);
+            this.Controls.Add(this.cbLakes);
+            this.Controls.Add(this.cbRivers);
+            this.Controls.Add(this.cbGroundType);
+            this.Controls.Add(this.tbSize);
+            this.Controls.Add(this.tbName);
+            this.Name = "MapCreatorForm";
+            this.ShowIcon = false;
             this.Text = "Map Creator";
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            ((System.ComponentModel.ISupportInitialize)(this.tbSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMap)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,21 +265,23 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.TrackBar tbSize;
+        private System.Windows.Forms.ComboBox cbGroundType;
+        private System.Windows.Forms.CheckBox cbRivers;
+        private System.Windows.Forms.CheckBox cbLakes;
+        private System.Windows.Forms.ComboBox cbMapType;
+        private System.Windows.Forms.Button btGenerateMap;
+        private System.Windows.Forms.Button btSaveMap;
+        private System.Windows.Forms.Button btDeleteMap;
+        private System.Windows.Forms.PictureBox pbMap;
+        private System.Windows.Forms.ListBox lbMaps;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btMenu;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbSize;
     }
 }
 

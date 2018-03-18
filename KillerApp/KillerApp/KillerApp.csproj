@@ -60,19 +60,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataLayer\IMapContext.cs" />
+    <Compile Include="DataLayer\MapSQLContext.cs" />
+    <Compile Include="DomeinClasses\BitmapGenerator.cs" />
+    <Compile Include="DomeinClasses\MapGenerator.cs" />
     <Compile Include="IngameForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IngameForm.Designer.cs">
       <DependentUpon>IngameForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogicLayer\Controller.cs" />
+    <Compile Include="LogicLayer\MapRepository.cs" />
     <Compile Include="MainMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainMenuForm.Designer.cs">
       <DependentUpon>MainMenuForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Map.cs" />
+    <Compile Include="DomeinClasses\Map.cs" />
     <Compile Include="MapCreatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,15 +128,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="KillerAppDatabase.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="KillerAppDatabase_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>KillerAppDatabase.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
@@ -142,5 +139,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
