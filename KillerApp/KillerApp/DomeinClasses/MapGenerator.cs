@@ -7,14 +7,14 @@ namespace KillerApp.DomeinClasses
     {
         public Map GenerateMap(string Name, int Size, int GroundType, int MapType, bool HasLakes, bool HasRivers)
         {
-            int[,] tiles = new int[Size, Size];
+            int[,] Tiles = new int[Size, Size];
             if (MapType == (int)Map.MapType.Continent)
             {
                 for (int y = 0; y < Size; y++)
                 {
                     for (int x = 0; x < Size; x++)
                     {
-                        tiles[x, y] = GroundType;
+                        Tiles[x, y] = GroundType;
                     }
                 }
             }
@@ -26,18 +26,18 @@ namespace KillerApp.DomeinClasses
                     {
                         if (x < 10 || x > (Size - 10) || y < 10 || y > (Size - 10))
                         {
-                            tiles[x, y] = 0;
+                            Tiles[x, y] = 0;
                         }
                         else
                         {
-                            tiles[x, y] = GroundType;
+                            Tiles[x, y] = GroundType;
                         }
                     }
                 }
             }
             BitmapGenerator bitmapGenerator = new BitmapGenerator();
-            Bitmap Image = bitmapGenerator.GenerateBitmap(tiles);
-            Map map = new Map(Name, Size, tiles.ToString(), DateTime.Now, GroundType, MapType, HasLakes, HasRivers, Image);
+            Bitmap Image = bitmapGenerator.GenerateBitmap(Tiles);
+            Map map = new Map(Name, Size, Tiles, DateTime.Now, GroundType, MapType, HasLakes, HasRivers, Image);
             return map;
         }
     }

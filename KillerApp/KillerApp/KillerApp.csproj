@@ -62,16 +62,19 @@
   <ItemGroup>
     <Compile Include="DataLayer\IMapContext.cs" />
     <Compile Include="DataLayer\MapSQLContext.cs" />
+    <Compile Include="DomeinClasses\ArrayStringConverter.cs" />
     <Compile Include="DomeinClasses\BitmapGenerator.cs" />
     <Compile Include="DomeinClasses\MapGenerator.cs" />
+    <Compile Include="DomeinClasses\User.cs" />
     <Compile Include="IngameForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IngameForm.Designer.cs">
       <DependentUpon>IngameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogicLayer\Controller.cs" />
+    <Compile Include="LogicLayer\MapController.cs" />
     <Compile Include="LogicLayer\MapRepository.cs" />
+    <Compile Include="LogicLayer\UserRepository.cs" />
     <Compile Include="MainMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>

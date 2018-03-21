@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using KillerApp.LogicLayer;
 using KillerApp.DomeinClasses;
@@ -14,28 +7,53 @@ namespace KillerApp
 {
     public partial class MapCreatorForm : Form
     {
-        Controller controller = Controller.Instance;
+        MapController controller = MapController.Instance;
 
         public MapCreatorForm()
         {
             InitializeComponent();
+            LoadMaps();
         }
 
         private void btGenerateMap_Click(object sender, EventArgs e)
         {
             controller.GenerateMap(tbName.Text, tbSize.Value, cbGroundType.SelectedIndex, cbMapType.SelectedIndex, cbLakes.Checked, cbRivers.Checked);
-            lbMaps.Items.Add(controller.TemporaryMap);
-            pbMap.Image = controller.TemporaryMap.Image; 
+            Map map = controller.GetMap();
+            pbMap.Image = map.Image;
         }
 
         private void btSaveMap_Click(object sender, EventArgs e)
         {
-
+            controller.SaveMap();
+            lbMaps.Items.Add(controller.GetMap());
         }
 
         private void btDeleteMap_Click(object sender, EventArgs e)
         {
+            controller.DeleteMap(lbMaps.SelectedItem.ToString());
+            lbMaps.Items.Remove(lbMaps.SelectedItem);
+        }
 
+        private void lbMaps_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbMaps.SelectedItem != null)
+            {
+                Map map = (Map)lbMaps.SelectedItem;
+                pbMap.Image = map.Image;
+            }
+        }
+
+        public void LoadMaps()
+        {
+            foreach (Map map in controller.GetMaps())
+            {
+                lbMaps.Items.Add(map);
+            }
+        }
+
+        private void tbSize_Scroll(object sender, EventArgs e)
+        {
+            lbSize.Text = tbSize.Value.ToString();
         }
     }
 }

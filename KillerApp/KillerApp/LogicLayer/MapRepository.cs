@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using KillerApp.DataLayer;
+using KillerApp.DomeinClasses;
 
 namespace KillerApp.LogicLayer
 {
@@ -7,6 +8,7 @@ namespace KillerApp.LogicLayer
     {
         private List<Map> maps = new List<Map>();
         private Map map;
+       
         public List<Map> Maps { get => maps; set => maps = value; }
         public Map Map { get => map; set => map = value; }
 
@@ -17,9 +19,16 @@ namespace KillerApp.LogicLayer
             _mapcontext = mapcontext;
         }
 
-        public void AddMap(Map map)
+        public void GenerateMap(string Name, int Size, int GroundType, int MapType, bool HasLakes, bool HasRivers)
         {
-            _mapcontext.AddMap(map);
+            MapGenerator mapGenerator = new MapGenerator();
+            Map = mapGenerator.GenerateMap(Name, Size, GroundType, MapType, HasLakes, HasRivers);
+        }
+
+        public void SaveMap()
+        {
+            _mapcontext.SaveMap(Map);
+            Maps.Add(Map);
         }
 
         public void GetMaps()
@@ -35,7 +44,7 @@ namespace KillerApp.LogicLayer
         public void DeleteMap(string name)
         {
             _mapcontext.DeleteMap(name);
+            Maps.RemoveAll(x => x.Name == name);
         }
-
     }
 }

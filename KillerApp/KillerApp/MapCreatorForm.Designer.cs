@@ -69,6 +69,7 @@
             this.tbSize.TabIndex = 1;
             this.tbSize.TickFrequency = 100;
             this.tbSize.Value = 200;
+            this.tbSize.Scroll += new System.EventHandler(this.tbSize_Scroll);
             // 
             // cbGroundType
             // 
@@ -169,6 +170,7 @@
             this.lbMaps.Name = "lbMaps";
             this.lbMaps.Size = new System.Drawing.Size(450, 531);
             this.lbMaps.TabIndex = 10;
+            this.lbMaps.SelectedIndexChanged += new System.EventHandler(this.lbMaps_SelectedIndexChanged);
             // 
             // label1
             // 

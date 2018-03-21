@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace KillerApp
+namespace KillerApp.DomeinClasses
 {
     public class Map
     {
@@ -10,7 +10,7 @@ namespace KillerApp
         
         private string name;
         private int size;
-        private string tiles;
+        private int[,] tiles;
         private DateTime creationdate;
         private int groundtype;
         private int maptype;
@@ -20,7 +20,7 @@ namespace KillerApp
         
         public string Name { get => name; set => name = value;}
         public int Size { get => size; set => size = value; }
-        public string Tiles { get => tiles; set => tiles = value; }
+        public int[,] Tiles { get => tiles; set => tiles = value; }
         public DateTime Creationdate { get => creationdate; set => creationdate = value; }
         public int Groundtype { get => groundtype; set => groundtype = value; }
         public int Maptype { get => maptype; set => maptype = value; }
@@ -37,7 +37,7 @@ namespace KillerApp
             Maptype = MapType;
         }
 
-        public Map(string Name, int Size, string Tiles, DateTime CreationDate, int GroundType, int MapType)
+        public Map(string Name, int Size, int[,] Tiles, DateTime CreationDate, int GroundType, int MapType)
         {
             this.Name = Name;
             this.Size = Size;
@@ -47,7 +47,7 @@ namespace KillerApp
             Maptype = MapType;
         }
 
-        public Map(string Name, int Size, string Tiles, DateTime CreationDate, int GroundType, int MapType, bool HasLakes, bool HasRivers, Bitmap Image)
+        public Map(string Name, int Size, int[,] Tiles, DateTime CreationDate, int GroundType, int MapType, bool HasLakes, bool HasRivers, Bitmap Image)
         {
             this.Name = Name;
             this.Size = Size;
