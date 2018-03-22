@@ -9,17 +9,19 @@ namespace KillerApp.DomeinClasses
     public class ArrayStringConverter
     {
         int[,] temporaryArray;
-        string temporaryString = "";
+        string temporaryString;
 
         public string ConvertArrayToString(int Size, int[,] Array)
         {
+            StringBuilder sb = new StringBuilder();
             for (int y = 0; y < Size; y++)
             {
                 for (int x = 0; x < Size; x++)
                 {
-                    temporaryString += Array[x, y] + " ";
+                    sb.Append(Array[x, y] + " ");
                 }
             }
+            temporaryString = sb.ToString();
             return temporaryString;
         }
 
