@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using KillerApp.LogicLayer;
 using KillerApp.DomeinClasses;
+using System.Drawing;
 
 namespace KillerApp
 {
@@ -17,7 +18,7 @@ namespace KillerApp
 
         private void btGenerateMap_Click(object sender, EventArgs e)
         {
-            controller.GenerateMap(tbName.Text, tbSize.Value, cbGroundType.SelectedIndex, cbMapType.SelectedIndex, cbLakes.Checked, cbRivers.Checked);
+            controller.GenerateMap(tbName.Text, tbSize.Value, cbGroundType.SelectedIndex, cbMapType.SelectedIndex, cbLakes.Checked, cbRivers.Checked, Convert.ToInt32(nudSeed.Value));
             Map map = controller.GetMap();
             pbMap.Image = map.Image;
         }

@@ -88,6 +88,7 @@
     <Compile Include="MapCreatorForm.Designer.cs">
       <DependentUpon>MapCreatorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DomeinClasses\PerlinNoiseGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartGameForm.cs">

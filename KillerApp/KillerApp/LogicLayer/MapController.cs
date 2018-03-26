@@ -28,11 +28,11 @@ namespace KillerApp.LogicLayer
             }
         }
 
-        public void GenerateMap(string Name, int Size, int GroundType, int MapType, bool HasLakes, bool HasRivers)
+        public void GenerateMap(string Name, int Size, int GroundType, int MapType, bool HasLakes, bool HasRivers, int Seed)
         {
             if (Name != null || Name != "")
             {
-                mapRepository.GenerateMap(Name, Size, GroundType, MapType, HasLakes, HasRivers);
+                mapRepository.GenerateMap(Name, Size, GroundType, MapType, HasLakes, HasRivers, Seed);
             }
         }
 

@@ -19,10 +19,10 @@ namespace KillerApp.LogicLayer
             _mapcontext = mapcontext;
         }
 
-        public void GenerateMap(string Name, int Size, int GroundType, int MapType, bool HasLakes, bool HasRivers)
+        public void GenerateMap(string Name, int Size, int GroundType, int MapType, bool HasLakes, bool HasRivers, int Seed)
         {
             MapGenerator mapGenerator = new MapGenerator();
-            Map = mapGenerator.GenerateMap(Name, Size, GroundType, MapType, HasLakes, HasRivers);
+            Map = mapGenerator.GenerateMap(Name, Size, GroundType, MapType, HasLakes, HasRivers, Seed);
         }
 
         public void SaveMap()

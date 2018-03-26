@@ -19,20 +19,30 @@ namespace KillerApp.DomeinClasses
                 for (int x = 0; x < width; x++)
                 {
                     Color color = new Color();
-                    switch (Tiles[x, y])
+                    int i = Tiles[x, y];
+                    if (i <= 20)
                     {
-                        case 1:
-                            color = Color.Green;
-                            break;
-                        case 2:
-                            color = Color.White;
-                            break;
-                        case 3:
-                            color = Color.Brown;
-                            break;
-                        default:
-                            color = Color.Blue;
-                            break;
+                        color = Color.Blue;
+                    }
+                    else if (i > 20 && i <= 40)
+                    {
+                        color = Color.SandyBrown;
+                    }
+                    else if (i > 40 && i <= 140)
+                    {
+                        color = Color.Green;
+                    }
+                    else if (i > 140 && i <= 200)
+                    {
+                        color = Color.DarkGreen;
+                    }
+                    else if (i > 200 && i <= 230)
+                    {
+                        color = Color.DarkGray;
+                    }
+                    else
+                    {
+                        color = Color.White;
                     }
                     bitmap.SetPixel(x, y, color);
                 }
