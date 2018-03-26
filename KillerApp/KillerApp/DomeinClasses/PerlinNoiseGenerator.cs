@@ -16,7 +16,7 @@ namespace KillerApp.DomeinClasses
         private static int seed = 0;
         private static byte[] noise;
 
-        public static int[,] GenerateMap(int size, float scale, int seed)
+        public static int[,] GenerateMap(int size, int seed)
         {
             Seed = seed;
             int[,] values = new int[size, size];
@@ -24,7 +24,7 @@ namespace KillerApp.DomeinClasses
             {
                 for (int x = 0; x < size; x++)
                 {
-                    values[x, y] = (int)(Generate(x * scale, y * scale) * 128 + 128);
+                    values[x, y] = (int)(OctaveGenerate(x, y, 8) * 128 + 128);
                 }
             }
             return values;
@@ -41,7 +41,21 @@ namespace KillerApp.DomeinClasses
             }
         }
 
-        internal static float Generate(float x, float y)
+        private static float OctaveGenerate(float x, float y, int octave)
+        {
+            float total = 0;
+            float frequency = 0.005f;
+            float amplitude = 1;
+            for (int i = 0; i < octave; i++)
+            {
+                amplitude /= 2;
+                frequency *= 2;
+                total += Generate(x * frequency, y * frequency) * amplitude;
+            }
+            return total;
+        }
+
+        private static float Generate(float x, float y)
         {
             const float F2 = 0.366025403f; // F2 = 0.5*(sqrt(3.0)-1.0)
             const float G2 = 0.211324865f; // G2 = (3.0-Math.sqrt(3.0))/6.0

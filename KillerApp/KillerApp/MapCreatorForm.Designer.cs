@@ -55,7 +55,7 @@
             // tbName
             // 
             this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbName.Location = new System.Drawing.Point(264, 24);
+            this.tbName.Location = new System.Drawing.Point(251, 12);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(337, 45);
             this.tbName.TabIndex = 0;
@@ -63,7 +63,7 @@
             // tbSize
             // 
             this.tbSize.LargeChange = 100;
-            this.tbSize.Location = new System.Drawing.Point(264, 95);
+            this.tbSize.Location = new System.Drawing.Point(251, 83);
             this.tbSize.Maximum = 800;
             this.tbSize.Minimum = 200;
             this.tbSize.Name = "tbSize";
@@ -83,7 +83,7 @@
             "Grass",
             "Snow",
             "Desert"});
-            this.cbGroundType.Location = new System.Drawing.Point(264, 167);
+            this.cbGroundType.Location = new System.Drawing.Point(251, 155);
             this.cbGroundType.Name = "cbGroundType";
             this.cbGroundType.Size = new System.Drawing.Size(337, 46);
             this.cbGroundType.TabIndex = 2;
@@ -92,7 +92,7 @@
             // 
             this.cbRivers.AutoSize = true;
             this.cbRivers.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbRivers.Location = new System.Drawing.Point(468, 307);
+            this.cbRivers.Location = new System.Drawing.Point(455, 295);
             this.cbRivers.Name = "cbRivers";
             this.cbRivers.Size = new System.Drawing.Size(133, 42);
             this.cbRivers.TabIndex = 3;
@@ -103,7 +103,7 @@
             // 
             this.cbLakes.AutoSize = true;
             this.cbLakes.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbLakes.Location = new System.Drawing.Point(264, 307);
+            this.cbLakes.Location = new System.Drawing.Point(251, 295);
             this.cbLakes.Name = "cbLakes";
             this.cbLakes.Size = new System.Drawing.Size(127, 42);
             this.cbLakes.TabIndex = 4;
@@ -117,7 +117,7 @@
             this.cbMapType.Items.AddRange(new object[] {
             "Continent",
             "Island"});
-            this.cbMapType.Location = new System.Drawing.Point(264, 240);
+            this.cbMapType.Location = new System.Drawing.Point(251, 228);
             this.cbMapType.Name = "cbMapType";
             this.cbMapType.Size = new System.Drawing.Size(337, 46);
             this.cbMapType.TabIndex = 5;
@@ -125,7 +125,7 @@
             // btGenerateMap
             // 
             this.btGenerateMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btGenerateMap.Location = new System.Drawing.Point(25, 442);
+            this.btGenerateMap.Location = new System.Drawing.Point(64, 447);
             this.btGenerateMap.Name = "btGenerateMap";
             this.btGenerateMap.Size = new System.Drawing.Size(292, 100);
             this.btGenerateMap.TabIndex = 6;
@@ -136,7 +136,7 @@
             // btSaveMap
             // 
             this.btSaveMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btSaveMap.Location = new System.Drawing.Point(25, 548);
+            this.btSaveMap.Location = new System.Drawing.Point(362, 447);
             this.btSaveMap.Name = "btSaveMap";
             this.btSaveMap.Size = new System.Drawing.Size(292, 100);
             this.btSaveMap.TabIndex = 7;
@@ -147,7 +147,7 @@
             // btDeleteMap
             // 
             this.btDeleteMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btDeleteMap.Location = new System.Drawing.Point(25, 654);
+            this.btDeleteMap.Location = new System.Drawing.Point(64, 553);
             this.btDeleteMap.Name = "btDeleteMap";
             this.btDeleteMap.Size = new System.Drawing.Size(292, 100);
             this.btDeleteMap.TabIndex = 8;
@@ -157,9 +157,9 @@
             // 
             // pbMap
             // 
-            this.pbMap.Location = new System.Drawing.Point(990, 12);
+            this.pbMap.Location = new System.Drawing.Point(981, 12);
             this.pbMap.Name = "pbMap";
-            this.pbMap.Size = new System.Drawing.Size(900, 900);
+            this.pbMap.Size = new System.Drawing.Size(965, 965);
             this.pbMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbMap.TabIndex = 9;
             this.pbMap.TabStop = false;
@@ -169,9 +169,10 @@
             this.lbMaps.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMaps.FormattingEnabled = true;
             this.lbMaps.ItemHeight = 31;
-            this.lbMaps.Location = new System.Drawing.Point(323, 442);
+            this.lbMaps.Location = new System.Drawing.Point(697, 12);
             this.lbMaps.Name = "lbMaps";
-            this.lbMaps.Size = new System.Drawing.Size(278, 500);
+            this.lbMaps.Size = new System.Drawing.Size(278, 965);
+            this.lbMaps.Sorted = true;
             this.lbMaps.TabIndex = 10;
             this.lbMaps.SelectedIndexChanged += new System.EventHandler(this.lbMaps_SelectedIndexChanged);
             // 
@@ -179,7 +180,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(125, 27);
+            this.label1.Location = new System.Drawing.Point(112, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 38);
             this.label1.TabIndex = 11;
@@ -189,7 +190,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(149, 95);
+            this.label2.Location = new System.Drawing.Point(136, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 38);
             this.label2.TabIndex = 12;
@@ -199,7 +200,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 170);
+            this.label3.Location = new System.Drawing.Point(5, 158);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(217, 38);
             this.label3.TabIndex = 13;
@@ -208,7 +209,7 @@
             // btMenu
             // 
             this.btMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btMenu.Location = new System.Drawing.Point(25, 760);
+            this.btMenu.Location = new System.Drawing.Point(362, 553);
             this.btMenu.Name = "btMenu";
             this.btMenu.Size = new System.Drawing.Size(292, 100);
             this.btMenu.TabIndex = 14;
@@ -219,7 +220,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(64, 243);
+            this.label4.Location = new System.Drawing.Point(51, 231);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(171, 38);
             this.label4.TabIndex = 15;
@@ -229,7 +230,7 @@
             // 
             this.lbSize.AutoSize = true;
             this.lbSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSize.Location = new System.Drawing.Point(621, 95);
+            this.lbSize.Location = new System.Drawing.Point(608, 83);
             this.lbSize.Name = "lbSize";
             this.lbSize.Size = new System.Drawing.Size(71, 38);
             this.lbSize.TabIndex = 16;
@@ -239,7 +240,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(125, 372);
+            this.label5.Location = new System.Drawing.Point(112, 360);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(102, 38);
             this.label5.TabIndex = 18;
@@ -248,7 +249,7 @@
             // nudSeed
             // 
             this.nudSeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudSeed.Location = new System.Drawing.Point(264, 370);
+            this.nudSeed.Location = new System.Drawing.Point(251, 358);
             this.nudSeed.Name = "nudSeed";
             this.nudSeed.Size = new System.Drawing.Size(337, 45);
             this.nudSeed.TabIndex = 19;
