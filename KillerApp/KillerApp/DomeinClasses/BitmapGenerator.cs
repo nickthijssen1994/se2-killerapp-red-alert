@@ -21,13 +21,13 @@ namespace KillerApp.DomeinClasses
                     Color color = new Color();
                     int i = Tiles[x, y];
                     //color = Color.FromArgb(i, i, i);
-                    if (i <= 20)
-                    {
-                        color = Color.DarkBlue;
-                    }
-                    else if (i > 20 && i <= 60)
+                    if (i <= 55)
                     {
                         color = Color.Blue;
+                    }
+                    else if (i > 55 && i <= 60)
+                    {
+                        color = Color.SkyBlue;
                     }
                     else if (i > 60 && i <= 70)
                     {
