@@ -37,11 +37,15 @@ namespace KillerApp
 
         private void lbMaps_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbMaps.SelectedItem != null)
-            {
-                Map map = (Map)lbMaps.SelectedItem;
-                pbMap.Image = map.Image;
-            }
+
+            Map map = (Map)lbMaps.SelectedItem;
+            pbMap.Image = map.Image;
+            hsbMapView.Maximum = map.Size - 21;
+            vsbMapView.Maximum = map.Size - 21;
+            hsbMapView.Value = hsbMapView.Minimum;
+            vsbMapView.Value = hsbMapView.Maximum;
+            pbMapView.Image = BitmapViewGenerator.GenerateBitmapView((Map)lbMaps.SelectedItem, hsbMapView.Value, vsbMapView.Value);
+
         }
 
         public void LoadMaps()
@@ -55,6 +59,22 @@ namespace KillerApp
         private void tbSize_Scroll(object sender, EventArgs e)
         {
             lbSize.Text = tbSize.Value.ToString();
+        }
+
+        private void hsbMapView_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (lbMaps.SelectedItem != null)
+            {
+                pbMapView.Image = BitmapViewGenerator.GenerateBitmapView((Map)lbMaps.SelectedItem, hsbMapView.Value, vsbMapView.Value);
+            }
+        }
+
+        private void vsbMapView_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (lbMaps.SelectedItem != null)
+            {
+                pbMapView.Image = BitmapViewGenerator.GenerateBitmapView((Map)lbMaps.SelectedItem, hsbMapView.Value, vsbMapView.Value);
+            }
         }
     }
 }

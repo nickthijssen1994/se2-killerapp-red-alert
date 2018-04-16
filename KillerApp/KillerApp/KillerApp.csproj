@@ -64,6 +64,7 @@
     <Compile Include="DataLayer\MapSQLContext.cs" />
     <Compile Include="DomeinClasses\ArrayStringConverter.cs" />
     <Compile Include="DomeinClasses\BitmapGenerator.cs" />
+    <Compile Include="DomeinClasses\BitmapViewGenerator.cs" />
     <Compile Include="DomeinClasses\MapGenerator.cs" />
     <Compile Include="DomeinClasses\User.cs" />
     <Compile Include="IngameForm.cs">
