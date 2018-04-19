@@ -1,0 +1,27 @@
+﻿@model KillerAppASP.ViewModels.LoginViewModel
+
+<div class="col-md-4 col-md-offset-2">
+    <h2>Login</h2>
+    <hr />
+    <form asp-controller="Account" asp-action="Login" method="post" class="form-group">
+        <div class="form-group">
+            <input asp-for="Username" class="form-control" placeholder="Username" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Password" class="form-control" placeholder="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label asp-for="RememberMe">
+                    <input asp-for="RememberMe" />
+                    @Html.DisplayNameFor(m => m.RememberMe)
+                </label>
+            </div>
+        </div>
+        <div class="btn-group" role="group">
+            <input type="submit" class="btn btn-primary" value="Login">
+        </div>
+    </form>
+</div>

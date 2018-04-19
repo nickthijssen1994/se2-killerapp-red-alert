@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using KillerAppASP.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace KillerAppASP.Controllers
 {
@@ -8,6 +9,7 @@ namespace KillerAppASP.Controllers
     {
         public IActionResult Index()
         {
+            CookieOptions options = new CookieOptions();
             return View();
         }
 

@@ -14,8 +14,8 @@ namespace KillerAppASP.Data
         {
             ArrayStringConverter converter = new ArrayStringConverter();
             string array = converter.ConvertArrayToString(map.Size, map.Tiles);
-            connection.Open();
             string query = "INSERT INTO Map VALUES ('" + map.Name + "', '" + map.Size + "', '" + array + "', '" + map.Creationdate.ToString("yyyy-MM-dd") + "', '" + map.Groundtype + "', '" + map.Maptype + "', '" + map.Haslakes + "', '" + map.Hasrivers + "')";
+            connection.Open();
             SqlCommand sqlCommand = new SqlCommand(query, connection);
             sqlCommand.ExecuteNonQuery();
             connection.Close();
@@ -78,8 +78,8 @@ namespace KillerAppASP.Data
 
         public void DeleteMap(string mapname)
         {
-            connection.Open();
             string query = "DELETE FROM Map WHERE Name = '" + mapname + "'";
+            connection.Open();
             SqlCommand sqlCommand = new SqlCommand(query, connection);
             sqlCommand.ExecuteNonQuery();
             connection.Close();
