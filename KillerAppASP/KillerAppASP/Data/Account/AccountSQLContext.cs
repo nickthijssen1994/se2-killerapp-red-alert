@@ -15,7 +15,7 @@ namespace KillerAppASP.Data
         {
             sqlCommand.CommandType = CommandType.StoredProcedure;
             sqlCommand.CommandText = "RegisterUser";
-            sqlCommand.Parameters.AddWithValue("@Email", user.Username);
+            sqlCommand.Parameters.AddWithValue("@Email", user.Email);
             sqlCommand.Parameters.AddWithValue("@Username", user.Username);
             sqlCommand.Parameters.AddWithValue("@Password", user.Password);
             sqlCommand.Connection = connection;
