@@ -17,10 +17,27 @@
     margin-top: 15%;
     margin-left: 5%;
     margin-right: 5%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
     padding: 25px;
     border: 5px;
     border-style: solid;
     border-radius: 5px;
-    border-color: rgba(2, 176, 169, 0.8);
+    border-color: rgba(2, 176, 169, 0.6);
+}
+
+.main-menu {
+    text-align: center;
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 25px;
+    border: 5px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: rgba(2, 176, 169, 0.6);
+}
+
+.main-menu .btn{
+    width: 100%;
 }

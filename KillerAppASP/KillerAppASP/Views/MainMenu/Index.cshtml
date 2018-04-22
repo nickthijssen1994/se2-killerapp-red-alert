@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Main Menu";
+}
+
+<audio src="~/music/soviet_march.mp3" autoplay loop></audio>
+<div class="row main-menu">
+    <div class="col-md-4 col-md-offset-4">
+        @if (TempData["LoginSuccessfull"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>@TempData["LoginSuccessfull"]</strong>
+            </div>
+        }
+        <h1>Main Menu</h1>
+        <hr />
+        <div class="form-group">
+            <a href='@Url.Action("Singleplayer", "Dashboard")'>
+                <input type='button' class="btn btn-primary" value='Singleplayer' />
+            </a>
+        </div>
+        <div class="form-group">
+            <a href='@Url.Action("Multiplayer", "Dashboard")'>
+                <input type='button' class="btn btn-primary" value='Multiplayer' />
+            </a>
+        </div>
+        <div class="form-group">
+            <a href='@Url.Action("MapCreator", "Dashboard")'>
+                <input type='button' class="btn btn-primary" value='Map Creator' />
+            </a>
+        </div>
+        <div class="form-group">
+            <a href='@Url.Action("Account", "Dashboard")'>
+                <input type='button' class="btn btn-primary" value='Account' />
+            </a>
+        </div>
+        <div class="form-group">
+            <a href='@Url.Action("Settings", "Home")'>
+                <input type='button' class="btn btn-primary" value='Settings' />
+            </a>
+        </div>
+        <div class="form-group">
+            <a href='@Url.Action("Logout", "Account")'>
+                <input type='button' class="btn btn-primary" value='Logout' />
+            </a>
+        </div>
+    </div>
+</div>

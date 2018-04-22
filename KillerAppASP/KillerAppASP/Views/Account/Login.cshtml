@@ -1,22 +1,22 @@
-﻿@model KillerAppASP.ViewModels.LoginViewModel
+﻿@model KillerAppASP.Models.LoginViewModel
 
 <div class="col-md-4 col-md-offset-2">
     <h2>Login</h2>
     <hr />
     <form asp-controller="Account" asp-action="Login" method="post" class="form-group">
         <div class="form-group">
-            <input asp-for="Username" class="form-control" placeholder="Username" />
-            <span asp-validation-for="Username" class="text-danger"></span>
+            <input asp-for="LoginUsername" class="form-control" placeholder="Username" />
+            <span asp-validation-for="LoginUsername" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input asp-for="Password" class="form-control" placeholder="Password" />
-            <span asp-validation-for="Password" class="text-danger"></span>
+            <input asp-for="LoginPassword" class="form-control" placeholder="Password" />
+            <span asp-validation-for="LoginPassword" class="text-danger"></span>
         </div>
         <div class="form-group">
             <div class="checkbox">
-                <label asp-for="RememberMe">
-                    <input asp-for="RememberMe" />
-                    @Html.DisplayNameFor(m => m.RememberMe)
+                <label asp-for="LoginRememberMe">
+                    <input asp-for="LoginRememberMe" />
+                    @Html.DisplayNameFor(m => m.LoginRememberMe)
                 </label>
             </div>
         </div>
