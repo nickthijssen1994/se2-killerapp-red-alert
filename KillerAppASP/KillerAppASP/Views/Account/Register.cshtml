@@ -1,4 +1,4 @@
-﻿@model KillerAppASP.Models.RegisterViewModel
+﻿@model KillerAppASP.ViewModels.RegisterViewModel
 
 <div class="col-md-4">
     <h2>Register</h2>
@@ -20,8 +20,6 @@
             <input asp-for="RegisterConfirmPassword" class="form-control" placeholder="Confirm Password" />
             <span asp-validation-for="RegisterConfirmPassword" class="text-danger"></span>
         </div>
-        <div class="btn-group" role="group">
-            <input type="submit" class="btn btn-primary" value="Register">
-        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>

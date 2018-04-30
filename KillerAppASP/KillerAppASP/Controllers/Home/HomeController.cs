@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using KillerAppASP.Models;
+using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace KillerAppASP.Controllers

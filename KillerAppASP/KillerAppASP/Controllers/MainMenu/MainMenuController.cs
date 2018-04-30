@@ -11,5 +11,19 @@ namespace KillerAppASP.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Account()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Settings()
+        {
+            return View();
+        }     
     }
 }

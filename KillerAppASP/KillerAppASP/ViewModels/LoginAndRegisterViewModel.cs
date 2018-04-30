@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KillerAppASP.Models
+namespace KillerAppASP.ViewModels
 {
     public class LoginAndRegisterViewModel
     {
@@ -32,12 +32,12 @@ namespace KillerAppASP.Models
         public string RegisterEmail { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(maximumLength: 20, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 6)]
         [Display(Name = "Username")]
         public string RegisterUsername { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(maximumLength: 20, ErrorMessage = "The {0} must be between {2} and {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string RegisterPassword { get; set; }

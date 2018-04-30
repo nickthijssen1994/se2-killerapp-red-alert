@@ -1,114 +1,212 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using KillerAppASP.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace KillerAppASP.Data
 {
     public class AccountSQLContext : IAccountContext
     {
-        private static string databaseLocation = "Server = mssql.fhict.local; Database=dbi369786;User Id = dbi369786; Password=KillerApp";
-        private SqlConnection connection = new SqlConnection(databaseLocation);
-        private SqlCommand sqlCommand = new SqlCommand();
+        private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
 
         public bool RegisterUser(User user)
         {
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.CommandText = "RegisterUser";
-            sqlCommand.Parameters.AddWithValue("@Email", user.Email);
-            sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-            sqlCommand.Parameters.AddWithValue("@Password", user.Password);
-            sqlCommand.Connection = connection;
-            connection.Open();
-            bool RegistrationSuccessfull = (bool)sqlCommand.ExecuteScalar();
-            connection.Close();
-            return RegistrationSuccessfull;
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "RegisterUser"
+                        
+                    };
+                    sqlCommand.Parameters.AddWithValue("@Email", user.Email);
+                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                    sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+                    connection.Open();
+                    bool RegistrationSuccessfull = (bool)sqlCommand.ExecuteScalar();
+                    connection.Close();
+                    return RegistrationSuccessfull;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool LoginUser(User user)
         {
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.CommandText = "LoginUser";
-            sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-            sqlCommand.Parameters.AddWithValue("@Password", user.Password);
-            sqlCommand.Connection = connection;
-            connection.Open();
-            bool LoginSuccessfull = (bool)sqlCommand.ExecuteScalar();
-            connection.Close();
-            return LoginSuccessfull;
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "LoginUser"
+                    };
+                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                    sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+                    connection.Open();
+                    bool LoginSuccessfull = (bool)sqlCommand.ExecuteScalar();
+                    connection.Close();
+                    return LoginSuccessfull;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void LogoutUser(User user)
         {
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.CommandText = "LogoutUser";
-            sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-            sqlCommand.Connection = connection;
-            connection.Open();
-            sqlCommand.ExecuteScalar();
-            connection.Close();
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "LogoutUser"
+                    };                 
+                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                    connection.Open();
+                    sqlCommand.ExecuteScalar();
+                    connection.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool DeleteUser(User user)
         {
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.CommandText = "DeleteUser";
-            sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-            sqlCommand.Parameters.AddWithValue("@Password", user.Password);
-            sqlCommand.Connection = connection;
-            connection.Open();
-            bool DeletionSuccessfull = (bool)sqlCommand.ExecuteScalar();
-            connection.Close();
-            return DeletionSuccessfull;
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "DeleteUser"
+                    };
+                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                    sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+                    connection.Open();
+                    bool DeletionSuccessfull = (bool)sqlCommand.ExecuteScalar();
+                    connection.Close();
+                    return DeletionSuccessfull;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<string> GetAllUsers()
         {
-            List<string> Users = new List<string>();
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.CommandText = "GetAllUsers";
-            using (SqlDataReader reader = sqlCommand.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                using (var connection = new SqlConnection(connectionString))
                 {
-                    Users.Add(reader.GetString(0));
+                    List<string> Users = new List<string>();
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "GetAllUsers"
+                    };
+                    connection.Open();
+                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Users.Add(reader.GetString(0));
+                        }
+                    }
+                    connection.Close();
+                    return Users;
                 }
             }
-            connection.Close();
-            return Users;
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<string> GetOnlineUsers()
-        {
-            List<string> OnlineUsers = new List<string>();
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.CommandText = "GetOnlineUsers";
-            using (SqlDataReader reader = sqlCommand.ExecuteReader())
+        { 
+            try
             {
-                while (reader.Read())
+                using (var connection = new SqlConnection(connectionString))
                 {
-                    OnlineUsers.Add(reader.GetString(0));
+                    List<string> OnlineUsers = new List<string>();
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "GetOnlineUsers"
+                    };
+                    connection.Open();
+                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            OnlineUsers.Add(reader.GetString(0));
+                        }
+                    }
+                    connection.Close();
+                    return OnlineUsers;
                 }
             }
-            connection.Close();
-            return OnlineUsers;
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public List<string> SearchUsers (string searchterm)
+        public List<string> SearchUsers(string searchterm)
         {
-            List<string> FoundUsers = new List<string>();
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.CommandText = "SearchUser";
-            sqlCommand.Parameters.AddWithValue("@SearchTerm", searchterm);
-            using (SqlDataReader reader = sqlCommand.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                using (var connection = new SqlConnection(connectionString))
                 {
-                    FoundUsers.Add(reader.GetString(0));
+                    List<string> FoundUsers = new List<string>();
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "SearchUser"
+                    };
+                    sqlCommand.Parameters.AddWithValue("@SearchTerm", searchterm);
+                    connection.Open();
+                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            FoundUsers.Add(reader.GetString(0));
+                        }
+                    }
+                    connection.Close();
+                    return FoundUsers;
                 }
             }
-            connection.Close();
-            return FoundUsers;
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -4,17 +4,14 @@ using KillerAppASP.Data;
 
 namespace KillerAppASP.Controllers
 {
-    public class MapRepository
+    public class MapCreatorRepository
     {
-        private List<Map> maps = new List<Map>();
-        private Map map;
-       
-        public List<Map> Maps { get => maps; set => maps = value; }
-        public Map Map { get => map; set => map = value; }
+        public List<Map> Maps { get; set; }
+        public Map Map { get; set; }
 
         private readonly IMapContext _mapcontext;
 
-        public MapRepository(IMapContext mapcontext)
+        public MapCreatorRepository(IMapContext mapcontext)
         {
             _mapcontext = mapcontext;
         }
@@ -23,6 +20,7 @@ namespace KillerAppASP.Controllers
         {
             MapGenerator mapGenerator = new MapGenerator();
             Map = mapGenerator.GenerateMap(Name, Size, GroundType, MapType, HasLakes, HasRivers, Seed);
+            _mapcontext.SaveMap(Map);
         }
 
         public void SaveMap()

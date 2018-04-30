@@ -1,4 +1,4 @@
-namespace KillerAppASP.Models
+namespace KillerAppASP.ViewModels
 {
     public class ErrorViewModel
     {
