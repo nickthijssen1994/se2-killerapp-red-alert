@@ -32,6 +32,11 @@ namespace KillerAppASP.Controllers
             return context.DeleteMap(name, username);
         }
 
+        public void GetMap(string mapname, string username)
+        {
+            Map = context.GetMap(mapname, username);
+        }
+
         public void GetAllMaps()
         {
             Maps = context.GetAllMaps();

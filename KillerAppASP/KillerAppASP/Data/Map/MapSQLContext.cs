@@ -31,6 +31,7 @@ namespace KillerAppASP.Data
                     sqlCommand.Parameters.AddWithValue("@HasRivers", map.HasRivers);
                     sqlCommand.Parameters.AddWithValue("@CreationDate", map.CreationDate);
                     sqlCommand.Parameters.AddWithValue("@CreatedBy", username);
+                    sqlCommand.Parameters.AddWithValue("@Image", map.Image);
 
                     connection.Open();
                     int result = (int)sqlCommand.ExecuteScalar();
@@ -62,6 +63,52 @@ namespace KillerAppASP.Data
                     int result = (int)sqlCommand.ExecuteScalar();
                     connection.Close();
                     return result;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Map GetMap(string Name, string Username)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    ArrayStringConverter converter = new ArrayStringConverter();
+                    Map map = new Map();
+
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "GetMap"
+                    };
+                    sqlCommand.Parameters.AddWithValue("@Name", Name);
+                    sqlCommand.Parameters.AddWithValue("@Username", Username);
+
+                    connection.Open();
+                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            map.MapID = reader.GetInt32(0);
+                            map.Name = reader.GetString(1);
+                            map.Size = reader.GetInt32(2);
+                            map.Array = converter.ConvertStringToArray(map.Size, reader.GetString(3));
+                            map.GroundType = reader.GetInt32(4);
+                            map.MapType = reader.GetInt32(5);
+                            map.HasLakes = reader.GetBoolean(6);
+                            map.HasRivers = reader.GetBoolean(7);
+                            map.CreationDate = reader.GetDateTime(8);
+                            map.CreatedBy = reader.GetString(9);
+                            map.Image = reader["Image"] as byte[] ?? null;
+                        }
+                    }
+                    connection.Close();
+                    return map;
                 }
             }
             catch (Exception)

@@ -8,6 +8,10 @@
     }
 }
 
+function GetPreview(mapname) {
+    $('#mappreview').attr('src', '/MapCreator/GetMapPreview?Mapname=' + mapname);
+}
+
 function Login() {
     $.ajax({
         url: $("#loginform").attr('action'),

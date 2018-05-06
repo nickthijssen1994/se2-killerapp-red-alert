@@ -95,10 +95,15 @@ namespace KillerAppASP.Controllers
             return View("Index", model);
         }
 
-        //[HttpGet]
-        //public FileStreamResult GetMapPreview(string MapName)
-        //{
-            
-        //}
+        [HttpGet]
+        public FileStreamResult GetMapPreview(string Mapname)
+        {
+            if (Mapname != null)
+            {
+                mapCreatorRepository.GetMap(Mapname, User.Identity.Name);
+            }
+            var stream = new System.IO.MemoryStream(mapCreatorRepository.Map.Image);
+            return new FileStreamResult(stream, "image/png");
+        }
     }
 }

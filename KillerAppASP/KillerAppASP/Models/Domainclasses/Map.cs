@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Drawing;
 
 namespace KillerAppASP.Models
 {
     public class Map
     {
         public int MapID { get; set; }
-        public string Name { get; set;}
+        public string Name { get; set; }
         public int Size { get; set; }
         public int[,] Array { get; set; }
         public int GroundType { get; set; }
@@ -15,6 +14,9 @@ namespace KillerAppASP.Models
         public bool HasRivers { get; set; }
         public DateTime CreationDate { get; set; }
         public string CreatedBy { get; set; }
+        public byte[] Image { get; set; }
+
+        public Map() { }
 
         public Map(string Name, int Size, int[,] Array, int GroundType, int MapType, bool HasLakes, bool HasRivers, DateTime CreationDate, string CreatedBy)
         {
@@ -27,6 +29,8 @@ namespace KillerAppASP.Models
             this.HasRivers = HasRivers;
             this.CreationDate = CreationDate;
             this.CreatedBy = CreatedBy;
+            ImageGenerator imageGenerator = new ImageGenerator();
+            Image = imageGenerator.GenerateImage(Array);
         }
 
         public override string ToString()

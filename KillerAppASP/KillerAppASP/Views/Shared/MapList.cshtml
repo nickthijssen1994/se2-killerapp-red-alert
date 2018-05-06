@@ -12,8 +12,12 @@
         {
             foreach (string map in Model.Maps)
             {
-                <a href='#@map' type="button" class="list-group-item">@map</a>
+                <button type="button" class="list-group-item" onclick="GetPreview('@map')">@map</button>
             }
+        }
+        else
+        {
+            <p class="text-danger">You don't have any maps yet.</p>
         }
     </div>
 </div>

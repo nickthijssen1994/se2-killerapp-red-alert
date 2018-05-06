@@ -5,9 +5,10 @@ namespace KillerAppASP.Data
 {
     public interface IMapContext
     {
-        int SaveMap(Map map, string username);
-        int DeleteMap(string mapname, string username);
+        int SaveMap(Map Map, string Username);
+        int DeleteMap(string Mapname, string Username);
+        Map GetMap(string Mapname, string Username);
         List<string> GetAllMaps();
-        List<string> GetUserMaps(string username);
+        List<string> GetUserMaps(string Username);
     }
 }

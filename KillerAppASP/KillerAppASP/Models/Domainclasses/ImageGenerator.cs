@@ -1,10 +1,12 @@
 ﻿using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace KillerAppASP.Models
 {
-    public class BitmapGenerator
+    public class ImageGenerator
     {
-        public Bitmap GenerateBitmap(int[,] Array)
+        public byte[] GenerateImage(int[,] Array)
         {
             int width = Array.GetLength(1);
             int height = Array.GetLength(0);
@@ -47,7 +49,13 @@ namespace KillerAppASP.Models
                     bitmap.SetPixel(x, y, color);
                 }
             }
-            return bitmap;
+
+            Image image = bitmap;
+            byte[] imageBytes;
+            MemoryStream memoryStream = new MemoryStream();
+            image.Save(memoryStream, ImageFormat.Png);
+            imageBytes = memoryStream.ToArray();
+            return imageBytes;
         }
     }
 }
