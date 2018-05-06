@@ -5,46 +5,28 @@ namespace KillerAppASP.Models
 {
     public class Map
     {
+        public int MapID { get; set; }
         public string Name { get; set;}
         public int Size { get; set; }
-        public int[,] Tiles { get; set; }
-        public DateTime Creationdate { get; set; }
-        public int Groundtype { get; set; }
-        public int Maptype { get; set; }
-        public bool Haslakes { get; set; }
-        public bool Hasrivers { get; set; }
-        public Bitmap Image { get; set; }
+        public int[,] Array { get; set; }
+        public int GroundType { get; set; }
+        public int MapType { get; set; }
+        public bool HasLakes { get; set; }
+        public bool HasRivers { get; set; }
+        public DateTime CreationDate { get; set; }
+        public string CreatedBy { get; set; }
 
-        public Map(string Name, int Size, int GroundType, int MapType)
+        public Map(string Name, int Size, int[,] Array, int GroundType, int MapType, bool HasLakes, bool HasRivers, DateTime CreationDate, string CreatedBy)
         {
             this.Name = Name;
             this.Size = Size;
-            Creationdate = DateTime.Now;
-            Groundtype = GroundType;
-            Maptype = MapType;
-        }
-
-        public Map(string Name, int Size, int[,] Tiles, DateTime CreationDate, int GroundType, int MapType)
-        {
-            this.Name = Name;
-            this.Size = Size;
-            this.Tiles = Tiles;
-            Creationdate = CreationDate;
-            Groundtype = GroundType;
-            Maptype = MapType;
-        }
-
-        public Map(string Name, int Size, int[,] Tiles, DateTime CreationDate, int GroundType, int MapType, bool HasLakes, bool HasRivers, Bitmap Image)
-        {
-            this.Name = Name;
-            this.Size = Size;
-            this.Tiles = Tiles;
-            Creationdate = CreationDate;
-            Groundtype = GroundType;
-            Maptype = MapType;
-            Haslakes = HasLakes;
-            Hasrivers = HasRivers;
-            this.Image = Image;
+            this.Array = Array;
+            this.GroundType = GroundType;
+            this.MapType = MapType;
+            this.HasLakes = HasLakes;
+            this.HasRivers = HasRivers;
+            this.CreationDate = CreationDate;
+            this.CreatedBy = CreatedBy;
         }
 
         public override string ToString()

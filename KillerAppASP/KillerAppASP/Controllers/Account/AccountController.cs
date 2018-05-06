@@ -1,152 +1,199 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Security.Cryptography;
-using System.Text;
-using KillerAppASP.ViewModels;
+﻿using KillerAppASP.Data;
 using KillerAppASP.Models;
-using KillerAppASP.Data;
+using KillerAppASP.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace KillerAppASP.Controllers
 {
     public class AccountController : Controller
     {
-        AccountRepository accountRepository = null;
+        private AccountRepository accountRepository;
 
         public AccountController()
         {
-            IAccountContext context = new AccountSQLContext();
-            accountRepository = new AccountRepository(context);
+            accountRepository = new AccountRepository(new AccountSQLContext());
         }
 
         [HttpGet]
+        [Route("")]
+        [Route("Account")]
+        [Route("Account/Login")]
+        [Route("Account/Register")]
         public IActionResult Index()
         {
-            LoginAndRegisterViewModel loginAndRegisterViewModel = new LoginAndRegisterViewModel
+            if (User.Identity.IsAuthenticated)
             {
-                LoginModel = new LoginViewModel(),
-                RegisterModel = new RegisterViewModel()
-            };
-            return View(loginAndRegisterViewModel);
-        }
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Register()
-        {
+                return RedirectToAction("Index", "MainMenu");
+            }
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            LoginAndRegisterViewModel loginAndRegisterViewModel = new LoginAndRegisterViewModel
-            {
-                LoginModel = loginViewModel,
-                RegisterModel = new RegisterViewModel()
-            };
+            bool Success = false;
+            string Message = "";
+            string Url = "";
 
             if (ModelState.IsValid)
             {
                 User user = new User
                 {
-                    Username = loginViewModel.LoginUsername,
-                    Password = EncryptPassword(loginViewModel.LoginPassword)
+                    Username = model.Username,
+                    Password = EncryptPassword(model.Password)
                 };
-                bool authorized = accountRepository.LoginUser(user);
-                if (authorized == true)
+                switch (accountRepository.LoginUser(user))
                 {
-                    var claims = new List<Claim>
-                    {
+                    case 0:
+                        var claims = new List<Claim>
+                        {
                         new Claim(ClaimTypes.Name, user.Username)
-                    };
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    var authProperties = new AuthenticationProperties
-                    {
-                        AllowRefresh = true,
-                        IsPersistent = loginViewModel.LoginRememberMe
-                    };
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-                    TempData["UserName"] = user.Username;
-                    TempData["LoginSuccessfull"] = "Welcome back " + user.Username + "!";
-                    return RedirectToAction("Index", "MainMenu");
-                }
-                else
-                {
-                    return View("Index", loginAndRegisterViewModel);
+                        };
+
+                        var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var authProperties = new AuthenticationProperties
+                        {
+                            AllowRefresh = true,
+                            IssuedUtc = DateTimeOffset.UtcNow,
+                            IsPersistent = model.RememberMe
+                        };
+                        var principal = new ClaimsPrincipal(userIdentity);
+                        Success = true;
+                        Message = "Login Successfull";
+                        Url = "/MainMenu";
+                        await HttpContext.SignInAsync(principal, authProperties);
+                        break;
+                    case 1:
+                        Message = "Username does not exist";
+                        break;
+                    case 2:
+                        Message = "Password incorrect";
+                        break;
                 }
             }
             else
             {
-                return View("Index", loginAndRegisterViewModel);
+                Message = ModelState.ErrorsToHTML();
             }
+
+            return Json(new { success = Success, message = Message, url = Url });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            LoginAndRegisterViewModel loginAndRegisterViewModel = new LoginAndRegisterViewModel
-            {
-                LoginModel = new LoginViewModel(),
-                RegisterModel = registerViewModel
-            };
+            bool Success = false;
+            string Message = "";
+            string Url = "";
+            bool Login = model.AutoLogin;
 
             if (ModelState.IsValid)
             {
                 User user = new User
                 {
-                    Email = registerViewModel.RegisterEmail,
-                    Username = registerViewModel.RegisterUsername,
-                    Password = EncryptPassword(registerViewModel.RegisterPassword)
+                    Email = model.Email,
+                    Username = model.Username,
+                    Password = EncryptPassword(model.Password),
+                    IsOnline = model.AutoLogin
                 };
-                bool authorized = accountRepository.RegisterUser(user);
-                if (authorized == true)
+
+                switch (accountRepository.RegisterUser(user))
                 {
-                    var claims = new List<Claim>
-                    {
+                    case 0:
+                        var claims = new List<Claim>
+                        {
                         new Claim(ClaimTypes.Name, user.Username)
-                    };
-                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    var authProperties = new AuthenticationProperties
-                    {
-                        AllowRefresh = true
-                    };
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-                    TempData["UserName"] = user.Username;
-                    TempData["RegistrationSuccessfull"] = "Welcome " + user.Username + ", your registration was successfull!";
-                    return RedirectToAction("Index", "MainMenu");
-                }
-                else
-                {
-                    return View("Index", loginAndRegisterViewModel);
+                        };
+
+                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var authProperties = new AuthenticationProperties
+                        {
+                            AllowRefresh = true,
+                            IsPersistent = model.RememberMe
+                        };
+                        Success = true;
+                        Message = "Registration Successfull";
+                        Url = "/MainMenu";
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                        break;
+                    case 1:
+                        Message = "Email address already in use";
+                        break;
+                    case 2:
+                        Message = "Username already in use";
+                        break;
                 }
             }
             else
             {
-                return View("Index", loginAndRegisterViewModel);
+                Message = ModelState.ErrorsToHTML();
             }
+
+            return Json(new { success = Success, message = Message, url = Url, login = Login });
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            bool Success = false;
+            string Message = "";
+
+            if (ModelState.IsValid)
+            {
+                User user = new User
+                {
+                    Username = User.Identity.Name,
+                    Password = EncryptPassword(model.OldPassword)
+                };
+
+                switch (accountRepository.ChangePassword(user, EncryptPassword(model.NewPassword)))
+                {
+                    case 0:
+                        Success = true;
+                        Message = "Password Changed";
+                        break;
+                    case 1:
+                        Message = "Old Password Incorrect";
+                        break;
+                }
+            }
+            else
+            {
+                Message = ModelState.ErrorsToHTML();
+            }
+            return Json(new { success = Success, message = Message });
         }
 
         [HttpGet]
+        [Authorize]
+        public IActionResult Settings()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             User user = new User
             {
-                Username = TempData["UserName"].ToString()
+                Username = User.Identity.Name
             };
             accountRepository.LogoutUser(user);
-            TempData["LogoutMessage"] = "You have been logged out";
-            TempData["UserName"] = null;
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Account");
         }

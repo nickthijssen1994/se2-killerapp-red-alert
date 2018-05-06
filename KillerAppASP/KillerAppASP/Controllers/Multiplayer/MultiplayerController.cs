@@ -1,19 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using KillerAppASP.Data;
+using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KillerAppASP.Controllers
 {
+    [Authorize]
     public class MultiplayerController : Controller
     {
+        private AccountRepository accountRepository;
+
+        public MultiplayerController()
+        {
+            accountRepository = new AccountRepository(new AccountSQLContext());
+        }
+
         [HttpGet]
-        [Authorize]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Lobby()
+        {
+            UserListViewModel model = new UserListViewModel();
+            model.OnlineUsers = accountRepository.GetOnlineUsers();
+            model.AllUsers = accountRepository.GetAllUsers();
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult GetOnlineUsers(UserListViewModel model)
+        {
+            model.OnlineUsers = accountRepository.GetOnlineUsers();
+            return PartialView("OnlineUserList", model);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllUsers(UserListViewModel model)
+        {
+            model.AllUsers = accountRepository.GetAllUsers();
+            return PartialView("AllUserList", model);
         }
     }
 }

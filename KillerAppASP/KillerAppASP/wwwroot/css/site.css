@@ -15,27 +15,22 @@ body {
     color: rgb(2, 176, 169);
 }
 
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.btn {
+.btn-default {
     border: 0;
     color: rgb(0, 0, 0);
     background-color: rgb(2, 176, 169);
     border-radius: 5px;
 }
 
-    .btn:hover {
+    .btn-default:hover {
         background-color: rgb(10, 112, 108);
         color: #fff;
     }
 
-.login-form {
-    margin-top: 15%;
-    margin-left: 5%;
-    margin-right: 5%;
+.menu-small {
+    margin-top: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
     background-color: rgba(0, 0, 0, 0.6);
     padding: 25px;
     border: 5px;
@@ -44,32 +39,15 @@ body {
     border-color: rgba(2, 176, 169, 0.6);
 }
 
-    .login-form h2 {
+    .menu-small h1, h2, h3 {
         text-align: center;
     }
 
-    .login-form .btn {
+    .menu-small .btn {
         width: 100%;
     }
 
-.main-menu {
-    text-align: center;
-    margin-top: 10%;
-    margin-left: 5%;
-    margin-right: 5%;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 25px;
-    border: 5px;
-    border-style: solid;
-    border-radius: 5px;
-    border-color: rgba(2, 176, 169, 0.6);
-}
-
-    .main-menu .btn {
-        width: 100%;
-    }
-
-.mapcreator-form {
+.menu-big {
     margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
@@ -81,32 +59,23 @@ body {
     border-color: rgba(2, 176, 169, 0.6);
 }
 
-    .mapcreator-form h1, h3 {
+    .menu-big h1, h2, h3 {
         text-align: center;
     }
 
-.start-game-form {
-    margin-left: 5%;
-    margin-right: 5%;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 25px;
-    border: 5px;
-    border-style: solid;
-    border-radius: 5px;
-    border-color: rgba(2, 176, 169, 0.6);
-}
-
-    .start-game-form h2 {
-        text-align: center;
+    .menu-big .btn {
+        width: 100%;
     }
 
 .slider {
+    -moz-appearance: none;
     -webkit-appearance: none;
     height: 25px;
     background-color: white;
 }
 
     .slider::-webkit-slider-thumb {
+        -moz-appearance: none;
         -webkit-appearance: none;
         width: 25px;
         height: 25px;

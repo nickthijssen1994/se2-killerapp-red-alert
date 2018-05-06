@@ -3,27 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KillerAppASP.Controllers
 {
+    [Authorize]
     public class MainMenuController : Controller
     {
         [HttpGet]
-        [Authorize]
+        [Route("/MainMenu")]
         public IActionResult Index()
         {
             return View();
         }
-
-        [HttpGet]
-        [Authorize]
-        public IActionResult Account()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        [Authorize]
-        public IActionResult Settings()
-        {
-            return View();
-        }     
     }
 }

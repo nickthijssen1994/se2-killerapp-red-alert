@@ -8,7 +8,7 @@ namespace KillerAppASP.Models
          * Original from https://github.com/WardBenjamin/SimplexNoise.git
         */
 
-        private static int seed = 0;
+        private static int seed = 1;
         private static byte[] noise;
 
         public static int[,] GenerateMap(int size, int seed)
@@ -64,7 +64,7 @@ namespace KillerAppASP.Models
             int i = FastFloor(xs);
             int j = FastFloor(ys);
 
-            float t = (float)(i + j) * G2;
+            float t = (i + j) * G2;
             float X0 = i - t; // Unskew the cell origin back to (x,y) space
             float Y0 = j - t;
             float x0 = x - X0; // The x,y distances from the cell origin

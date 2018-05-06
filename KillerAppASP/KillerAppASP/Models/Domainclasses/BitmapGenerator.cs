@@ -4,10 +4,10 @@ namespace KillerAppASP.Models
 {
     public class BitmapGenerator
     {
-        public Bitmap GenerateBitmap(int[,] Tiles)
+        public Bitmap GenerateBitmap(int[,] Array)
         {
-            int width = Tiles.GetLength(1);
-            int height = Tiles.GetLength(0);
+            int width = Array.GetLength(1);
+            int height = Array.GetLength(0);
             Bitmap bitmap = new Bitmap(width, height);
 
             for (int y = 0; y < height; y++)
@@ -15,7 +15,7 @@ namespace KillerAppASP.Models
                 for (int x = 0; x < width; x++)
                 {
                     Color color = new Color();
-                    int i = Tiles[x, y];
+                    int i = Array[x, y];
                     if (i <= 55)
                     {
                         color = Color.Blue;

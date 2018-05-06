@@ -1,48 +1,47 @@
-﻿using System.Collections.Generic;
+﻿using KillerAppASP.Data;
 using KillerAppASP.Models;
-using KillerAppASP.Data;
+using System.Collections.Generic;
 
 namespace KillerAppASP.Controllers
 {
     public class MapCreatorRepository
     {
-        public List<Map> Maps { get; set; }
+        private IMapContext context;
+
+        public MapCreatorRepository(IMapContext context)
+        {
+            this.context = context;
+        }
+
+        public List<string> Maps { get; set; }
         public Map Map { get; set; }
 
-        private readonly IMapContext _mapcontext;
-
-        public MapCreatorRepository(IMapContext mapcontext)
-        {
-            _mapcontext = mapcontext;
-        }
-
-        public void GenerateMap(string Name, int Size, int GroundType, int MapType, bool HasLakes, bool HasRivers, int Seed)
+        public void GenerateMap(string Name, int Size, int GroundType, int MapType, bool HasLakes, bool HasRivers, int Seed, string Username)
         {
             MapGenerator mapGenerator = new MapGenerator();
-            Map = mapGenerator.GenerateMap(Name, Size, GroundType, MapType, HasLakes, HasRivers, Seed);
-            _mapcontext.SaveMap(Map);
+            Map = mapGenerator.GenerateMap(Name, Size, GroundType, MapType, HasLakes, HasRivers, Seed, Username);
         }
 
-        public void SaveMap()
+        public int SaveMap(string username)
         {
-            _mapcontext.SaveMap(Map);
-            Maps.Add(Map);
+            return context.SaveMap(Map, username);
         }
 
-        public void GetMaps()
+        public int DeleteMap(string name, string username)
         {
-            Maps = _mapcontext.GetMaps();
+            return context.DeleteMap(name, username);
         }
 
-        public void GetMap(string name)
+        public void GetAllMaps()
         {
-            Map = _mapcontext.GetMap(name);
+            Maps = context.GetAllMaps();
+            Maps.Sort();
         }
 
-        public void DeleteMap(string name)
+        public void GetUserMaps(string username)
         {
-            _mapcontext.DeleteMap(name);
-            Maps.RemoveAll(x => x.Name == name);
+            Maps = context.GetUserMaps(username);
+            Maps.Sort();
         }
     }
 }

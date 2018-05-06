@@ -1,0 +1,29 @@
+﻿@model KillerAppASP.ViewModels.UserListViewModel
+
+<script>
+    window.onload = function () {
+        GetOnlineUsers();
+    }
+</script>
+
+<div class="OnlineUserList">
+    <div class="form-group">
+        <input onkeyup="SearchUser()" class="form-control" type="text" placeholder="Search...">
+    </div>
+    <div class="list-group">
+        <div class="pre-scrollable">
+            @if (Model != null && Model.OnlineUsers.Count != 0)
+            {
+                foreach (string user in Model.OnlineUsers)
+                {
+                    if (user != User.Identity.Name)
+                    {
+                        <a href='#@user' type="button" class="list-group-item">@user</a>
+                    }
+
+                }
+            }
+        </div>
+    </div>
+    <button type="button" class="btn btn-default btn-group-justified">Send Invite</button>
+</div>

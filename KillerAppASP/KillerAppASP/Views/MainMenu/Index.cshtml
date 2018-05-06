@@ -2,53 +2,46 @@
     ViewData["Title"] = "Main Menu";
 }
 
-<div class="row main-menu">
-    <div class="col-md-4 col-md-offset-4">
-        @if (TempData["LoginSuccessfull"] != null)
-        {
-            <div class="alert alert-success alert-dismissible fade in">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>@TempData["LoginSuccessfull"]</strong>
-            </div>
-        }
-        @if (TempData["RegistrationSuccessfull"] != null)
-        {
-            <div class="alert alert-success alert-dismissible fade in">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>@TempData["RegistrationSuccessfull"]</strong>
-            </div>
-        }
+<div class="row menu-small">
+    <div class="col-md-4">
+        <img src="~/images/united-states.jpg" class="img-responsive" alt="United States">
+        <br />
+        <br />
+        <img src="~/images/soviet-union.jpg" class="img-responsive" alt="Soviet Union">
+    </div>
+    <div class="col-md-4">
         <h1>Main Menu</h1>
         <hr />
         <div class="form-group">
-            <a href='@Url.Action("Index", "Singleplayer")'>
-                <input type='button' class="btn btn-primary" value='Singleplayer' />
+            <a asp-controller="Singleplayer" asp-action="Index">
+                <input type='button' class="btn btn-default btn-lg" value='Singleplayer' />
             </a>
         </div>
         <div class="form-group">
-            <a href='@Url.Action("Index", "Multiplayer")'>
-                <input type='button' class="btn btn-primary" value='Multiplayer' />
+            <a asp-controller="Multiplayer" asp-action="Lobby">
+                <input type='button' class="btn btn-default btn-lg" value='Multiplayer' />
             </a>
         </div>
         <div class="form-group">
-            <a href='@Url.Action("Index", "MapCreator")'>
-                <input type='button' class="btn btn-primary" value='Map Creator' />
+            <a asp-controller="MapCreator" asp-action="Index">
+                <input type='button' class="btn btn-default btn-lg" value='Map Creator' />
             </a>
         </div>
         <div class="form-group">
-            <a href='@Url.Action("Account", "MainMenu")'>
-                <input type='button' class="btn btn-primary" value='Account' />
+            <a asp-controller="Account" asp-action="Settings">
+                <input type='button' class="btn btn-default btn-lg" value='Settings' />
             </a>
         </div>
         <div class="form-group">
-            <a href='@Url.Action("Settings", "MainMenu")'>
-                <input type='button' class="btn btn-primary" value='Settings' />
+            <a asp-controller="Account" asp-action="Logout">
+                <input type='button' class="btn btn-default btn-lg" value='Logout' />
             </a>
         </div>
-        <div class="form-group">
-            <a href='@Url.Action("Logout", "Account")'>
-                <input type='button' class="btn btn-primary" value='Logout' />
-            </a>
-        </div>
+    </div>
+    <div class="col-md-4">
+        <img src="~/images/japan.jpg" class="img-responsive" alt="Japan">
+        <br />
+        <br />
+        <img src="~/images/nazi-germany.jpg" class="img-responsive" alt="Nazi Germany">
     </div>
 </div>

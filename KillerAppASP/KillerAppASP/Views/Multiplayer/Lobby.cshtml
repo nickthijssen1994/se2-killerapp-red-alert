@@ -1,0 +1,32 @@
+﻿@model KillerAppASP.ViewModels.UserListViewModel
+
+@{
+    ViewData["Title"] = "Lobby";
+}
+
+<div class="menu-big">
+    <h1>Lobby</h1>
+    <hr />
+    <div class="row">
+        <div class="form-group col-md-3">
+            <h2>Online Users</h2>
+            @Html.Partial("OnlineUserList", Model)
+        </div>
+        <div class="form-group col-md-3">
+            <h2>All Users</h2>
+            @Html.Partial("AllUserList", Model)
+        </div>
+        <div class="form-group col-md-3">
+            <h2>Global Chat</h2>
+            <textarea class="form-control" rows="10" placeholder="Chat..."></textarea>
+            <br />
+            <button type="button" class="btn btn-default btn-group-justified">Send Message</button>
+        </div>
+        <div class="form-group col-md-3">
+            <h2>Invites</h2>
+            <a asp-controller="Multiplayer" asp-action="Index">
+                <input type='button' class="btn btn-default" value='Start Game' />
+            </a>
+        </div>
+    </div>
+</div>

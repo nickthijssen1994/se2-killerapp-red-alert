@@ -5,12 +5,13 @@ namespace KillerAppASP.Data
 {
     public interface IAccountContext
     {
-        bool RegisterUser(User user);
-        bool LoginUser(User user);
+        int RegisterUser(User user);
+        int LoginUser(User user);
         void LogoutUser(User user);
-        bool DeleteUser(User user);
-        List<string> GetAllUsers();
+        int ChangePassword(User user, string newPassword);
+        int DeleteUser(User user);
+        List<User> GetAllUsers();
         List<string> GetOnlineUsers();
-        List<string> SearchUsers(string searchterm);
+        List<User> SearchUsers(string searchterm);
     }
 }

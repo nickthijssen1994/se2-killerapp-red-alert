@@ -1,56 +1,59 @@
-﻿using System.Collections.Generic;
-using KillerAppASP.Data;
+﻿using KillerAppASP.Data;
 using KillerAppASP.Models;
+using System.Collections.Generic;
 
 namespace KillerAppASP.Controllers
 {
     public class AccountRepository
     {
-        private readonly IAccountContext _accountcontext;
+        private IAccountContext context;
 
-        public AccountRepository(IAccountContext accountcontext)
+        public AccountRepository(IAccountContext context)
         {
-            _accountcontext = accountcontext;
+            this.context = context;
         }
 
-        public bool DeleteUser(User user)
+        public int RegisterUser(User user)
         {
-            bool DeletionSuccessfull = _accountcontext.DeleteUser(user);
-            return DeletionSuccessfull;
+            return context.RegisterUser(user);
         }
 
-        public bool LoginUser(User user)
+        public int LoginUser(User user)
         {
-            bool LoginSuccessfull = _accountcontext.LoginUser(user);
-            return LoginSuccessfull;
+            return context.LoginUser(user);
         }
 
         public void LogoutUser(User user)
         {
-            _accountcontext.LogoutUser(user);
+            context.LogoutUser(user);
         }
 
-        public bool RegisterUser(User user)
+        public int ChangePassword(User user, string newPassword)
         {
-            bool RegistrationSuccessfull = _accountcontext.RegisterUser(user);
-            return RegistrationSuccessfull;
+            return context.ChangePassword(user, newPassword);
         }
 
-        public List<string> GetAllUsers()
+        public int DeleteUser(User user)
         {
-            List<string> AllUsers = _accountcontext.GetAllUsers();
-            return AllUsers;
+            return context.DeleteUser(user);
+        }
+
+        public List<User> GetAllUsers()
+        {
+            List<User> Users = context.GetAllUsers();
+            return Users;
         }
 
         public List<string> GetOnlineUsers()
         {
-            List<string> OnlineUsers = _accountcontext.GetOnlineUsers();
+            List<string> OnlineUsers = context.GetOnlineUsers();
             return OnlineUsers;
         }
 
-        public List<string> SearchUsers(string searchterm)
+        public List<User> SearchUsers(string searchterm)
         {
-            List<string> FoundUsers = _accountcontext.SearchUsers(searchterm);
+            List<User> FoundUsers = context.SearchUsers(searchterm);
+            FoundUsers.Sort();
             return FoundUsers;
         }
     }

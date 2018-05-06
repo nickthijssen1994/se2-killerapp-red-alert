@@ -10,15 +10,15 @@ namespace KillerAppASP.Models
 
         public string ConvertArrayToString(int Size, int[,] Array)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
             for (int y = 0; y < Size; y++)
             {
                 for (int x = 0; x < Size; x++)
                 {
-                    sb.Append(Array[x, y] + " ");
+                    stringBuilder.Append(Array[x, y] + " ");
                 }
             }
-            temporaryString = sb.ToString();
+            temporaryString = stringBuilder.ToString();
             return temporaryString;
         }
 

@@ -6,7 +6,7 @@ namespace KillerAppASP.Models
     {
         public static Bitmap GenerateBitmapView(Map map, int x, int y)
         {
-            int[,] tiles = map.Tiles;
+            int[,] tiles = map.Array;
             int[,] temptiles = new int[20, 20];
             int tempX = 0;
             int tempY = 0;

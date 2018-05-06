@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using KillerAppASP.Models;
-using Microsoft.Extensions.Configuration;
 
 namespace KillerAppASP.Data
 {
-    public class AccountSQLContext : IAccountContext
+    public class AccountSQLContext : SQLContext, IAccountContext
     {
-        private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
-
-        public bool RegisterUser(User user)
+        public int RegisterUser(User user)
         {
             try
             {
@@ -27,10 +24,12 @@ namespace KillerAppASP.Data
                     sqlCommand.Parameters.AddWithValue("@Email", user.Email);
                     sqlCommand.Parameters.AddWithValue("@Username", user.Username);
                     sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+                    sqlCommand.Parameters.AddWithValue("@AutoLogin", user.IsOnline);
+
                     connection.Open();
-                    bool RegistrationSuccessfull = (bool)sqlCommand.ExecuteScalar();
+                    int result = (int)sqlCommand.ExecuteScalar();
                     connection.Close();
-                    return RegistrationSuccessfull;
+                    return result;
                 }
             }
             catch (Exception)
@@ -39,7 +38,7 @@ namespace KillerAppASP.Data
             }
         }
 
-        public bool LoginUser(User user)
+        public int LoginUser(User user)
         {
             try
             {
@@ -53,10 +52,11 @@ namespace KillerAppASP.Data
                     };
                     sqlCommand.Parameters.AddWithValue("@Username", user.Username);
                     sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+
                     connection.Open();
-                    bool LoginSuccessfull = (bool)sqlCommand.ExecuteScalar();
+                    int result = (int)sqlCommand.ExecuteScalar();
                     connection.Close();
-                    return LoginSuccessfull;
+                    return result;
                 }
             }
             catch (Exception)
@@ -78,6 +78,7 @@ namespace KillerAppASP.Data
                         CommandText = "LogoutUser"
                     };                 
                     sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+
                     connection.Open();
                     sqlCommand.ExecuteScalar();
                     connection.Close();
@@ -89,7 +90,35 @@ namespace KillerAppASP.Data
             }
         }
 
-        public bool DeleteUser(User user)
+        public int ChangePassword(User user, string newPassword)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.StoredProcedure,
+                        CommandText = "ChangePassword"
+                    };
+                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                    sqlCommand.Parameters.AddWithValue("@OldPassword", user.Password);
+                    sqlCommand.Parameters.AddWithValue("@NewPassword", newPassword);
+
+                    connection.Open();
+                    int result = (int)sqlCommand.ExecuteScalar();
+                    connection.Close();
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int DeleteUser(User user)
         {
             try
             {
@@ -103,10 +132,11 @@ namespace KillerAppASP.Data
                     };
                     sqlCommand.Parameters.AddWithValue("@Username", user.Username);
                     sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+
                     connection.Open();
-                    bool DeletionSuccessfull = (bool)sqlCommand.ExecuteScalar();
+                    int result = (int)sqlCommand.ExecuteScalar();
                     connection.Close();
-                    return DeletionSuccessfull;
+                    return result;
                 }
             }
             catch (Exception)
@@ -115,29 +145,36 @@ namespace KillerAppASP.Data
             }
         }
 
-        public List<string> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             try
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    List<string> Users = new List<string>();
+                    List<User> users = new List<User>();
                     SqlCommand sqlCommand = new SqlCommand
                     {
                         Connection = connection,
                         CommandType = CommandType.StoredProcedure,
                         CommandText = "GetAllUsers"
                     };
+
                     connection.Open();
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Users.Add(reader.GetString(0));
+                            User user = new User
+                            {
+                                Username = reader.GetString(0),
+                                IsOnline = reader.GetBoolean(1),
+                                LastOnline = reader.GetDateTime(2)
+                            };
+                            users.Add(user);
                         }
                     }
                     connection.Close();
-                    return Users;
+                    return users;
                 }
             }
             catch (Exception)
@@ -152,23 +189,24 @@ namespace KillerAppASP.Data
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    List<string> OnlineUsers = new List<string>();
+                    List<string> onlineUsers = new List<string>();
                     SqlCommand sqlCommand = new SqlCommand
                     {
                         Connection = connection,
                         CommandType = CommandType.StoredProcedure,
                         CommandText = "GetOnlineUsers"
                     };
+
                     connection.Open();
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            OnlineUsers.Add(reader.GetString(0));
+                            onlineUsers.Add(reader.GetString(0));
                         }
                     }
                     connection.Close();
-                    return OnlineUsers;
+                    return onlineUsers;
                 }
             }
             catch (Exception)
@@ -177,13 +215,13 @@ namespace KillerAppASP.Data
             }
         }
 
-        public List<string> SearchUsers(string searchterm)
+        public List<User> SearchUsers(string searchterm)
         {
             try
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    List<string> FoundUsers = new List<string>();
+                    List<User> foundUsers = new List<User>();
                     SqlCommand sqlCommand = new SqlCommand
                     {
                         Connection = connection,
@@ -191,16 +229,23 @@ namespace KillerAppASP.Data
                         CommandText = "SearchUser"
                     };
                     sqlCommand.Parameters.AddWithValue("@SearchTerm", searchterm);
+
                     connection.Open();
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            FoundUsers.Add(reader.GetString(0));
+                            User foundUser = new User
+                            {
+                                Username = reader.GetString(0),
+                                IsOnline = reader.GetBoolean(1),
+                                LastOnline = reader.GetDateTime(2)
+                            };
+                            foundUsers.Add(foundUser);
                         }
                     }
                     connection.Close();
-                    return FoundUsers;
+                    return foundUsers;
                 }
             }
             catch (Exception)

@@ -1,78 +1,104 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using KillerAppASP.Data;
 using KillerAppASP.Models;
-using KillerAppASP.Data;
 using KillerAppASP.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 
 namespace KillerAppASP.Controllers
 {
+    [Authorize]
     public class MapCreatorController : Controller
     {
-        MapCreatorRepository mapCreatorRepository = null;
+        private MapCreatorRepository mapCreatorRepository;
 
         public MapCreatorController()
         {
-            IMapContext mapContext = new MapSQLContext();
-            mapCreatorRepository = new MapCreatorRepository(mapContext);
+            mapCreatorRepository = new MapCreatorRepository(new MapSQLContext());
         }
 
         [HttpGet]
-        [Authorize]
-        public IActionResult Index(MapCreatorViewModel _mapCreatorViewModel)
+        [Route("MapCreator")]
+        public IActionResult Index()
         {
-            MapCreatorViewModel mapCreatorViewModel = _mapCreatorViewModel;
-            mapCreatorRepository.GetMaps();
-            mapCreatorViewModel.GenerateViewModel = _mapCreatorViewModel.GenerateViewModel;
-            foreach (Map map in mapCreatorRepository.Maps)
-            {
-                mapCreatorViewModel.ListViewModel.AllMaps.Add(map);
-            }
-            return View(mapCreatorViewModel);
+            return View();
         }
 
         [HttpPost]
-        [Authorize]
-        public IActionResult GenerateMap(MapCreatorViewModel mcvm)
+        public IActionResult GenerateMap(GenerateMapViewModel model)
         {
-            mcvm.ListViewModel = new MapListViewModel();
-            MapGenerateViewModel vm = mcvm.GenerateViewModel;
+            bool Success = false;
+            string Message = "";
+
             if (ModelState.IsValid)
             {
-                mapCreatorRepository.GenerateMap(vm.MapName, vm.MapSize, Convert.ToInt32(vm.MapGroundType), Convert.ToInt32(vm.MapType), vm.HasLakes, vm.HasRivers, vm.MapSeed);
+                Success = true;
+                Message = "Map Generated";
+                mapCreatorRepository.GenerateMap(model.Name, model.Size, Convert.ToInt32(model.GroundType), Convert.ToInt32(model.MapType), model.HasLakes, model.HasRivers, model.Seed, User.Identity.Name);
+                HttpContext.Session.SetString("Map", JsonConvert.SerializeObject(mapCreatorRepository.Map));
             }
-            return RedirectToAction("Index", "MapCreator");
+            else
+            {
+                Message = ModelState.ErrorsToHTML();
+            }
+
+            return Json(new { success = Success, message = Message });
         }
 
-        [HttpPost]
-        [Authorize]
+        [HttpGet]
         public IActionResult SaveMap()
         {
-            mapCreatorRepository.SaveMap();
-            return View();
+            bool Success = false;
+            string Message = "";
+
+            var map = HttpContext.Session.GetString("Map");
+            mapCreatorRepository.Map = JsonConvert.DeserializeObject<Map>(map);
+
+            switch (mapCreatorRepository.SaveMap(User.Identity.Name))
+            {
+                case 0:
+                    Success = true;
+                    Message = "Map Saved";
+                    break;
+                case 1:
+                    Message = "A map with this name already exists.";
+                    break;
+            }
+
+            return Json(new { success = Success, message = Message });
         }
 
-        [HttpPost]
-        [Authorize]
-        public IActionResult DeleteMap(MapListViewModel vm)
+        [HttpDelete]
+        public IActionResult DeleteMap(MapListViewModel model)
         {
-            mapCreatorRepository.DeleteMap(vm.SearchTerm);
-            return View();
+            mapCreatorRepository.DeleteMap(model.SearchTerm, User.Identity.Name);
+            return View("Index");
         }
 
-        [HttpPost]
-        [Authorize]
-        public IActionResult GetMap(MapListViewModel vm)
+        [HttpGet]
+        public IActionResult GetUserMaps()
         {
-            mapCreatorRepository.GetMap(vm.SearchTerm);
-            return View();
+            MapListViewModel model = new MapListViewModel();
+            mapCreatorRepository.GetUserMaps(User.Identity.Name);
+            model.Maps = mapCreatorRepository.Maps;
+            return PartialView("MapList", model);
         }
-        [HttpPost]
-        [Authorize]
+
+        [HttpGet]
         public IActionResult GetAllMaps()
         {
-            mapCreatorRepository.GetMaps();
-            return View();
+            MapListViewModel model = new MapListViewModel();
+            mapCreatorRepository.GetAllMaps();
+            model.Maps = mapCreatorRepository.Maps;
+            return View("Index", model);
         }
+
+        //[HttpGet]
+        //public FileStreamResult GetMapPreview(string MapName)
+        //{
+            
+        //}
     }
 }

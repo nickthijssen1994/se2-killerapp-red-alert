@@ -1,17 +1,12 @@
-﻿@model KillerAppASP.ViewModels.LoginAndRegisterViewModel
-
-@{
+﻿@{
     ViewData["Title"] = "Welcome";
 }
 
-<div class="row login-form">
-    @if (TempData["LogoutMessage"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade in">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>@TempData["LogoutMessage"]</strong>
-        </div>
-    }
-    @{ Html.RenderPartial("Login", Model.LoginModel);}
-    @{ Html.RenderPartial("Register", Model.RegisterModel);}
+<div class="row menu-small">
+    <div class="col-sm-6" id="Login">
+        @Html.Partial("Login")
+    </div>
+    <div class="col-sm-6" id="Register">
+        @Html.Partial("Register")
+    </div>
 </div>

@@ -21,13 +21,13 @@ namespace KillerAppASP
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>
                     {
-                        options.Cookie.Name = "KillerAppUser";
-                        options.LoginPath = "/Account/Login";
+                        options.LoginPath = "/Account";
+                        options.LogoutPath = "/Account/Logout";
                     });
-            services.AddSession();
-            services.AddDistributedMemoryCache();
+
             services.AddMvc();
-            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,15 +44,15 @@ namespace KillerAppASP
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Account}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -1,0 +1,19 @@
+﻿@model KillerAppASP.ViewModels.MapListViewModel
+
+<script>
+    window.onload = function () {
+        GetUserMaps();
+    }
+</script>
+
+<div id="MapList" class="list-group">
+    <div class="pre-scrollable">
+        @if (Model != null && Model.Maps.Count != 0)
+        {
+            foreach (string map in Model.Maps)
+            {
+                <a href='#@map' type="button" class="list-group-item">@map</a>
+            }
+        }
+    </div>
+</div>

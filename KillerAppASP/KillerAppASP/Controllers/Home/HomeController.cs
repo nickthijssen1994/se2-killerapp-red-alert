@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using KillerAppASP.ViewModels;
+﻿using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace KillerAppASP.Controllers
 {
@@ -9,7 +9,6 @@ namespace KillerAppASP.Controllers
     {
         public IActionResult Index()
         {
-            CookieOptions options = new CookieOptions();
             return View();
         }
 
