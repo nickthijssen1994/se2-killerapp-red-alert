@@ -46,8 +46,11 @@
     </div>
     <br />
     <div class="btn-group btn-group-justified" role="group">
-        <button id="generatemap" type="button" class="btn btn-default" onclick="GenerateMap()">Generate Map</button>
-        <button id="savemap" type="button" class="btn btn-default" onclick="SaveMap()">Save Map</button>
+        <div class="btn-group">
+            <input id="generatemap" type="button" class="btn btn-default" onclick="GenerateMap()" value="Generate Map">
+        </div>
+        <div class="btn-group">
+            <input id="savemap" type="button" class="btn btn-default" onclick="SaveMap()" value="Save Map">
+        </div>
     </div>
 </form>
-<div id="result" class="form-group text-danger"></div>

@@ -60,6 +60,7 @@ namespace KillerAppASP.Data
                     sqlCommand.Parameters.AddWithValue("@Name", mapname);
                     sqlCommand.Parameters.AddWithValue("@Username", username);
 
+                    connection.Open();
                     int result = (int)sqlCommand.ExecuteScalar();
                     connection.Close();
                     return result;

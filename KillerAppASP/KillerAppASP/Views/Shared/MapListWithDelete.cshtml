@@ -1,0 +1,30 @@
+﻿@model KillerAppASP.ViewModels.MapListViewModel
+
+<script>
+    window.onload = function () {
+        GetUserMapsWithDelete();
+    }
+</script>
+
+<div id="MapListWithDelete" class="list-group">
+    @if (Model != null && Model.Maps.Count != 0)
+    {
+        <div class="pre-scrollable">
+            @foreach (string map in Model.Maps)
+            {
+                <a class="list-group-item clearfix" id="@map" onclick="GetPreview('@map')">
+                    @map
+                    <span class="pull-right">
+                        <span class="btn btn-danger" id="@map" type="button" onclick="DeleteMap('@map')">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </span>
+                    </span>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <a class="list-group-item list-group-item-danger">You don't have any maps yet.</a>
+    }
+</div>

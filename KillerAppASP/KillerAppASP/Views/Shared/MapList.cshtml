@@ -7,17 +7,17 @@
 </script>
 
 <div id="MapList" class="list-group">
-    <div class="pre-scrollable">
-        @if (Model != null && Model.Maps.Count != 0)
-        {
-            foreach (string map in Model.Maps)
+    @if (Model != null && Model.Maps.Count != 0)
+    {
+        <div class="pre-scrollable">
+            @foreach (string map in Model.Maps)
             {
-                <button type="button" class="list-group-item" onclick="GetPreview('@map')">@map</button>
+                <button class="list-group-item" id="@map" type="button" onclick="GetPreview('@map')">@map</button>
             }
-        }
-        else
-        {
-            <p class="text-danger">You don't have any maps yet.</p>
-        }
-    </div>
+        </div>
+    }
+    else
+    {
+        <a class="list-group-item list-group-item-danger">You don't have any maps yet.</a>
+    }
 </div>

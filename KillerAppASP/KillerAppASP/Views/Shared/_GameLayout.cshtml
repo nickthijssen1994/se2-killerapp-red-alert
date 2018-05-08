@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KillerApp</title>
+    <title>@ViewData["Title"]</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -16,32 +16,19 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body class="layout">
-
-    @if (User.Identity.IsAuthenticated)
-    {
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    @if ((string)ViewData["Title"] != "Main Menu")
-                    {
-                        <a class="navbar-brand" asp-controller="MainMenu" asp-action="Index">Main Menu</a>
-                    }
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a asp-controller="Account" asp-action="Settings">Settings</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    }
-
+<body class="gamelayout">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#">@User.Identity.Name</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Options</a></li>
+                <li><a href="#">Save</a></li>
+                <li><a asp-controller="MainMenu" asp-action="Index">Exit</a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="container-fluid body-content">
         @RenderBody()
     </div>

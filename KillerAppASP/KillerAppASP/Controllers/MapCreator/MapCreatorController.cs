@@ -71,10 +71,23 @@ namespace KillerAppASP.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteMap(MapListViewModel model)
+        public IActionResult DeleteMap(string Mapname)
         {
-            mapCreatorRepository.DeleteMap(model.SearchTerm, User.Identity.Name);
-            return View("Index");
+            bool Success = false;
+            string Message = "";
+
+            switch (mapCreatorRepository.DeleteMap(Mapname, User.Identity.Name))
+            {
+                case 0:
+                    Success = true;
+                    Message = Mapname + " Deleted";
+                    break;
+                case 1:
+                    Message = "Map doesn't exist.";
+                    break;
+            }
+
+            return Json(new { success = Success, message = Message });
         }
 
         [HttpGet]
@@ -84,6 +97,15 @@ namespace KillerAppASP.Controllers
             mapCreatorRepository.GetUserMaps(User.Identity.Name);
             model.Maps = mapCreatorRepository.Maps;
             return PartialView("MapList", model);
+        }
+
+        [HttpGet]
+        public IActionResult GetUserMapsWithDelete()
+        {
+            MapListViewModel model = new MapListViewModel();
+            mapCreatorRepository.GetUserMaps(User.Identity.Name);
+            model.Maps = mapCreatorRepository.Maps;
+            return PartialView("MapListWithDelete", model);
         }
 
         [HttpGet]

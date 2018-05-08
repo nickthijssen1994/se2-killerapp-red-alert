@@ -24,9 +24,11 @@ namespace KillerAppASP.Controllers
         [HttpGet]
         public IActionResult Lobby()
         {
-            UserListViewModel model = new UserListViewModel();
-            model.OnlineUsers = accountRepository.GetOnlineUsers();
-            model.AllUsers = accountRepository.GetAllUsers();
+            UserListViewModel model = new UserListViewModel
+            {
+                OnlineUsers = accountRepository.GetOnlineUsers(),
+                AllUsers = accountRepository.GetAllUsers()
+            };
             return View(model);
         }
 

@@ -75,15 +75,17 @@
     </div>
     <div class="col-md-3">
         <h2>Map List</h2>
-        @Html.Partial("MapList")
+        @await Html.PartialAsync("MapList")
 
     </div>
     <div class="col-md-3">
         <br />
-        @Html.Partial("MapPreview")
+        @await Html.PartialAsync("MapPreview")
         <br />
         <div class="btn-group btn-group-justified" role="group">
-            <button type="button" class="btn btn-default" disabled>Start Game</button>
+            <a asp-controller="Game" asp-action="Index">
+                <input type='button' class="btn btn-default" value='Start Game' />
+            </a>
         </div>
     </div>
 </div>

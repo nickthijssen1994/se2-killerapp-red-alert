@@ -6,17 +6,15 @@
     <h1>Map Creator</h1>
     <hr />
     <div class="col-md-4">
-        @Html.Partial("GenerateMap")
+        @await Html.PartialAsync("GenerateMap")
     </div>
     <div class="col-md-4">
         <h2>Saved Maps</h2>
-        @Html.Partial("MapList")
-        <div class="btn-group btn-group-justified" role="group">
-            <button type="button" class="btn btn-danger" onclick="DeleteMap()">Delete Map</button>
-        </div>
+        @await Html.PartialAsync("MapListWithDelete")
+        <div id="result" class="alert alert-danger"></div>
     </div>
     <div class="col-md-4">
         <br />
-        @Html.Partial("MapPreview")
+        @await Html.PartialAsync("MapPreview")
     </div>
 </div>

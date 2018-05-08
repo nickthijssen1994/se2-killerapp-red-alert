@@ -3,7 +3,18 @@
     src: url(/css/red_alert-webfont.woff2) format('woff2'), url(/css/red_alert-webfont.woff) format('woff');
 }
 
-body {
+.row.no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+    .row.no-gutter [class*='col-']:not(:first-child),
+    .row.no-gutter [class*='col-']:not(:last-child) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+.layout {
     font-family: redalert;
     font-size: large;
     background-image: url(../images/worldmapwallpaper.jpg);
@@ -12,6 +23,14 @@ body {
     background-size: cover;
     padding-top: 50px;
     padding-bottom: 20px;
+    color: rgb(2, 176, 169);
+}
+
+.gamelayout {
+    font-family: redalert;
+    font-size: large;
+    background-color: black;
+    padding-top: 50px;
     color: rgb(2, 176, 169);
 }
 
@@ -81,3 +100,22 @@ body {
         height: 25px;
         background: rgb(2, 176, 169);
     }
+
+.mappreview {
+    width: 100%;
+    position: relative;
+}
+
+#preview {
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+    width: 100%;
+    padding: 11.5%;
+}
+
+#previewborder {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}

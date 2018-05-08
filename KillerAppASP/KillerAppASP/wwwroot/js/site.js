@@ -9,7 +9,7 @@
 }
 
 function GetPreview(mapname) {
-    $('#mappreview').attr('src', '/MapCreator/GetMapPreview?Mapname=' + mapname);
+    $('#preview').attr('src', '/MapCreator/GetMapPreview?Mapname=' + mapname);
 }
 
 function Login() {
@@ -115,19 +115,27 @@ function SaveMap() {
             $("#result").text("Something Went Wrong");
         }
     });
+    setTimeout(GetUserMapsWithDelete, 2000);
 }
 
-function DeleteMap() {
-    $.ajax({
-        url: "/MapCreator/DeleteMap",
-        type: 'DELETE',
-        success: function () {
-            $("#result").text("Map Deleted");
-        },
-        error: function () {
-            $("#result").text("Something Went Wrong");
-        }
-    });
+function DeleteMap(mapname) {
+    var r = confirm("Are you sure you want to delete this map?");
+    if (r == true) {
+        $.ajax({
+            type: 'DELETE',
+            url: 'MapCreator/DeleteMap?Mapname=' + mapname,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $('#preview').attr('src', '/images/preview.gif');
+                $("#result").html(data.message);
+            },
+            error: function () {
+                $("#result").text("Something Went Wrong");
+            }
+        });
+        setTimeout(GetUserMapsWithDelete, 2000);
+    }
 }
 
 function GetUserMaps() {
@@ -136,6 +144,19 @@ function GetUserMaps() {
         type: 'GET',
         success: function (data) {
             $("#MapList").html(data);
+        },
+        error: function () {
+            $("#result").text("Something Went Wrong");
+        }
+    });
+}
+
+function GetUserMapsWithDelete() {
+    $.ajax({
+        url: "/MapCreator/GetUserMapsWithDelete",
+        type: 'GET',
+        success: function (data) {
+            $("#MapListWithDelete").html(data);
         },
         error: function () {
             $("#result").text("Something Went Wrong");
