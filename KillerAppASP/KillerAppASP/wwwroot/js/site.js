@@ -164,6 +164,26 @@ function GetUserMapsWithDelete() {
     });
 }
 
+function SearchAllUsers() {
+    $.ajax({
+        url: "/Multiplayer/SearchAllUsers?SearchTerm=" + $("#SearchAllUsers").val(),
+        type: 'GET',
+        success: function (data) {
+            $("#AllUserList").html(data);
+        },
+    });
+}
+
+function SearchOnlineUsers() {
+    $.ajax({
+        url: "/Multiplayer/SearchOnlineUsers?SearchTerm=" + $("#SearchOnlineUsers").val(),
+        type: 'GET',
+        success: function (data) {
+            $("#OnlineUserList").html(data);
+        },
+    });
+}
+
 $(function () {
     $('body').on('click', '.list-group-item', function () {
         $('.list-group-item').removeClass('active');

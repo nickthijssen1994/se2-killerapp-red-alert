@@ -1,13 +1,16 @@
 ﻿using KillerAppASP.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace KillerAppASP.Data
+namespace KillerAppASP.Datalayer
 {
-    public class MapSQLContext : SQLContext, IMapContext
+    public class MapSQLContext : IMapContext
     {
+        private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
+
         public int SaveMap(Map map, string username)
         {
             try
@@ -20,7 +23,6 @@ namespace KillerAppASP.Data
                         CommandType = CommandType.StoredProcedure,
                         CommandText = "SaveMap"
                     };
-
                     sqlCommand.Parameters.AddWithValue("@Name", map.Name);
                     sqlCommand.Parameters.AddWithValue("@Size", map.Size);
                     sqlCommand.Parameters.AddWithValue("@Seed", map.Seed);
@@ -29,7 +31,7 @@ namespace KillerAppASP.Data
                     sqlCommand.Parameters.AddWithValue("@HasLakes", map.HasLakes);
                     sqlCommand.Parameters.AddWithValue("@HasRivers", map.HasRivers);
                     sqlCommand.Parameters.AddWithValue("@CreationDate", map.CreationDate);
-                    sqlCommand.Parameters.AddWithValue("@CreatedBy", username);
+                    sqlCommand.Parameters.AddWithValue("@CreatedBy", map.CreatedBy);
                     sqlCommand.Parameters.AddWithValue("@Image", map.Image);
 
                     connection.Open();

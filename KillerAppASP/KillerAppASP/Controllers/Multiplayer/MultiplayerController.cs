@@ -1,4 +1,4 @@
-﻿using KillerAppASP.Data;
+﻿using KillerAppASP.Datalayer;
 using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,9 +26,39 @@ namespace KillerAppASP.Controllers
         {
             UserListViewModel model = new UserListViewModel
             {
-                Users = userRepository.GetUsers(),
+                Users = userRepository.GetUsers()
             };
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult SearchOnlineUsers(string SearchTerm)
+        {
+            UserListViewModel model = new UserListViewModel();
+            if (SearchTerm == null || SearchTerm == "")
+            {
+                model.Users = userRepository.GetUsers();
+            }
+            else
+            {
+                model.Users = userRepository.SearchUsers(SearchTerm);
+            }
+            return PartialView("OnlineUserList", model);
+        }
+
+        [HttpGet]
+        public IActionResult SearchAllUsers(string SearchTerm)
+        {
+            UserListViewModel model = new UserListViewModel();
+            if (SearchTerm == null || SearchTerm == "")
+            {
+                model.Users = userRepository.GetUsers();
+            }
+            else
+            {
+                model.Users = userRepository.SearchUsers(SearchTerm);
+            }
+            return PartialView("AllUserList", model);
         }
     }
 }

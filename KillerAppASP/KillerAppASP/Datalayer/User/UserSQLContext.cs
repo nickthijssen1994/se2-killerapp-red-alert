@@ -1,13 +1,16 @@
 ﻿using KillerAppASP.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace KillerAppASP.Data
+namespace KillerAppASP.Datalayer
 {
-    public class UserSQLContext : SQLContext, IUserContext
+    public class UserSQLContext : IUserContext
     {
+        private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
+
         public int RegisterUser(User user)
         {
             try
@@ -152,6 +155,7 @@ namespace KillerAppASP.Data
                 using (var connection = new SqlConnection(connectionString))
                 {
                     List<User> users = new List<User>();
+
                     SqlCommand sqlCommand = new SqlCommand
                     {
                         Connection = connection,

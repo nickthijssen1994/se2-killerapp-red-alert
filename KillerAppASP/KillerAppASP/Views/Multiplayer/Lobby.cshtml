@@ -10,11 +10,23 @@
     <div class="row">
         <div class="form-group col-md-3">
             <h2>Online Users</h2>
-            @await Html.PartialAsync("OnlineUserList", Model)
+            <div class="form-group">
+                <input class="form-control" id="SearchOnlineUsers" type="text" onkeyup="SearchOnlineUsers()" placeholder="Search...">
+            </div>
+            <div id="OnlineUserList">
+                @Html.Partial("OnlineUserList")
+            </div>
+            <button type="button" class="btn btn-default btn-group-justified">Send Invite</button>
         </div>
         <div class="form-group col-md-3">
             <h2>All Users</h2>
-            @await Html.PartialAsync("AllUserList", Model)
+            <div class="form-group">
+                <input class="form-control" id="SearchAllUsers" type="text" onkeyup="SearchAllUsers()" placeholder="Search...">
+            </div>
+            <div id="AllUserList">
+                @Html.Partial("AllUserList")
+            </div>
+            <button type="button" class="btn btn-default btn-group-justified">Send Invite</button>
         </div>
         <div class="form-group col-md-3">
             <h2>Global Chat</h2>

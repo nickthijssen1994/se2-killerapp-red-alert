@@ -1,7 +1,7 @@
 ﻿using KillerAppASP.Models;
 using System.Collections.Generic;
 
-namespace KillerAppASP.Data
+namespace KillerAppASP.Datalayer
 {
     public class MapRepository
     {
