@@ -1,12 +1,12 @@
-﻿using System;
+﻿using KillerAppASP.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using KillerAppASP.Models;
 
 namespace KillerAppASP.Data
 {
-    public class AccountSQLContext : SQLContext, IAccountContext
+    public class UserSQLContext : SQLContext, IUserContext
     {
         public int RegisterUser(User user)
         {
@@ -19,7 +19,7 @@ namespace KillerAppASP.Data
                         Connection = connection,
                         CommandType = CommandType.StoredProcedure,
                         CommandText = "RegisterUser"
-                        
+
                     };
                     sqlCommand.Parameters.AddWithValue("@Email", user.Email);
                     sqlCommand.Parameters.AddWithValue("@Username", user.Username);
@@ -76,7 +76,7 @@ namespace KillerAppASP.Data
                         Connection = connection,
                         CommandType = CommandType.StoredProcedure,
                         CommandText = "LogoutUser"
-                    };                 
+                    };
                     sqlCommand.Parameters.AddWithValue("@Username", user.Username);
 
                     connection.Open();
@@ -145,7 +145,7 @@ namespace KillerAppASP.Data
             }
         }
 
-        public List<User> GetAllUsers()
+        public List<User> GetUsers()
         {
             try
             {
@@ -156,7 +156,7 @@ namespace KillerAppASP.Data
                     {
                         Connection = connection,
                         CommandType = CommandType.StoredProcedure,
-                        CommandText = "GetAllUsers"
+                        CommandText = "GetUsers"
                     };
 
                     connection.Open();
@@ -166,47 +166,16 @@ namespace KillerAppASP.Data
                         {
                             User user = new User
                             {
-                                Username = reader.GetString(0),
-                                IsOnline = reader.GetBoolean(1),
-                                LastOnline = reader.GetDateTime(2)
+                                UserID = reader.GetInt32(0),
+                                Username = reader.GetString(1),
+                                IsOnline = reader.GetBoolean(2),
+                                LastOnline = reader.GetDateTime(3)
                             };
                             users.Add(user);
                         }
                     }
                     connection.Close();
                     return users;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public List<string> GetOnlineUsers()
-        { 
-            try
-            {
-                using (var connection = new SqlConnection(connectionString))
-                {
-                    List<string> onlineUsers = new List<string>();
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "GetOnlineUsers"
-                    };
-
-                    connection.Open();
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            onlineUsers.Add(reader.GetString(0));
-                        }
-                    }
-                    connection.Close();
-                    return onlineUsers;
                 }
             }
             catch (Exception)
@@ -222,11 +191,12 @@ namespace KillerAppASP.Data
                 using (var connection = new SqlConnection(connectionString))
                 {
                     List<User> foundUsers = new List<User>();
+
                     SqlCommand sqlCommand = new SqlCommand
                     {
                         Connection = connection,
                         CommandType = CommandType.StoredProcedure,
-                        CommandText = "SearchUser"
+                        CommandText = "SearchUsers"
                     };
                     sqlCommand.Parameters.AddWithValue("@SearchTerm", searchterm);
 
@@ -237,9 +207,10 @@ namespace KillerAppASP.Data
                         {
                             User foundUser = new User
                             {
-                                Username = reader.GetString(0),
-                                IsOnline = reader.GetBoolean(1),
-                                LastOnline = reader.GetDateTime(2)
+                                UserID = reader.GetInt32(0),
+                                Username = reader.GetString(1),
+                                IsOnline = reader.GetBoolean(2),
+                                LastOnline = reader.GetDateTime(3)
                             };
                             foundUsers.Add(foundUser);
                         }

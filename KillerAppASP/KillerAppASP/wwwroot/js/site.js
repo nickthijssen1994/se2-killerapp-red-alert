@@ -127,7 +127,7 @@ function DeleteMap(mapname) {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                $('#preview').attr('src', '/images/preview.gif');
+                $('#preview').attr('src', '/images/interface/preview.gif');
                 $("#result").html(data.message);
             },
             error: function () {
@@ -157,32 +157,6 @@ function GetUserMapsWithDelete() {
         type: 'GET',
         success: function (data) {
             $("#MapListWithDelete").html(data);
-        },
-        error: function () {
-            $("#result").text("Something Went Wrong");
-        }
-    });
-}
-
-function GetOnlineUsers() {
-    $.ajax({
-        url: "/Multiplayer/GetOnlineUsers",
-        type: 'GET',
-        success: function (data) {
-            $("#OnlineUserList").html(data);
-        },
-        error: function () {
-            $("#result").text("Something Went Wrong");
-        }
-    });
-}
-
-function GetAllUsers() {
-    $.ajax({
-        url: "/Multiplayer/GetAllUsers",
-        type: 'GET',
-        success: function (data) {
-            $("#AllUserList").html(data);
         },
         error: function () {
             $("#result").text("Something Went Wrong");

@@ -12,11 +12,11 @@ namespace KillerAppASP.Controllers
     [Authorize]
     public class MapCreatorController : Controller
     {
-        private MapCreatorRepository mapCreatorRepository;
+        private MapRepository mapRepository;
 
         public MapCreatorController()
         {
-            mapCreatorRepository = new MapCreatorRepository(new MapSQLContext());
+            mapRepository = new MapRepository(new MapSQLContext());
         }
 
         [HttpGet]
@@ -37,7 +37,7 @@ namespace KillerAppASP.Controllers
                 Success = true;
                 Message = "Map Generated";
 
-                mapCreatorRepository.GenerateMap
+                mapRepository.GenerateMap
                     (
                     model.Name,
                     model.Size,
@@ -49,7 +49,7 @@ namespace KillerAppASP.Controllers
                     User.Identity.Name
                     );
 
-                HttpContext.Session.SetString("Map", JsonConvert.SerializeObject(mapCreatorRepository.Map));
+                HttpContext.Session.SetString("Map", JsonConvert.SerializeObject(mapRepository.Map));
             }
             else
             {
@@ -66,9 +66,9 @@ namespace KillerAppASP.Controllers
             string Message = "";
 
             var map = HttpContext.Session.GetString("Map");
-            mapCreatorRepository.Map = JsonConvert.DeserializeObject<Map>(map);
+            mapRepository.Map = JsonConvert.DeserializeObject<Map>(map);
 
-            switch (mapCreatorRepository.SaveMap(User.Identity.Name))
+            switch (mapRepository.SaveMap(User.Identity.Name))
             {
                 case 0:
                     Success = true;
@@ -88,7 +88,7 @@ namespace KillerAppASP.Controllers
             bool Success = false;
             string Message = "";
 
-            switch (mapCreatorRepository.DeleteMap(Mapname, User.Identity.Name))
+            switch (mapRepository.DeleteMap(Mapname, User.Identity.Name))
             {
                 case 0:
                     Success = true;
@@ -106,8 +106,8 @@ namespace KillerAppASP.Controllers
         public IActionResult GetUserMaps()
         {
             MapListViewModel model = new MapListViewModel();
-            mapCreatorRepository.GetUserMaps(User.Identity.Name);
-            model.Maps = mapCreatorRepository.Maps;
+            mapRepository.GetUserMaps(User.Identity.Name);
+            model.Maps = mapRepository.Maps;
             return PartialView("MapList", model);
         }
 
@@ -115,8 +115,8 @@ namespace KillerAppASP.Controllers
         public IActionResult GetUserMapsWithDelete()
         {
             MapListViewModel model = new MapListViewModel();
-            mapCreatorRepository.GetUserMaps(User.Identity.Name);
-            model.Maps = mapCreatorRepository.Maps;
+            mapRepository.GetUserMaps(User.Identity.Name);
+            model.Maps = mapRepository.Maps;
             return PartialView("MapListWithDelete", model);
         }
 
@@ -124,8 +124,8 @@ namespace KillerAppASP.Controllers
         public IActionResult GetAllMaps()
         {
             MapListViewModel model = new MapListViewModel();
-            mapCreatorRepository.GetAllMaps();
-            model.Maps = mapCreatorRepository.Maps;
+            mapRepository.GetAllMaps();
+            model.Maps = mapRepository.Maps;
             return View("Index", model);
         }
 
@@ -134,9 +134,9 @@ namespace KillerAppASP.Controllers
         {
             if (Mapname != null)
             {
-                mapCreatorRepository.GetMap(Mapname, User.Identity.Name);
+                mapRepository.GetMap(Mapname, User.Identity.Name);
             }
-            var stream = new System.IO.MemoryStream(mapCreatorRepository.Map.Image);
+            var stream = new System.IO.MemoryStream(mapRepository.Map.Image);
             return new FileStreamResult(stream, "image/png");
         }
     }

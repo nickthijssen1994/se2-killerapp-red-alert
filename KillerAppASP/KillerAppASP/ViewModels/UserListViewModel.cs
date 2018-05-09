@@ -7,7 +7,6 @@ namespace KillerAppASP.ViewModels
     {
         public string SearchTerm { get; set; }
         public User SelectedUser { get; set; }
-        public List<string> OnlineUsers { get; set; }
-        public List<User> AllUsers { get; set; }
+        public List<User> Users { get; set; }
     }
 }

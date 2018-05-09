@@ -17,11 +17,11 @@ namespace KillerAppASP.Controllers
 {
     public class AccountController : Controller
     {
-        private AccountRepository accountRepository;
+        private UserRepository userRepository;
 
         public AccountController()
         {
-            accountRepository = new AccountRepository(new AccountSQLContext());
+            userRepository = new UserRepository(new UserSQLContext());
         }
 
         [HttpGet]
@@ -53,7 +53,7 @@ namespace KillerAppASP.Controllers
                     Username = model.Username,
                     Password = EncryptPassword(model.Password)
                 };
-                switch (accountRepository.LoginUser(user))
+                switch (userRepository.LoginUser(user))
                 {
                     case 0:
                         var claims = new List<Claim>
@@ -109,7 +109,7 @@ namespace KillerAppASP.Controllers
                     IsOnline = model.AutoLogin
                 };
 
-                switch (accountRepository.RegisterUser(user))
+                switch (userRepository.RegisterUser(user))
                 {
                     case 0:
                         var claims = new List<Claim>
@@ -160,7 +160,7 @@ namespace KillerAppASP.Controllers
                     Password = EncryptPassword(model.OldPassword)
                 };
 
-                switch (accountRepository.ChangePassword(user, EncryptPassword(model.NewPassword)))
+                switch (userRepository.ChangePassword(user, EncryptPassword(model.NewPassword)))
                 {
                     case 0:
                         Success = true;
@@ -193,7 +193,7 @@ namespace KillerAppASP.Controllers
             {
                 Username = User.Identity.Name
             };
-            accountRepository.LogoutUser(user);
+            userRepository.LogoutUser(user);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Account");
         }

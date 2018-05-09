@@ -8,11 +8,11 @@ namespace KillerAppASP.Controllers
     [Authorize]
     public class MultiplayerController : Controller
     {
-        private AccountRepository accountRepository;
+        private UserRepository userRepository;
 
         public MultiplayerController()
         {
-            accountRepository = new AccountRepository(new AccountSQLContext());
+            userRepository = new UserRepository(new UserSQLContext());
         }
 
         [HttpGet]
@@ -26,24 +26,9 @@ namespace KillerAppASP.Controllers
         {
             UserListViewModel model = new UserListViewModel
             {
-                OnlineUsers = accountRepository.GetOnlineUsers(),
-                AllUsers = accountRepository.GetAllUsers()
+                Users = userRepository.GetUsers(),
             };
             return View(model);
-        }
-
-        [HttpGet]
-        public IActionResult GetOnlineUsers(UserListViewModel model)
-        {
-            model.OnlineUsers = accountRepository.GetOnlineUsers();
-            return PartialView("OnlineUserList", model);
-        }
-
-        [HttpGet]
-        public IActionResult GetAllUsers(UserListViewModel model)
-        {
-            model.AllUsers = accountRepository.GetAllUsers();
-            return PartialView("AllUserList", model);
         }
     }
 }

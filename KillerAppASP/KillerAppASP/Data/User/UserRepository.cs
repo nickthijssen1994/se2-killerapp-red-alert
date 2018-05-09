@@ -1,14 +1,13 @@
-﻿using KillerAppASP.Data;
-using KillerAppASP.Models;
+﻿using KillerAppASP.Models;
 using System.Collections.Generic;
 
-namespace KillerAppASP.Controllers
+namespace KillerAppASP.Data
 {
-    public class AccountRepository
+    public class UserRepository
     {
-        private IAccountContext context;
+        private IUserContext context;
 
-        public AccountRepository(IAccountContext context)
+        public UserRepository(IUserContext context)
         {
             this.context = context;
         }
@@ -38,22 +37,15 @@ namespace KillerAppASP.Controllers
             return context.DeleteUser(user);
         }
 
-        public List<User> GetAllUsers()
+        public List<User> GetUsers()
         {
-            List<User> Users = context.GetAllUsers();
+            List<User> Users = context.GetUsers();
             return Users;
-        }
-
-        public List<string> GetOnlineUsers()
-        {
-            List<string> OnlineUsers = context.GetOnlineUsers();
-            return OnlineUsers;
         }
 
         public List<User> SearchUsers(string searchterm)
         {
             List<User> FoundUsers = context.SearchUsers(searchterm);
-            FoundUsers.Sort();
             return FoundUsers;
         }
     }

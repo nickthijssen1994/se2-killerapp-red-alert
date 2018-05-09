@@ -17,7 +17,7 @@
 .layout {
     font-family: redalert;
     font-size: large;
-    background-image: url(../images/worldmapwallpaper.jpg);
+    background-image: url(../images/interface/worldmapwallpaper.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -106,16 +106,16 @@
     position: relative;
 }
 
+#previewborder {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
 #preview {
     position: absolute;
     right: 0px;
     z-index: 1;
     width: 100%;
     padding: 11.5%;
-}
-
-#previewborder {
-    position: relative;
-    z-index: 2;
-    width: 100%;
 }

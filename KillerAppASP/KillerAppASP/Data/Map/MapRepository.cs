@@ -1,14 +1,13 @@
-﻿using KillerAppASP.Data;
-using KillerAppASP.Models;
+﻿using KillerAppASP.Models;
 using System.Collections.Generic;
 
-namespace KillerAppASP.Controllers
+namespace KillerAppASP.Data
 {
-    public class MapCreatorRepository
+    public class MapRepository
     {
         private IMapContext context;
 
-        public MapCreatorRepository(IMapContext context)
+        public MapRepository(IMapContext context)
         {
             this.context = context;
         }
@@ -40,13 +39,11 @@ namespace KillerAppASP.Controllers
         public void GetAllMaps()
         {
             Maps = context.GetAllMaps();
-            Maps.Sort();
         }
 
         public void GetUserMaps(string username)
         {
             Maps = context.GetUserMaps(username);
-            Maps.Sort();
         }
     }
 }

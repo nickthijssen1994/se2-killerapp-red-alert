@@ -1,24 +1,18 @@
 ﻿@model KillerAppASP.ViewModels.UserListViewModel
 
-<script>
-    window.onload = function () {
-        GetAllUsers();
-    }
-</script>
-
-<div class="OnlineUserList">
+<div class="AllUserList">
     <div class="form-group">
         <input onkeyup="SearchUser()" class="form-control" type="text" placeholder="Search...">
     </div>
     <div class="list-group">
         <div class="pre-scrollable">
-            @if (Model != null && Model.AllUsers.Count != 0)
+            @if (Model != null && Model.Users.Count != 0)
             {
-                foreach (User user in Model.AllUsers)
+                foreach (User user in Model.Users)
                 {
                     if (user.Username != User.Identity.Name)
                     {
-                        <a href='#@user.Username' type="button" class="list-group-item">@user.Username - @user.IsOnline - @user.LastOnline</a>
+                        <a href='#@user.UserID' type="button" class="list-group-item">@user.Username - @user.IsOnline - @user.LastOnline</a>
                     }
                 }
             }
