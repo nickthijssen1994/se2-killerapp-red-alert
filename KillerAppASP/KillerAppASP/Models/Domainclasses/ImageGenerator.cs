@@ -4,9 +4,9 @@ using System.IO;
 
 namespace KillerAppASP.Models
 {
-    public class ImageGenerator
+    public static class ImageGenerator
     {
-        public byte[] GenerateImage(int[,] Array)
+        public static byte[] GenerateImage(int[,] Array)
         {
             int width = Array.GetLength(1);
             int height = Array.GetLength(0);

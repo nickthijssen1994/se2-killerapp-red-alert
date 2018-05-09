@@ -2,7 +2,7 @@
 
 namespace KillerAppASP.Models
 {
-    public class PerlinNoiseGenerator
+    public static class PerlinNoiseGenerator
     {
         /*
          * Original from https://github.com/WardBenjamin/SimplexNoise.git
@@ -24,7 +24,7 @@ namespace KillerAppASP.Models
             }
             return values;
         }
-       
+
         public static int Seed
         {
             get { return seed; }

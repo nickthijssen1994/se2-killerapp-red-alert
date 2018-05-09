@@ -20,11 +20,10 @@ namespace KillerAppASP.Data
                         CommandType = CommandType.StoredProcedure,
                         CommandText = "SaveMap"
                     };
-                    ArrayStringConverter converter = new ArrayStringConverter();
-                    string array = converter.ConvertArrayToString(map.Size, map.Array);
+
                     sqlCommand.Parameters.AddWithValue("@Name", map.Name);
                     sqlCommand.Parameters.AddWithValue("@Size", map.Size);
-                    sqlCommand.Parameters.AddWithValue("@Array", array);
+                    sqlCommand.Parameters.AddWithValue("@Seed", map.Seed);
                     sqlCommand.Parameters.AddWithValue("@GroundType", map.GroundType);
                     sqlCommand.Parameters.AddWithValue("@MapType", map.MapType);
                     sqlCommand.Parameters.AddWithValue("@HasLakes", map.HasLakes);
@@ -78,7 +77,6 @@ namespace KillerAppASP.Data
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    ArrayStringConverter converter = new ArrayStringConverter();
                     Map map = new Map();
 
                     SqlCommand sqlCommand = new SqlCommand
@@ -98,7 +96,7 @@ namespace KillerAppASP.Data
                             map.MapID = reader.GetInt32(0);
                             map.Name = reader.GetString(1);
                             map.Size = reader.GetInt32(2);
-                            map.Array = converter.ConvertStringToArray(map.Size, reader.GetString(3));
+                            map.Seed = reader.GetInt32(3);
                             map.GroundType = reader.GetInt32(4);
                             map.MapType = reader.GetInt32(5);
                             map.HasLakes = reader.GetBoolean(6);
@@ -124,7 +122,6 @@ namespace KillerAppASP.Data
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    ArrayStringConverter converter = new ArrayStringConverter();
                     List<string> maps = new List<string>();
 
                     SqlCommand sqlCommand = new SqlCommand
@@ -159,7 +156,6 @@ namespace KillerAppASP.Data
             {
                 using (var connection = new SqlConnection(connectionString))
                 {
-                    ArrayStringConverter converter = new ArrayStringConverter();
                     List<string> maps = new List<string>();
 
                     SqlCommand sqlCommand = new SqlCommand

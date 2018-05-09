@@ -16,10 +16,10 @@ namespace KillerAppASP.Controllers
         public List<string> Maps { get; set; }
         public Map Map { get; set; }
 
-        public void GenerateMap(string Name, int Size, int GroundType, int MapType, bool HasLakes, bool HasRivers, int Seed, string Username)
+        public void GenerateMap(string Name, int Size, int Seed, int GroundType, int MapType, bool HasLakes, bool HasRivers, string Username)
         {
             MapGenerator mapGenerator = new MapGenerator();
-            Map = mapGenerator.GenerateMap(Name, Size, GroundType, MapType, HasLakes, HasRivers, Seed, Username);
+            Map = mapGenerator.GenerateMap(Name, Size, Seed, GroundType, MapType, HasLakes, HasRivers, Username);
         }
 
         public int SaveMap(string username)

@@ -36,7 +36,19 @@ namespace KillerAppASP.Controllers
             {
                 Success = true;
                 Message = "Map Generated";
-                mapCreatorRepository.GenerateMap(model.Name, model.Size, Convert.ToInt32(model.GroundType), Convert.ToInt32(model.MapType), model.HasLakes, model.HasRivers, model.Seed, User.Identity.Name);
+
+                mapCreatorRepository.GenerateMap
+                    (
+                    model.Name,
+                    model.Size,
+                    model.Seed,
+                    Convert.ToInt32(model.GroundType),
+                    Convert.ToInt32(model.MapType),
+                    model.HasLakes,
+                    model.HasRivers,
+                    User.Identity.Name
+                    );
+
                 HttpContext.Session.SetString("Map", JsonConvert.SerializeObject(mapCreatorRepository.Map));
             }
             else

@@ -115,7 +115,7 @@ function SaveMap() {
             $("#result").text("Something Went Wrong");
         }
     });
-    setTimeout(GetUserMapsWithDelete, 2000);
+    setTimeout(GetUserMapsWithDelete, 500);
 }
 
 function DeleteMap(mapname) {
@@ -134,7 +134,7 @@ function DeleteMap(mapname) {
                 $("#result").text("Something Went Wrong");
             }
         });
-        setTimeout(GetUserMapsWithDelete, 2000);
+        setTimeout(GetUserMapsWithDelete, 500);
     }
 }
 
