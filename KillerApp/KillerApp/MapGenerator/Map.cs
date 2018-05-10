@@ -14,7 +14,7 @@
 
         public Map() { }
 
-        public Map(string Name, int Size, int Seed, int GroundType, int MapType, bool HasLakes, bool HasRivers, byte[] PreviewImage)
+        public Map(string Name, int Size, int Seed, int GroundType, int MapType, bool HasLakes, bool HasRivers, byte[] PreviewImage, byte[] TileImage)
         {
             this.Name = Name;
             this.Size = Size;
@@ -24,6 +24,7 @@
             this.HasLakes = HasLakes;
             this.HasRivers = HasRivers;
             this.PreviewImage = PreviewImage;
+            this.TileImage = TileImage;
         }
 
         public override string ToString()

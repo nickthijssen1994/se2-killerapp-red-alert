@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MapGenerator\BitmapViewGenerator.cs" />
+    <Compile Include="MapGenerator\TileImageGenerator.cs" />
     <Compile Include="MapCreatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,7 +72,6 @@
     <Compile Include="MapGenerator\PerlinNoiseGenerator.cs" />
     <Compile Include="MapGenerator\PreviewImageGenerator.cs" />
     <Compile Include="MapGenerator\TileColorSelector.cs" />
-    <Compile Include="MapGenerator\TilesImageGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MapCreatorForm.resx">

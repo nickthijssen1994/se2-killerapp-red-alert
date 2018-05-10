@@ -6,8 +6,9 @@
         {
             int[,] Array = new int[Size, Size];
             Array = PerlinNoiseGenerator.GenerateMap(Size, Seed);
-            byte[] PreviewImage = PreviewImageGenerator.GeneratePreviewImage(Array);
-            Map map = new Map(Name, Size, Seed, GroundType, MapType, HasLakes, HasRivers, PreviewImage);
+            byte[] PreviewImage = PreviewImageGenerator.GeneratePreviewImage(Array, GroundType);
+            byte[] TileImage = TileImageGenerator.GenerateTiles(Array, GroundType);
+            Map map = new Map(Name, Size, Seed, GroundType, MapType, HasLakes, HasRivers, PreviewImage, TileImage);
             return map;
         }
     }

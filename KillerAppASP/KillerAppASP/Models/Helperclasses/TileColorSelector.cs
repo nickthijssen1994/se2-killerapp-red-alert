@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace MapGenerator
+namespace KillerAppASP.Models
 {
     public static class TileColorSelector
     {

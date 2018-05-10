@@ -10,21 +10,6 @@ namespace KillerAppASP.Models
 
         private static int seed = 1;
         private static byte[] noise;
-
-        public static int[,] GenerateMap(int size, int seed)
-        {
-            Seed = seed;
-            int[,] values = new int[size, size];
-            for (int y = 0; y < size; y++)
-            {
-                for (int x = 0; x < size; x++)
-                {
-                    values[x, y] = (int)(OctaveGenerate(x, y, 8) * 128 + 128);
-                }
-            }
-            return values;
-        }
-
         public static int Seed
         {
             get { return seed; }
@@ -34,6 +19,29 @@ namespace KillerAppASP.Models
                 Random random = new Random(value);
                 random.NextBytes(noise);
             }
+        }
+
+        public static int[,] GenerateMap(int size, int seed)
+        {
+            Seed = seed;
+            int[,] heightValues = new int[size, size];
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    int heightValue = (int)(OctaveGenerate(x, y, 8) * 128 + 128);
+                    if (heightValue < 0)
+                    {
+                        heightValue = 0;
+                    }
+                    if (heightValue > 255)
+                    {
+                        heightValue = 255;
+                    }
+                    heightValues[x, y] = heightValue;
+                }
+            }
+            return heightValues;
         }
 
         private static float OctaveGenerate(float x, float y, int octave)

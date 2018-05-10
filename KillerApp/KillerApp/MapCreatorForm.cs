@@ -23,7 +23,21 @@ namespace MapGenerator
         {
             map = MapGenerator.GenerateMap(tbName.Text, tbSize.Value, (int)nudSeed.Value, cbGroundType.SelectedIndex, cbMapType.SelectedIndex, cbHasLakes.Checked, cbHasRivers.Checked);
             pbPreviewMap.Image = new Bitmap(new MemoryStream(map.PreviewImage));
-            pbTileMap.Image = new Bitmap(new MemoryStream(map.PreviewImage));
+            pbTileMap.Image = new Bitmap(new MemoryStream(map.TileImage));
+        }
+
+        private void pbTileMap_Click(object sender, EventArgs e)
+        {
+            DateTime date = DateTime.Now;
+            Image bitmap = pbTileMap.Image;
+            bitmap.Save(@"C:\Users\Nick\Desktop\Tilemap.png", System.Drawing.Imaging.ImageFormat.Png);
+        }
+
+        private void pbPreviewMap_Click(object sender, EventArgs e)
+        {
+            DateTime date = DateTime.Now;
+            Image bitmap = pbPreviewMap.Image;
+            bitmap.Save(@"C:\Users\Nick\Desktop\Previewmap.png", System.Drawing.Imaging.ImageFormat.Png);
         }
     }
 }

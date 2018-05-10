@@ -44,10 +44,12 @@
             this.nudSeed = new System.Windows.Forms.NumericUpDown();
             this.pbTileMap = new System.Windows.Forms.PictureBox();
             this.tbName = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.tbSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviewMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTileMap)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbSize
@@ -131,6 +133,7 @@
             this.pbPreviewMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPreviewMap.TabIndex = 9;
             this.pbPreviewMap.TabStop = false;
+            this.pbPreviewMap.Click += new System.EventHandler(this.pbPreviewMap_Click);
             // 
             // lbName
             // 
@@ -204,12 +207,13 @@
             // pbTileMap
             // 
             this.pbTileMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbTileMap.Location = new System.Drawing.Point(392, 12);
+            this.pbTileMap.Location = new System.Drawing.Point(3, 3);
             this.pbTileMap.Name = "pbTileMap";
-            this.pbTileMap.Size = new System.Drawing.Size(900, 900);
-            this.pbTileMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbTileMap.Size = new System.Drawing.Size(1556, 962);
+            this.pbTileMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbTileMap.TabIndex = 20;
             this.pbTileMap.TabStop = false;
+            this.pbTileMap.Click += new System.EventHandler(this.pbTileMap_Click);
             // 
             // tbName
             // 
@@ -219,12 +223,21 @@
             this.tbName.Size = new System.Drawing.Size(167, 30);
             this.tbName.TabIndex = 0;
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.pbTileMap);
+            this.panel1.Location = new System.Drawing.Point(377, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1562, 968);
+            this.panel1.TabIndex = 21;
+            // 
             // MapCreatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1307, 928);
-            this.Controls.Add(this.pbTileMap);
+            this.ClientSize = new System.Drawing.Size(1951, 992);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.nudSeed);
             this.Controls.Add(this.lbSeed);
             this.Controls.Add(this.lbSelectedSize);
@@ -247,6 +260,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviewMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTileMap)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,6 +284,7 @@
         private System.Windows.Forms.NumericUpDown nudSeed;
         private System.Windows.Forms.PictureBox pbTileMap;
         private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

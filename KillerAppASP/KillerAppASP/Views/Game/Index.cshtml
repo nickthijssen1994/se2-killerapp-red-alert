@@ -3,11 +3,18 @@
     Layout = "_GameLayout";
 }
 
+<script>
+    window.onload = function () {
+        GetTiles();
+        GetPreview('DesertMap3');
+    }
+</script>
+
 <div class="row no-gutter">
     <div class="col-sm-10">
         <br />
         <div class="world-map">
-            <img src="~/images/interface/mappreview.png" />
+            <img id="worldmap" />
         </div>
     </div>
     <div class="col-sm-2">

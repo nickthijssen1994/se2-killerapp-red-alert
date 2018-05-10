@@ -8,8 +8,8 @@ namespace KillerAppASP.Models
         {
             int[,] Array = new int[Size, Size];
             Array = PerlinNoiseGenerator.GenerateMap(Size, Seed);
-            byte[] Image = PreviewImageGenerator.GeneratePreviewImage(Array);
-            Map map = new Map(Name, Size, Seed, GroundType, MapType, HasLakes, HasRivers, DateTime.Now, CreatedBy, Image);
+            byte[] PreviewImage = PreviewImageGenerator.GeneratePreviewImage(Array, GroundType);
+            Map map = new Map(Name, Size, Seed, GroundType, MapType, HasLakes, HasRivers, DateTime.Now, CreatedBy, PreviewImage);
             return map;
         }
     }
