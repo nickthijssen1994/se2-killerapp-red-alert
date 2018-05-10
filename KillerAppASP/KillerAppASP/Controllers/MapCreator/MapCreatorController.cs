@@ -108,7 +108,7 @@ namespace KillerAppASP.Controllers
             MapListViewModel model = new MapListViewModel();
             mapRepository.GetUserMaps(User.Identity.Name);
             model.Maps = mapRepository.Maps;
-            return PartialView("MapList", model);
+            return PartialView("_MapList", model);
         }
 
         [HttpGet]

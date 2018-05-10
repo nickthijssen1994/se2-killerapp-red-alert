@@ -2,16 +2,16 @@
     ViewData["Title"] = "Settings";
 }
 
-<div class="row menu-small">
+<div class="row menu menu-small">
     <h1>Settings</h1>
     <hr />
-    <div class="col-md-4">
+    <div class="col-sm-4">
         @await Html.PartialAsync("ChangePassword")
     </div>
-    <div class="col-md-4">
+    <div class="col-sm-4">
 
     </div>
-    <div class="form-group col-md-4">
+    <div class="col-sm-4">
         @await Html.PartialAsync("DeleteAccount")
     </div>
 </div>

@@ -2,7 +2,7 @@
     ViewData["Title"] = "Multiplayer";
 }
 
-<div class="row menu-big">
+<div class="row menu menu-big">
     <h1>Multiplayer</h1>
     <hr />
     <div class="col-md-6">
@@ -75,12 +75,12 @@
     </div>
     <div class="col-md-3">
         <h2>Map List</h2>
-        @await Html.PartialAsync("MapList")
+        @await Html.PartialAsync("_MapList")
 
     </div>
     <div class="col-md-3">
         <br />
-        @await Html.PartialAsync("MapPreview")
+        @await Html.PartialAsync("_MapPreview")
         <br />
         <div class="btn-group btn-group-justified" role="group">
             <a asp-controller="Game" asp-action="Index">

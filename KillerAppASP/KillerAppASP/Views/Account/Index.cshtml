@@ -2,7 +2,12 @@
     ViewData["Title"] = "Welcome";
 }
 
-<div class="row menu-small">
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <img class="main-logo" src="~/images/interface/red-alert-logo.png" style="width: 100%;" />
+    </div>
+</div>
+<div class="row menu menu-welcome">
     <div class="col-sm-6" id="Login">
         @await Html.PartialAsync("Login")
     </div>

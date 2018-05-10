@@ -3,35 +3,19 @@
     src: url(/css/red_alert-webfont.woff2) format('woff2'), url(/css/red_alert-webfont.woff) format('woff');
 }
 
-.row.no-gutter {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-    .row.no-gutter [class*='col-']:not(:first-child),
-    .row.no-gutter [class*='col-']:not(:last-child) {
-        padding-right: 0;
-        padding-left: 0;
-    }
-
-.layout {
+body {
     font-family: redalert;
     font-size: large;
-    background-image: url(../images/interface/worldmapwallpaper.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
     padding-top: 50px;
-    padding-bottom: 20px;
     color: rgb(2, 176, 169);
 }
 
-.gamelayout {
-    font-family: redalert;
-    font-size: large;
-    background-color: black;
-    padding-top: 50px;
-    color: rgb(2, 176, 169);
+h1, h2, h3 {
+    text-align: center;
+}
+
+.btn {
+    width: 100%;
 }
 
 .btn-default {
@@ -46,45 +30,100 @@
         color: #fff;
     }
 
+.row.no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+    .row.no-gutter [class*='col-']:not(:first-child),
+    .row.no-gutter [class*='col-']:not(:last-child) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+.layout {
+    background-image: url(../images/interface/worldmapwallpaper.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.gamelayout {
+    background-color: black;
+    color: rgb(2, 176, 169);
+}
+
+    .gamelayout .world-map {
+        width: 100%;
+        min-height: 90vh;
+        max-height: 90vh;
+        overflow: scroll;
+        border: 10px;
+        border-style: solid;
+        border-radius: 5px;
+        border-color: #232322;
+    }
+
+        .gamelayout .world-map > img {
+            width: 200%;
+        }
+
+    .gamelayout .control-panel {
+        min-height: 90vh;
+        max-height: 90vh;
+    }
+
+    .gamelayout .panel {
+        background-color: #232322;
+        border: none;
+    }
+
+    .gamelayout .panel-default {
+        border-color: #ddd;
+    }
+
+    .gamelayout .panel-heading {
+        background-color: #02b0a9;
+        border: none;
+    }
+
+    .gamelayout .panel-body {
+        padding: unset;
+    }
+
+.menu {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border: 5px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: rgba(2, 176, 169, 0.6);
+}
+
+.menu-welcome {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.menu-main {
+    margin-top: 2%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
 .menu-small {
     margin-top: 10%;
     margin-left: 15%;
     margin-right: 15%;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 25px;
-    border: 5px;
-    border-style: solid;
-    border-radius: 5px;
-    border-color: rgba(2, 176, 169, 0.6);
 }
-
-    .menu-small h1, h2, h3 {
-        text-align: center;
-    }
-
-    .menu-small .btn {
-        width: 100%;
-    }
 
 .menu-big {
-    margin-top: 5%;
+    margin-top: 2%;
     margin-left: 5%;
     margin-right: 5%;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 25px;
-    border: 5px;
-    border-style: solid;
-    border-radius: 5px;
-    border-color: rgba(2, 176, 169, 0.6);
+    padding-left: 5%;
+    padding-right: 5%;
 }
-
-    .menu-big h1, h2, h3 {
-        text-align: center;
-    }
-
-    .menu-big .btn {
-        width: 100%;
-    }
 
 .slider {
     -moz-appearance: none;
@@ -114,8 +153,13 @@
 
 #preview {
     position: absolute;
+    top: 0px;
     right: 0px;
     z-index: 1;
     width: 100%;
     padding: 11.5%;
+}
+
+.pre-scrollable {
+    overflow-x: hidden;
 }
