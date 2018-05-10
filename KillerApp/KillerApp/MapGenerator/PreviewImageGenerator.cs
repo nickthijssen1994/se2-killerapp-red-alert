@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
-namespace KillerApp.DomeinClasses
+namespace MapGenerator
 {
-    public class BitmapGenerator
+    public static class PreviewImageGenerator
     {
-        public Bitmap GenerateBitmap(int[,] Tiles)
+        public static byte[] GeneratePreviewImage(int[,] Array)
         {
-            int width = Tiles.GetLength(1);
-            int height = Tiles.GetLength(0);
+            int width = Array.GetLength(1);
+            int height = Array.GetLength(0);
             Bitmap bitmap = new Bitmap(width, height);
+
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
                     Color color = new Color();
-                    int i = Tiles[x, y];
-                    //color = Color.FromArgb(i, i, i);
+                    int i = Array[x, y];
                     if (i <= 55)
                     {
                         color = Color.Blue;
@@ -52,7 +49,13 @@ namespace KillerApp.DomeinClasses
                     bitmap.SetPixel(x, y, color);
                 }
             }
-            return bitmap;
+
+            Image image = bitmap;
+            byte[] imageBytes;
+            MemoryStream memoryStream = new MemoryStream();
+            image.Save(memoryStream, ImageFormat.Png);
+            imageBytes = memoryStream.ToArray();
+            return imageBytes;
         }
     }
 }

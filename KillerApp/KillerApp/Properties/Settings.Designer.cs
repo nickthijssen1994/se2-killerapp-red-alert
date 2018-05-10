@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KillerApp.Properties
+namespace MapGenerator.Properties
 {
 
 

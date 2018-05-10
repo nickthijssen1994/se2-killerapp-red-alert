@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KillerApp.DomeinClasses
+namespace MapGenerator
 {
-    public class PerlinNoiseGenerator
+    public static class PerlinNoiseGenerator
     {
         /*
          * Original from https://github.com/WardBenjamin/SimplexNoise.git
         */
 
-        private static int seed = 0;
+        private static int seed = 1;
         private static byte[] noise;
 
         public static int[,] GenerateMap(int size, int seed)
@@ -29,7 +24,7 @@ namespace KillerApp.DomeinClasses
             }
             return values;
         }
-       
+
         public static int Seed
         {
             get { return seed; }
@@ -69,7 +64,7 @@ namespace KillerApp.DomeinClasses
             int i = FastFloor(xs);
             int j = FastFloor(ys);
 
-            float t = (float)(i + j) * G2;
+            float t = (i + j) * G2;
             float X0 = i - t; // Unskew the cell origin back to (x,y) space
             float Y0 = j - t;
             float x0 = x - X0; // The x,y distances from the cell origin

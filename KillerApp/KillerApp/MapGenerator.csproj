@@ -60,50 +60,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataLayer\IMapContext.cs" />
-    <Compile Include="DataLayer\MapSQLContext.cs" />
-    <Compile Include="DomeinClasses\ArrayStringConverter.cs" />
-    <Compile Include="DomeinClasses\BitmapGenerator.cs" />
-    <Compile Include="DomeinClasses\BitmapViewGenerator.cs" />
-    <Compile Include="DomeinClasses\MapGenerator.cs" />
-    <Compile Include="DomeinClasses\User.cs" />
-    <Compile Include="IngameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="IngameForm.Designer.cs">
-      <DependentUpon>IngameForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LogicLayer\MapController.cs" />
-    <Compile Include="LogicLayer\MapRepository.cs" />
-    <Compile Include="LogicLayer\UserRepository.cs" />
-    <Compile Include="MainMenuForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainMenuForm.Designer.cs">
-      <DependentUpon>MainMenuForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DomeinClasses\Map.cs" />
+    <Compile Include="MapGenerator\BitmapViewGenerator.cs" />
     <Compile Include="MapCreatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MapCreatorForm.Designer.cs">
       <DependentUpon>MapCreatorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DomeinClasses\PerlinNoiseGenerator.cs" />
+    <Compile Include="MapGenerator\Map.cs" />
+    <Compile Include="MapGenerator\MapGenerator.cs" />
+    <Compile Include="MapGenerator\PerlinNoiseGenerator.cs" />
+    <Compile Include="MapGenerator\PreviewImageGenerator.cs" />
+    <Compile Include="MapGenerator\TileColorSelector.cs" />
+    <Compile Include="MapGenerator\TilesImageGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StartGameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StartGameForm.Designer.cs">
-      <DependentUpon>StartGameForm.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="IngameForm.resx">
-      <DependentUpon>IngameForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainMenuForm.resx">
-      <DependentUpon>MainMenuForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MapCreatorForm.resx">
       <DependentUpon>MapCreatorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -116,9 +87,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="StartGameForm.resx">
-      <DependentUpon>StartGameForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
