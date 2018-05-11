@@ -12,10 +12,6 @@ function GetPreview(mapname) {
     $('#preview').attr('src', '/MapCreator/GetMapPreview?Mapname=' + mapname);
 }
 
-function GetTiles() {
-    $('#worldmap').attr('src', '/Game/GetMapTiles');
-}
-
 function Login() {
     $.ajax({
         url: $("#loginform").attr('action'),

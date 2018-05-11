@@ -19,6 +19,7 @@
     }
 
     var song = document.getElementsByTagName('audio')[0];
+    song.volume = 0.05;
     var played = false;
     var tillPlayed = getCookie('timePlayed');
     function update() {

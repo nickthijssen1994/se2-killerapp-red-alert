@@ -7,7 +7,7 @@ body {
     font-family: redalert;
     font-size: large;
     padding-top: 50px;
-    color: rgb(2, 176, 169);
+    color: rgb(255, 255, 255);
 }
 
 h1, h2, h3 {
@@ -19,15 +19,18 @@ h1, h2, h3 {
 }
 
 .btn-default {
-    border: 0;
     color: rgb(0, 0, 0);
-    background-color: rgb(2, 176, 169);
+    background-color: rgb(194, 29, 35);
+    border: 5px;
+    border-style: solid;
     border-radius: 5px;
+    border-color: rgb(180, 135, 6);
 }
 
     .btn-default:hover {
-        background-color: rgb(10, 112, 108);
+        background-color: rgb(180, 135, 6);
         color: #fff;
+        border-color: rgb(194, 29, 35);
     }
 
 .row.no-gutter {
@@ -42,7 +45,7 @@ h1, h2, h3 {
     }
 
 .layout {
-    background-image: url(../images/interface/worldmapwallpaper.jpg);
+    background-image: url(../images/interface/red-alert-wallpaper.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -50,10 +53,10 @@ h1, h2, h3 {
 
 .gamelayout {
     background-color: black;
-    color: rgb(2, 176, 169);
+
 }
 
-    .gamelayout .world-map {
+    .gamelayout .worldmap {
         width: 100%;
         min-height: 90vh;
         max-height: 90vh;
@@ -63,10 +66,6 @@ h1, h2, h3 {
         border-radius: 5px;
         border-color: #232322;
     }
-
-        .gamelayout .world-map > img {
-            width: 500%;
-        }
 
     .gamelayout .control-panel {
         min-height: 90vh;
@@ -83,7 +82,8 @@ h1, h2, h3 {
     }
 
     .gamelayout .panel-heading {
-        background-color: #02b0a9;
+        color: white;
+        background-color: rgb(194, 29, 35);
         border: none;
     }
 
@@ -97,7 +97,7 @@ h1, h2, h3 {
     border: 5px;
     border-style: solid;
     border-radius: 5px;
-    border-color: rgba(2, 176, 169, 0.6);
+    border-color: rgb(180, 135, 6);
 }
 
 .menu-welcome {
@@ -137,7 +137,7 @@ h1, h2, h3 {
         -webkit-appearance: none;
         width: 25px;
         height: 25px;
-        background: rgb(2, 176, 169);
+        background: rgb(180, 135, 6);
     }
 
 .mappreview {

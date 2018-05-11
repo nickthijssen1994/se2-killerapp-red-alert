@@ -1,20 +1,15 @@
-﻿@{
+﻿@model KillerAppASP.ViewModels.WorldMapViewModel
+
+@{
     ViewData["Title"] = "Game";
     Layout = "_GameLayout";
 }
 
-<script>
-    window.onload = function () {
-        GetTiles();
-        GetPreview('DesertMap3');
-    }
-</script>
-
 <div class="row no-gutter">
     <div class="col-sm-10">
         <br />
-        <div class="world-map">
-            <img id="worldmap" />
+        <div class="worldmap">
+            <canvas id="worldcanvas" width="@(Model.TileSize * Model.Size)" height="@(Model.TileSize * Model.Size)"></canvas>
         </div>
     </div>
     <div class="col-sm-2">
@@ -24,7 +19,7 @@
                 <h3 class="panel-title">Resources:</h3>
             </div>
             <div class="panel-body">
-                @await Html.PartialAsync("_MapPreview")
+                @Html.Partial("_MapPreview")
                 <div class="btn-group btn-group-justified" role="group">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default">Repair</button>
@@ -47,3 +42,31 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var canvas = document.getElementById("worldcanvas");
+    var ctx = canvas.getContext("2d");
+    @for (int y = 0; y < Model.Size; y++)
+    {
+        for (int x = 0; x < Model.Size; x++)
+        {
+            int Color = Model.HeightValues[x, y];
+            <text>
+                ctx.beginPath();
+                ctx.lineWidth = "2";
+                ctx.strokeStyle = "black";
+                ctx.rect(@(x* Model.TileSize), @(y* Model.TileSize), @Model.TileSize, @Model.TileSize);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.fillStyle = 'rgb(0,@Color,0)';
+                ctx.fillRect(@(x* Model.TileSize), @(y* Model.TileSize), @Model.TileSize, @Model.TileSize);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.font = "12px Arial";
+                ctx.fillStyle = "red";
+    ctx.fillText("@x/@y", @(x* Model.TileSize), @(y * Model.TileSize + (Model.TileSize/2)));
+                ctx.stroke()
+            </text>
+        }
+    }
+</script>
