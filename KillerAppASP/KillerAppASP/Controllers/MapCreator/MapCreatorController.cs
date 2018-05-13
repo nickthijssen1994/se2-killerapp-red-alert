@@ -16,7 +16,7 @@ namespace KillerAppASP.Controllers
 
         public MapCreatorController()
         {
-            mapRepository = new MapRepository(new MapSQLContext());
+            mapRepository = new MapRepository(new MapMSSQLContext());
         }
 
         [HttpGet]

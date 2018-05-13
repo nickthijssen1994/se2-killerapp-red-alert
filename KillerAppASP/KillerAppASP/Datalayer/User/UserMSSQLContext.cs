@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace KillerAppASP.Datalayer
 {
-    public class UserSQLContext : IUserContext
+    public class UserMSSQLContext : IUserContext
     {
         private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
 

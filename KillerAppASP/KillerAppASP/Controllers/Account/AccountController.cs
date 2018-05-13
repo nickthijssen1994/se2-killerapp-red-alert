@@ -21,7 +21,7 @@ namespace KillerAppASP.Controllers
 
         public AccountController()
         {
-            userRepository = new UserRepository(new UserSQLContext());
+            userRepository = new UserRepository(new UserMSSQLContext());
         }
 
         [HttpGet]

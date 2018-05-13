@@ -39,11 +39,13 @@ namespace KillerAppASP.Datalayer
         public void GetAllMaps()
         {
             Maps = context.GetAllMaps();
+            Maps.Sort();
         }
 
         public void GetUserMaps(string username)
         {
             Maps = context.GetUserMaps(username);
+            Maps.Sort();
         }
     }
 }

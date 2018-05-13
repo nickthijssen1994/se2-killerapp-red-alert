@@ -12,7 +12,7 @@ namespace KillerAppASP.Controllers
 
         public MultiplayerController()
         {
-            userRepository = new UserRepository(new UserSQLContext());
+            userRepository = new UserRepository(new UserMSSQLContext());
         }
 
         [HttpGet]

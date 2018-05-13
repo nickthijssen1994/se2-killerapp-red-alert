@@ -10,6 +10,11 @@ body {
     color: rgb(255, 255, 255);
 }
 
+label{
+    font-size: 20px;
+    font-weight:normal;
+}
+
 h1, h2, h3 {
     text-align: center;
 }
@@ -18,7 +23,16 @@ h1, h2, h3 {
     width: 100%;
 }
 
+.text-danger{
+    color: red;
+}
+
+.text-success {
+    color: green;
+}
+
 .btn-default {
+    font-size: 20px;
     color: rgb(0, 0, 0);
     background-color: rgb(194, 29, 35);
     border: 5px;
@@ -32,6 +46,22 @@ h1, h2, h3 {
         color: #fff;
         border-color: rgb(194, 29, 35);
     }
+
+a.list-group-item.active {
+    background-color: rgb(180, 135, 6);
+    border-color: rgb(194, 29, 35);
+}
+
+    a.list-group-item.active:hover {
+        background-color: rgb(194, 29, 35);
+        border-color: rgb(180, 135, 6);
+    }
+
+a.list-group-item:hover {
+    color: rgb(180, 135, 6);
+    background-color: rgba(194, 29, 35, 0.8);
+    border-color: black;
+}
 
 .row.no-gutter {
     margin-left: 0;

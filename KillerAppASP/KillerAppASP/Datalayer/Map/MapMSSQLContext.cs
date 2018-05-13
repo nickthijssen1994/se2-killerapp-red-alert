@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace KillerAppASP.Datalayer
 {
-    public class MapSQLContext : IMapContext
+    public class MapMSSQLContext : IMapContext
     {
         private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
 

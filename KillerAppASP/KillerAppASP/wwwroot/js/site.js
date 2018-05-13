@@ -119,8 +119,8 @@ function SaveMap() {
 }
 
 function DeleteMap(mapname) {
-    var r = confirm("Are you sure you want to delete this map?");
-    if (r == true) {
+    var input = confirm("Are you sure you want to delete this map?");
+    if (input == true) {
         $.ajax({
             type: 'DELETE',
             url: 'MapCreator/DeleteMap?Mapname=' + mapname,

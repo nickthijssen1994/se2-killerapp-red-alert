@@ -1,4 +1,4 @@
-﻿@model KillerAppASP.ViewModels.MapListViewModel
+﻿@model MapListViewModel
 
 <script>
     window.onload = function () {
@@ -12,7 +12,7 @@
         <div class="pre-scrollable">
             @foreach (string map in Model.Maps)
             {
-                <button class="list-group-item" id="@map" type="button" onclick="GetPreview('@map')">@map</button>
+                <a class="list-group-item" id="@map" onclick="GetPreview('@map')">@map</a>
             }
         </div>
     }

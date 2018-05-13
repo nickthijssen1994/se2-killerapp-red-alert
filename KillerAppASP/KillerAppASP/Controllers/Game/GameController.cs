@@ -12,7 +12,7 @@ namespace KillerAppASP.Controllers.Game
         private MapRepository mapRepository;
         public GameController()
         {
-            mapRepository = new MapRepository(new MapSQLContext());
+            mapRepository = new MapRepository(new MapMSSQLContext());
         }
 
         [HttpGet]
