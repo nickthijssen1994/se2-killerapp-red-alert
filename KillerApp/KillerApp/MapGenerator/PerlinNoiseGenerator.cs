@@ -22,26 +22,50 @@ namespace MapGenerator
             }
         }
 
-        public static int[,] GenerateMap(int size, int seed)
+        public static float[,] GenerateMap(int size, int seed)
         {
             Seed = seed;
-            int[,] heightValues = new int[size, size];
+
+            float MinValue = 0;
+            float MaxValue = 0;
+            float[,] heightValues = new float[size, size];
+
             for (int y = 0; y < size; y++)
             {
                 for (int x = 0; x < size; x++)
                 {
-                    int heightValue = (int)(OctaveGenerate(x, y, 8) * 128 + 128);
-                    if (heightValue < 0)
+                    float heightValue = OctaveGenerate(x, y, 8);
+                    if (heightValue < -1.0f)
                     {
-                        heightValue = 0;
+                        heightValue = -1.0f;
                     }
-                    if (heightValue > 255)
+                    if (heightValue > 1.0f)
                     {
-                        heightValue = 255;
+                        heightValue = 1.0f;
+                    }
+                    if (heightValue > MaxValue)
+                    {
+                        MaxValue = heightValue;
+                    }
+                    if (heightValue < MinValue)
+                    {
+                        MinValue = heightValue;
                     }
                     heightValues[x, y] = heightValue;
                 }
             }
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float heigthValue = heightValues[x, y];
+                    float scale = 1 / (MaxValue - MinValue);
+                    heigthValue = (heigthValue - MinValue) * scale;
+                    heightValues[x, y] = heigthValue;
+                }
+            }
+
             return heightValues;
         }
 

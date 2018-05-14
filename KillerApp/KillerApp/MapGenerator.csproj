@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MapGenerator\IslandMaskGenerator.cs" />
     <Compile Include="MapGenerator\TileImageGenerator.cs" />
     <Compile Include="MapCreatorForm.cs">
       <SubType>Form</SubType>

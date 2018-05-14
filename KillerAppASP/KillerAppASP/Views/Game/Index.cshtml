@@ -16,7 +16,7 @@
         <br />
         <div class="control-panel panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Resources:</h3>
+                <h3 class="panel-title">Resources: </h3>
             </div>
             <div class="panel-body">
                 @Html.Partial("_MapPreview")
@@ -64,7 +64,7 @@
                 ctx.beginPath();
                 ctx.font = "12px Arial";
                 ctx.fillStyle = "red";
-    ctx.fillText("@x/@y", @(x* Model.TileSize), @(y * Model.TileSize + (Model.TileSize/2)));
+                ctx.fillText("@x/@y", @(x* Model.TileSize), @(y * Model.TileSize + (Model.TileSize/2)));
                 ctx.stroke()
             </text>
         }

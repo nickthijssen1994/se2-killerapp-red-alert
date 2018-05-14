@@ -6,7 +6,7 @@ namespace MapGenerator
 {
     public static class TileImageGenerator
     {
-        public static byte[] GenerateTiles(int[,] Array, int GroundType)
+        public static byte[] GenerateTiles(float[,] Array, int GroundType)
         {
             int tileSize = 20;
             int inputWidth = Array.GetLength(1);
@@ -20,7 +20,7 @@ namespace MapGenerator
             {
                 for (int x = 0; x < inputWidth; x++)
                 {
-                    int heightValue = Array[x, y];
+                    int heightValue = (int)(Array[x, y] * 256);
                     tile = GenerateTile(heightValue, tileSize);
                     for (int yPixel = 0; yPixel < tileSize; yPixel++)
                     {

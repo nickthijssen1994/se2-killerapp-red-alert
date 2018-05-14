@@ -6,7 +6,7 @@ namespace MapGenerator
 {
     public static class PreviewImageGenerator
     {
-        public static byte[] GeneratePreviewImage(int[,] Array, int GroundType)
+        public static byte[] GeneratePreviewImage(float[,] Array, int GroundType)
         {
             int width = Array.GetLength(1);
             int height = Array.GetLength(0);
@@ -16,8 +16,8 @@ namespace MapGenerator
             {
                 for (int x = 0; x < width; x++)
                 {
-                    int i = Array[x, y];
-                    Color color = TileColorSelector.SelectTileColor(i, GroundType);
+                    int HeightValue = (int)(Array[x, y] * 256);
+                    Color color = TileColorSelector.SelectTileColor(HeightValue, GroundType);
                     bitmap.SetPixel(x, y, color);
                 }
             }

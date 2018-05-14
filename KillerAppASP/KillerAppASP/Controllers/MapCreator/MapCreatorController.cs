@@ -135,6 +135,7 @@ namespace KillerAppASP.Controllers
             if (Mapname != null)
             {
                 mapRepository.GetMap(Mapname, User.Identity.Name);
+                TempData["SelectedMap"] = mapRepository.Map.Name;
             }
             var stream = new System.IO.MemoryStream(mapRepository.Map.Image);
             return new FileStreamResult(stream, "image/png");

@@ -33,7 +33,6 @@
             this.cbHasRivers = new System.Windows.Forms.CheckBox();
             this.cbHasLakes = new System.Windows.Forms.CheckBox();
             this.cbMapType = new System.Windows.Forms.ComboBox();
-            this.btGenerateMap = new System.Windows.Forms.Button();
             this.pbPreviewMap = new System.Windows.Forms.PictureBox();
             this.lbName = new System.Windows.Forms.Label();
             this.lbSize = new System.Windows.Forms.Label();
@@ -78,6 +77,7 @@
             this.cbGroundType.Name = "cbGroundType";
             this.cbGroundType.Size = new System.Drawing.Size(167, 33);
             this.cbGroundType.TabIndex = 2;
+            this.cbGroundType.SelectedIndexChanged += new System.EventHandler(this.cbGroundType_SelectedIndexChanged);
             // 
             // cbHasRivers
             // 
@@ -89,6 +89,7 @@
             this.cbHasRivers.TabIndex = 3;
             this.cbHasRivers.Text = "Rivers";
             this.cbHasRivers.UseVisualStyleBackColor = true;
+            this.cbHasRivers.CheckedChanged += new System.EventHandler(this.cbHasRivers_CheckedChanged);
             // 
             // cbHasLakes
             // 
@@ -100,6 +101,7 @@
             this.cbHasLakes.TabIndex = 4;
             this.cbHasLakes.Text = "Lakes";
             this.cbHasLakes.UseVisualStyleBackColor = true;
+            this.cbHasLakes.CheckedChanged += new System.EventHandler(this.cbHasLakes_CheckedChanged);
             // 
             // cbMapType
             // 
@@ -112,22 +114,12 @@
             this.cbMapType.Name = "cbMapType";
             this.cbMapType.Size = new System.Drawing.Size(167, 33);
             this.cbMapType.TabIndex = 5;
-            // 
-            // btGenerateMap
-            // 
-            this.btGenerateMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btGenerateMap.Location = new System.Drawing.Point(33, 268);
-            this.btGenerateMap.Name = "btGenerateMap";
-            this.btGenerateMap.Size = new System.Drawing.Size(300, 36);
-            this.btGenerateMap.TabIndex = 6;
-            this.btGenerateMap.Text = "Generate Map";
-            this.btGenerateMap.UseVisualStyleBackColor = true;
-            this.btGenerateMap.Click += new System.EventHandler(this.btGenerateMap_Click);
+            this.cbMapType.SelectedIndexChanged += new System.EventHandler(this.cbMapType_SelectedIndexChanged);
             // 
             // pbPreviewMap
             // 
             this.pbPreviewMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pbPreviewMap.Location = new System.Drawing.Point(33, 346);
+            this.pbPreviewMap.Location = new System.Drawing.Point(33, 258);
             this.pbPreviewMap.Name = "pbPreviewMap";
             this.pbPreviewMap.Size = new System.Drawing.Size(300, 300);
             this.pbPreviewMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -203,6 +195,7 @@
             this.nudSeed.Size = new System.Drawing.Size(167, 30);
             this.nudSeed.TabIndex = 19;
             this.nudSeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudSeed.ValueChanged += new System.EventHandler(this.nudSeed_ValueChanged);
             // 
             // pbTileMap
             // 
@@ -210,7 +203,7 @@
             this.pbTileMap.Location = new System.Drawing.Point(3, 3);
             this.pbTileMap.Name = "pbTileMap";
             this.pbTileMap.Size = new System.Drawing.Size(1556, 962);
-            this.pbTileMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbTileMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbTileMap.TabIndex = 20;
             this.pbTileMap.TabStop = false;
             this.pbTileMap.Click += new System.EventHandler(this.pbTileMap_Click);
@@ -246,7 +239,6 @@
             this.Controls.Add(this.lbSize);
             this.Controls.Add(this.lbName);
             this.Controls.Add(this.pbPreviewMap);
-            this.Controls.Add(this.btGenerateMap);
             this.Controls.Add(this.cbMapType);
             this.Controls.Add(this.cbHasLakes);
             this.Controls.Add(this.cbHasRivers);
@@ -256,12 +248,12 @@
             this.Name = "MapCreatorForm";
             this.ShowIcon = false;
             this.Text = "Map Creator";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.tbSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviewMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbTileMap)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,7 +265,6 @@
         private System.Windows.Forms.CheckBox cbHasRivers;
         private System.Windows.Forms.CheckBox cbHasLakes;
         private System.Windows.Forms.ComboBox cbMapType;
-        private System.Windows.Forms.Button btGenerateMap;
         private System.Windows.Forms.PictureBox pbPreviewMap;
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.Label lbSize;
