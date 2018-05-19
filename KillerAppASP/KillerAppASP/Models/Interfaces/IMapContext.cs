@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using KillerAppASP.Models;
 
-namespace KillerAppASP.Datalayer
+namespace KillerAppASP.Models
 {
     public interface IMapContext
     {

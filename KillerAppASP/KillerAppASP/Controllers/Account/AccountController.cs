@@ -1,5 +1,4 @@
-﻿using KillerAppASP.Datalayer;
-using KillerAppASP.Models;
+﻿using KillerAppASP.Models;
 using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -9,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace KillerAppASP.Controllers
@@ -21,7 +18,8 @@ namespace KillerAppASP.Controllers
 
         public AccountController()
         {
-            userRepository = new UserRepository(new UserMSSQLContext());
+            IUserContext context = new UserMSSQLContext();
+            userRepository = new UserRepository(context);
         }
 
         [HttpGet]
@@ -51,7 +49,7 @@ namespace KillerAppASP.Controllers
                 User user = new User
                 {
                     Username = model.Username,
-                    Password = EncryptPassword(model.Password)
+                    Password = model.Password
                 };
                 switch (userRepository.LoginUser(user))
                 {
@@ -105,7 +103,7 @@ namespace KillerAppASP.Controllers
                 {
                     Email = model.Email,
                     Username = model.Username,
-                    Password = EncryptPassword(model.Password),
+                    Password = model.Password,
                     IsOnline = model.AutoLogin
                 };
 
@@ -157,10 +155,10 @@ namespace KillerAppASP.Controllers
                 User user = new User
                 {
                     Username = User.Identity.Name,
-                    Password = EncryptPassword(model.OldPassword)
+                    Password = model.OldPassword
                 };
 
-                switch (userRepository.ChangePassword(user, EncryptPassword(model.NewPassword)))
+                switch (userRepository.ChangePassword(user, model.NewPassword))
                 {
                     case 0:
                         Success = true;
@@ -196,14 +194,6 @@ namespace KillerAppASP.Controllers
             userRepository.LogoutUser(user);
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Account");
-        }
-
-        private string EncryptPassword(string password)
-        {
-            SHA256 sha256 = SHA256.Create();
-            byte[] bytes = sha256.ComputeHash(Encoding.Unicode.GetBytes(password));
-            string encryptedPassword = BitConverter.ToString(bytes).Replace("-", string.Empty);
-            return encryptedPassword;
         }
     }
 }

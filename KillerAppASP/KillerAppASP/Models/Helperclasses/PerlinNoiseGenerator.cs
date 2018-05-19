@@ -34,7 +34,7 @@ namespace KillerAppASP.Models
             {
                 for (int x = 0; x < size; x++)
                 {
-                    float heightValue = OctaveGenerate(x, y, 8);
+                    float heightValue = ApplyOctaves(x, y, 8);
                     if (heightValue < -1.0f)
                     {
                         heightValue = -1.0f;
@@ -69,7 +69,7 @@ namespace KillerAppASP.Models
             return heightValues;
         }
 
-        private static float OctaveGenerate(float x, float y, int octave)
+        private static float ApplyOctaves(float x, float y, int octave)
         {
             float total = 0;
             float frequency = 0.005f;

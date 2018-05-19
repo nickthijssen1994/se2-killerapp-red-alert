@@ -1,7 +1,6 @@
-﻿using KillerAppASP.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace KillerAppASP.Datalayer
+namespace KillerAppASP.Models
 {
     public class UserRepository
     {
@@ -14,11 +13,13 @@ namespace KillerAppASP.Datalayer
 
         public int RegisterUser(User user)
         {
+            user.Password = PasswordEncryptor.EncryptPassword(user.Password);
             return context.RegisterUser(user);
         }
 
         public int LoginUser(User user)
         {
+            user.Password = PasswordEncryptor.EncryptPassword(user.Password);
             return context.LoginUser(user);
         }
 
@@ -29,6 +30,8 @@ namespace KillerAppASP.Datalayer
 
         public int ChangePassword(User user, string newPassword)
         {
+            user.Password = PasswordEncryptor.EncryptPassword(user.Password);
+            newPassword = PasswordEncryptor.EncryptPassword(newPassword);
             return context.ChangePassword(user, newPassword);
         }
 

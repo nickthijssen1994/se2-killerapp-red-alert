@@ -1,5 +1,4 @@
-﻿using KillerAppASP.Datalayer;
-using KillerAppASP.Models;
+﻿using KillerAppASP.Models;
 using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +10,11 @@ namespace KillerAppASP.Controllers.Game
     public class GameController : Controller
     {
         private MapRepository mapRepository;
+
         public GameController()
         {
-            mapRepository = new MapRepository(new MapMSSQLContext());
+            IMapContext context = new MapMSSQLContext();
+            mapRepository = new MapRepository(context);
         }
 
         [HttpGet]

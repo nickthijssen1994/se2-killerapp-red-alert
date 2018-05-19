@@ -1,7 +1,6 @@
-﻿using KillerAppASP.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace KillerAppASP.Datalayer
+namespace KillerAppASP.Models
 {
     public interface IUserContext
     {

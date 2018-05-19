@@ -1,4 +1,4 @@
-﻿using KillerAppASP.Datalayer;
+﻿using KillerAppASP.Models;
 using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +12,8 @@ namespace KillerAppASP.Controllers
 
         public MultiplayerController()
         {
-            userRepository = new UserRepository(new UserMSSQLContext());
+            IUserContext context = new UserMSSQLContext();
+            userRepository = new UserRepository(context);
         }
 
         [HttpGet]
