@@ -9,74 +9,26 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <h2>Player 1</h2>
-                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Player Name">
-                </div>
-                <div class="form-group">
-                    <select id="inputState" class="form-control" title="Faction">
-                        <option selected>USA</option>
-                        <option>Soviet Union</option>
-                        <option>Japan</option>
-                        <option>Nazi Germany</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select id="inputState" class="form-control">
-                        <option selected>Leader</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="color" value="#0000ff" />
-                </div>
+                @await Html.PartialAsync("_PlayerOptions")
                 <button type="button" class="btn btn-danger btn-group-justified" data-toggle="button">Ready?</button>
             </div>
             <div class="form-group col-md-6">
                 <h2>Player 2</h2>
-                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Player Name" disabled>
-                </div>
-                <div class="form-group">
-                    <select id="inputState" class="form-control" title="Faction" disabled>
-                        <option>USA</option>
-                        <option selected>Soviet Union</option>
-                        <option>Japan</option>
-                        <option>Nazi Germany</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select id="inputState" class="form-control" disabled>
-                        <option selected>Leader</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="color" value="#ff0000" disabled />
-                </div>
+                @await Html.PartialAsync("_PlayerOptions")
                 <button type="button" class="btn btn-danger btn-group-justified" data-toggle="button" disabled>Ready?</button>
             </div>
         </div>
         <div class="row">
-            <div class="form-group">
-                <div class="col-md-2 col-md-offset-2">
-                    <label>Resources:</label>
-                </div>
-                <div class="col-md-6">
-                    <input class="col-md-10 slider" type="range" min="5000" max="50000" value="10000">
-                </div>
-            </div>
+            @await Html.PartialAsync("_StartGameOptions")
         </div>
         <br />
         <div class="row">
-            <div class="form-group col-md-8 col-md-offset-2">
-                <textarea class="form-control" rows="5" placeholder="Chat..."></textarea>
-                <br />
-                <button type="button" class="btn btn-default btn-group-justified">Send Message</button>
-            </div>
+            @await Html.PartialAsync("_ChatWindow")
         </div>
     </div>
     <div class="col-md-3">
         <h2>Map List</h2>
         @await Html.PartialAsync("_MapList")
-
     </div>
     <div class="col-md-3">
         <br />

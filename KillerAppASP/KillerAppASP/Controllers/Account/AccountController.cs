@@ -122,9 +122,16 @@ namespace KillerAppASP.Controllers
                             IsPersistent = model.RememberMe
                         };
                         Success = true;
-                        Message = "Registration Successfull";
-                        Url = "/MainMenu";
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                        if (model.AutoLogin == true)
+                        {
+                            Url = "/MainMenu";
+                            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                        }
+                        else
+                        {
+                            Url = "/Account";
+                            Message = "Registration Successfull";
+                        }
                         break;
                     case 1:
                         Message = "Email address already in use";
