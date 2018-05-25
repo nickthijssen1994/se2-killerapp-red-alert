@@ -1,4 +1,6 @@
-﻿using KillerAppASP.Models;
+﻿using KillerAppASP.Datalayer;
+using KillerAppASP.Interfaces;
+using KillerAppASP.Repositories;
 using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

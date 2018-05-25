@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace KillerAppASP.Models
+namespace KillerAppASP.Helperclasses
 {
     public static class ModelStateExtension
     {

@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using KillerAppASP.Interfaces;
+using KillerAppASP.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace KillerAppASP.Models
+namespace KillerAppASP.Datalayer
 {
     public class MapMSSQLContext : IMapContext
     {

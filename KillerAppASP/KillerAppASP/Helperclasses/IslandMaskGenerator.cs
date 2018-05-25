@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KillerAppASP.Models
+namespace KillerAppASP.Helperclasses
 {
     public static class IslandMaskGenerator
     {

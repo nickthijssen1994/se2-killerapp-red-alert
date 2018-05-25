@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KillerAppASP.Models.Domainclasses
+namespace KillerAppASP.Models
 {
     public class Game
     {
@@ -9,6 +9,5 @@ namespace KillerAppASP.Models.Domainclasses
         public Map Map { get; set; }
         public int StartingResources { get; set; }
         public DateTime CreationDate { get; set; }
-
     }
 }

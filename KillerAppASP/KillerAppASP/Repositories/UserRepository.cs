@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using KillerAppASP.Helperclasses;
+using KillerAppASP.Interfaces;
+using KillerAppASP.Models;
+using System.Collections.Generic;
 
-namespace KillerAppASP.Models
+namespace KillerAppASP.Repositories
 {
     public class UserRepository
     {

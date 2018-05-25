@@ -1,6 +1,7 @@
-﻿using System;
+﻿using KillerAppASP.Models;
+using System;
 
-namespace KillerAppASP.Models
+namespace KillerAppASP.Helperclasses
 {
     public class MapGenerator
     {

@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace KillerAppASP.Models
+namespace KillerAppASP.Helperclasses
 {
     public static class PasswordEncryptor
     {

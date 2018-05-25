@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using KillerAppASP.Models;
+using System.Collections.Generic;
 
-namespace KillerAppASP.Models
+namespace KillerAppASP.Interfaces
 {
     public interface IMapContext
     {

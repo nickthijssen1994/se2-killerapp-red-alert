@@ -2,7 +2,7 @@
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace KillerAppASP.Models
+namespace KillerAppASP.Helperclasses
 {
     public static class PreviewImageGenerator
     {

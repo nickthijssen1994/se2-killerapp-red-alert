@@ -1,4 +1,8 @@
-﻿using KillerAppASP.Models;
+﻿using KillerAppASP.Datalayer;
+using KillerAppASP.Helperclasses;
+using KillerAppASP.Interfaces;
+using KillerAppASP.Models;
+using KillerAppASP.Repositories;
 using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
