@@ -6,7 +6,6 @@ using KillerAppASP.Repositories;
 using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace KillerAppASP.Controllers.Game
 {
@@ -31,18 +30,7 @@ namespace KillerAppASP.Controllers.Game
 
             if (map.MapType == 1)
             {
-                float[,] islandMask = IslandMaskGenerator.GenerateIslandMask(map.Size);
-                for (int y = 0; y < map.Size; y++)
-                {
-                    for (int x = 0; x < map.Size; x++)
-                    {
-                        FloatArray[x, y] *= Math.Max(0.0f, 1.0f - islandMask[x, y]);
-                        if (FloatArray[x, y] < 0.1f)
-                        {
-                            FloatArray[x, y] = 0.0f;
-                        }
-                    }
-                }
+                FloatArray = IslandMaskGenerator.ApplyIslandMask(map.Size, FloatArray);
             }
 
             int[,] IntegerArray = new int[map.Size, map.Size];

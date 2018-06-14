@@ -12,18 +12,7 @@ namespace KillerAppASP.Helperclasses
 
             if (MapType == 1)
             {
-                float[,] islandMask = IslandMaskGenerator.GenerateIslandMask(Size);
-                for (int y = 0; y < Size; y++)
-                {
-                    for (int x = 0; x < Size; x++)
-                    {
-                        Array[x, y] *= Math.Max(0.0f, 1.0f - islandMask[x, y]);
-                        if (Array[x, y] < 0.1f)
-                        {
-                            Array[x, y] = 0.0f;
-                        }
-                    }
-                }
+                Array = IslandMaskGenerator.ApplyIslandMask(Size, Array);
             }
 
             byte[] PreviewImage = PreviewImageGenerator.GeneratePreviewImage(Array, GroundType);

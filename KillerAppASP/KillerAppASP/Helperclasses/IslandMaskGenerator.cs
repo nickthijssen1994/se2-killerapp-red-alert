@@ -4,10 +4,9 @@ namespace KillerAppASP.Helperclasses
 {
     public static class IslandMaskGenerator
     {
-        public static float[,] GenerateIslandMask(int Size)
+        private static float[,] GenerateIslandMask(int Size)
         {
             float[,] IslandMask = new float[Size, Size];
-            float MaxValue = 0;
 
             for (int y = 0; y < Size; y++)
             {
@@ -22,14 +21,27 @@ namespace KillerAppASP.Helperclasses
                     distance *= distance;
 
                     IslandMask[x, y] = distance;
-
-                    if (distance > MaxValue)
-                    {
-                        MaxValue = distance;
-                    }
                 }
             }
             return IslandMask;
+        }
+
+        public static float[,] ApplyIslandMask(int Size, float[,] Array)
+        {
+            float[,] TempArray = Array;
+            float[,] islandMask = GenerateIslandMask(Size);
+            for (int y = 0; y < Size; y++)
+            {
+                for (int x = 0; x < Size; x++)
+                {
+                    TempArray[x, y] *= Math.Max(0.0f, 1.0f - islandMask[x, y]);
+                    if (TempArray[x, y] < 0.1f)
+                    {
+                        TempArray[x, y] = 0.0f;
+                    }
+                }
+            }
+            return TempArray;
         }
     }
 }
