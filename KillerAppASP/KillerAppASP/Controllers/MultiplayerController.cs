@@ -11,11 +11,14 @@ namespace KillerAppASP.Controllers
     public class MultiplayerController : Controller
     {
         private UserRepository userRepository;
+        private ChatRepository chatRepository;
 
         public MultiplayerController()
         {
-            IUserContext context = new UserMSSQLContext();
-            userRepository = new UserRepository(context);
+            IUserContext userContext = new UserMSSQLContext();
+            IChatContext chatContext = new ChatMSSQLContext();
+            userRepository = new UserRepository(userContext);
+            chatRepository = new ChatRepository(chatContext);
         }
 
         [HttpGet]
@@ -27,40 +30,76 @@ namespace KillerAppASP.Controllers
         [HttpGet]
         public IActionResult Lobby()
         {
-            UserListViewModel model = new UserListViewModel
+            GlobalChatViewModel globalChat = new GlobalChatViewModel
+            {
+                GlobalMessages = chatRepository.GetGlobalMessages()
+            };
+
+            UserListViewModel userModel = new UserListViewModel
             {
                 Users = userRepository.GetUsers()
             };
+
+            MultiplayerViewModel model = new MultiplayerViewModel
+            {
+                chatModel = globalChat,
+                userModel = userModel
+            };
+
             return View(model);
         }
 
         [HttpGet]
         public IActionResult SearchOnlineUsers(string SearchTerm)
         {
-            UserListViewModel model = new UserListViewModel();
+            GlobalChatViewModel globalChat = new GlobalChatViewModel
+            {
+                GlobalMessages = chatRepository.GetGlobalMessages()
+            };
+
+            UserListViewModel userModel = new UserListViewModel();
             if (SearchTerm == null || SearchTerm == "")
             {
-                model.Users = userRepository.GetUsers();
+                userModel.Users = userRepository.GetUsers();
             }
             else
             {
-                model.Users = userRepository.SearchUsers(SearchTerm);
+                userModel.Users = userRepository.SearchUsers(SearchTerm);
             }
+
+            MultiplayerViewModel model = new MultiplayerViewModel
+            {
+                chatModel = globalChat,
+                userModel = userModel
+            };
+
             return PartialView("OnlineUserList", model);
         }
 
         [HttpGet]
         public IActionResult SearchAllUsers(string SearchTerm)
         {
-            UserListViewModel model = new UserListViewModel();
+            GlobalChatViewModel globalChat = new GlobalChatViewModel
+            {
+                GlobalMessages = chatRepository.GetGlobalMessages()
+            };
+
+            UserListViewModel userModel = new UserListViewModel();
             if (SearchTerm == null || SearchTerm == "")
             {
-                model.Users = userRepository.GetUsers();
+                userModel.Users = userRepository.GetUsers();
             }
             else
             {
-                model.Users = userRepository.SearchUsers(SearchTerm);
+                userModel.Users = userRepository.SearchUsers(SearchTerm);
             }
+
+            MultiplayerViewModel model = new MultiplayerViewModel
+            {
+                chatModel = globalChat,
+                userModel = userModel
+            };
+
             return PartialView("AllUserList", model);
         }
     }

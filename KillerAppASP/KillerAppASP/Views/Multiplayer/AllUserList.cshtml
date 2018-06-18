@@ -1,10 +1,10 @@
-﻿@model UserListViewModel
+﻿@model MultiplayerViewModel
 
 <div class="list-group">
     <div class="pre-scrollable">
-        @if (Model != null && Model.Users.Count != 0)
+        @if (Model.userModel != null && Model.userModel.Users.Count != 0)
         {
-            foreach (User user in Model.Users)
+            foreach (User user in Model.userModel.Users)
             {
                 if (user.Username != User.Identity.Name)
                 {

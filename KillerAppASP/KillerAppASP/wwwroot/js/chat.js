@@ -10,9 +10,9 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .build();
 
-connection.on("ReceiveMessage", (user, message) => {
+connection.on("ReceiveMessage", (user, message, timestamp) => {
     const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    const encodedMsg = user + ": " + msg;
+    const encodedMsg = user + ": " + msg + " - " + timestamp;
     const li = document.createElement("a");
     li.className = "list-group-item";
     li.textContent = encodedMsg;

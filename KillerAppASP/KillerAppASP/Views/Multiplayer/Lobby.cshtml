@@ -1,4 +1,4 @@
-﻿@model UserListViewModel
+﻿@model MultiplayerViewModel
 
 @{
     ViewData["Title"] = "Lobby";
@@ -8,6 +8,10 @@
     <h1>Lobby</h1>
     <hr />
     <div class="row">
+        <div class="col-md-6">
+            <h2>Global Chat</h2>
+            @Html.Partial("_ChatWindow")
+        </div>
         <div class="form-group col-md-3">
             <h2>Online Users</h2>
             <div class="form-group">
@@ -28,15 +32,12 @@
             </div>
             <button type="button" class="btn btn-default btn-group-justified">Send Invite</button>
         </div>
-        <div class="col-md-3">
-            <h2>Global Chat</h2>
-            @Html.Partial("_ChatWindow")
-        </div>
-        <div class="form-group col-md-3">
-            <h2>Invites</h2>
-            <a asp-controller="Multiplayer" asp-action="Index">
-                <input type='button' class="btn btn-default" value='Start Game' />
-            </a>
-        </div>
+
+        @*<div class="form-group col-md-3">
+                <h2>Invites</h2>
+                <a asp-controller="Multiplayer" asp-action="Index">
+                    <input type='button' class="btn btn-default" value='Start Game' />
+                </a>
+            </div>*@
     </div>
 </div>

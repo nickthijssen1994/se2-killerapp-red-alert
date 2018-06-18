@@ -1,4 +1,7 @@
-﻿<div class="form-group">
+﻿@model MultiplayerViewModel
+@using KillerAppASP.Helperclasses
+
+<div class="form-group">
     <div class="form-group">
         <input type="text" class="form-control" id="messageInput" placeholder="Message..." />
         <input type="text" id="userInput" value="@User.Identity.Name" style="display: none;" />
@@ -7,7 +10,19 @@
         <button type="button" id="sendButton" value="Send Message" class="btn btn-default btn-group-justified">Send Message</button>
     </div>
     <div class="list-group pre-scrollable" id="messagesList">
-
+        @if (Model.chatModel != null)
+        {
+            if (Model.chatModel.GlobalMessages != null)
+            {
+                if (Model.chatModel.GlobalMessages.Count > 0)
+                {
+                    foreach (Message message in Model.chatModel.GlobalMessages)
+                    {
+                        <a class="list-group-item">@message.SendBy: @message.Text - @DateTimeExtensions.HowLongAgo(message.TimeStamp)</a>
+                    }
+                }
+            }
+        }
     </div>
 </div>
 
