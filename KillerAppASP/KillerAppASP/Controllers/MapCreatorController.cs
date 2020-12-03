@@ -7,7 +7,7 @@ using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 
 namespace KillerAppASP.Controllers
@@ -53,7 +53,7 @@ namespace KillerAppASP.Controllers
                     User.Identity.Name
                     );
 
-                HttpContext.Session.SetString("Map", JsonConvert.SerializeObject(mapRepository.Map));
+                HttpContext.Session.SetString("Map", JsonSerializer.Serialize(mapRepository.Map));
             }
             else
             {
@@ -70,7 +70,7 @@ namespace KillerAppASP.Controllers
             string Message = "";
 
             var map = HttpContext.Session.GetString("Map");
-            mapRepository.Map = JsonConvert.DeserializeObject<Map>(map);
+            mapRepository.Map = JsonSerializer.Deserialize<Map>(map);
 
             switch (mapRepository.SaveMap(User.Identity.Name))
             {
