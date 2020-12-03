@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-6">
             <h2>Global Chat</h2>
-            @Html.Partial("_ChatWindow")
+            @Html.PartialAsync("_ChatWindow")
         </div>
         <div class="form-group col-md-3">
             <h2>Online Users</h2>
@@ -18,7 +18,7 @@
                 <input class="form-control" id="SearchOnlineUsers" type="text" onkeyup="SearchOnlineUsers()" placeholder="Search...">
             </div>
             <div id="OnlineUserList">
-                @Html.Partial("OnlineUserList")
+                @Html.PartialAsync("OnlineUserList")
             </div>
             <button type="button" class="btn btn-default btn-group-justified">Send Invite</button>
         </div>
@@ -28,7 +28,7 @@
                 <input class="form-control" id="SearchAllUsers" type="text" onkeyup="SearchAllUsers()" placeholder="Search...">
             </div>
             <div id="AllUserList">
-                @Html.Partial("AllUserList")
+                @Html.PartialAsync("AllUserList")
             </div>
             <button type="button" class="btn btn-default btn-group-justified">Send Invite</button>
         </div>
