@@ -1,44 +1,40 @@
-﻿using KillerAppASP.Interfaces;
+﻿using System;
+using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace KillerAppASP.Datalayer
 {
     public class UserMSSQLContext : IUserContext
     {
+        
+        private MySqlConnection conn;
         private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
 
         public int RegisterUser(User user)
         {
-            try
+            using (var connection = new SqlConnection(connectionString))
             {
-                using (var connection = new SqlConnection(connectionString))
+                SqlCommand sqlCommand = new SqlCommand
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "RegisterUser"
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "RegisterUser"
 
-                    };
-                    sqlCommand.Parameters.AddWithValue("@Email", user.Email);
-                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-                    sqlCommand.Parameters.AddWithValue("@Password", user.Password);
-                    sqlCommand.Parameters.AddWithValue("@AutoLogin", user.IsOnline);
+                };
+                sqlCommand.Parameters.AddWithValue("@Email", user.Email);
+                sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+                sqlCommand.Parameters.AddWithValue("@AutoLogin", user.IsOnline);
 
-                    connection.Open();
-                    int result = (int)sqlCommand.ExecuteScalar();
-                    connection.Close();
-                    return result;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                connection.Open();
+                int result = (int)sqlCommand.ExecuteScalar();
+                connection.Close();
+                return result;
             }
         }
 
@@ -46,187 +42,155 @@ namespace KillerAppASP.Datalayer
         {
             try
             {
-                using (var connection = new SqlConnection(connectionString))
-                {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "LoginUser"
-                    };
-                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-                    sqlCommand.Parameters.AddWithValue("@Password", user.Password);
-
-                    connection.Open();
-                    int result = (int)sqlCommand.ExecuteScalar();
-                    connection.Close();
-                    return result;
-                }
+                conn = new MySqlConnection();
+                conn.ConnectionString = connectionString;
+                conn.Open();
             }
-            catch (Exception)
+            catch (MySqlException ex)
             {
-                throw;
+                Console.WriteLine(ex);
+            }
+            using (var connection = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "LoginUser"
+                };
+                sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+
+                connection.Open();
+                int result = (int)sqlCommand.ExecuteScalar();
+                connection.Close();
+                return result;
             }
         }
 
         public void LogoutUser(User user)
         {
-            try
+            using (var connection = new SqlConnection(connectionString))
             {
-                using (var connection = new SqlConnection(connectionString))
+                SqlCommand sqlCommand = new SqlCommand
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "LogoutUser"
-                    };
-                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "LogoutUser"
+                };
+                sqlCommand.Parameters.AddWithValue("@Username", user.Username);
 
-                    connection.Open();
-                    sqlCommand.ExecuteScalar();
-                    connection.Close();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                connection.Open();
+                sqlCommand.ExecuteScalar();
+                connection.Close();
             }
         }
 
         public int ChangePassword(User user, string newPassword)
         {
-            try
+            using (var connection = new SqlConnection(connectionString))
             {
-                using (var connection = new SqlConnection(connectionString))
+                SqlCommand sqlCommand = new SqlCommand
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "ChangePassword"
-                    };
-                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-                    sqlCommand.Parameters.AddWithValue("@OldPassword", user.Password);
-                    sqlCommand.Parameters.AddWithValue("@NewPassword", newPassword);
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "ChangePassword"
+                };
+                sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                sqlCommand.Parameters.AddWithValue("@OldPassword", user.Password);
+                sqlCommand.Parameters.AddWithValue("@NewPassword", newPassword);
 
-                    connection.Open();
-                    int result = (int)sqlCommand.ExecuteScalar();
-                    connection.Close();
-                    return result;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                connection.Open();
+                int result = (int)sqlCommand.ExecuteScalar();
+                connection.Close();
+                return result;
             }
         }
 
         public int DeleteUser(User user)
         {
-            try
+            using (var connection = new SqlConnection(connectionString))
             {
-                using (var connection = new SqlConnection(connectionString))
+                SqlCommand sqlCommand = new SqlCommand
                 {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "DeleteUser"
-                    };
-                    sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-                    sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "DeleteUser"
+                };
+                sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+                sqlCommand.Parameters.AddWithValue("@Password", user.Password);
 
-                    connection.Open();
-                    int result = (int)sqlCommand.ExecuteScalar();
-                    connection.Close();
-                    return result;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                connection.Open();
+                int result = (int)sqlCommand.ExecuteScalar();
+                connection.Close();
+                return result;
             }
         }
 
         public List<User> GetUsers()
         {
-            try
+            using (var connection = new SqlConnection(connectionString))
             {
-                using (var connection = new SqlConnection(connectionString))
+                List<User> users = new List<User>();
+
+                SqlCommand sqlCommand = new SqlCommand
                 {
-                    List<User> users = new List<User>();
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "GetUsers"
+                };
 
-                    SqlCommand sqlCommand = new SqlCommand
+                connection.Open();
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    while (reader.Read())
                     {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "GetUsers"
-                    };
-
-                    connection.Open();
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                    {
-                        while (reader.Read())
+                        User user = new User
                         {
-                            User user = new User
-                            {
-                                UserID = reader.GetInt32(0),
-                                Username = reader.GetString(1),
-                                IsOnline = reader.GetBoolean(2),
-                                LastOnline = reader.GetDateTime(3)
-                            };
-                            users.Add(user);
-                        }
+                            UserID = reader.GetInt32(0),
+                            Username = reader.GetString(1),
+                            IsOnline = reader.GetBoolean(2),
+                            LastOnline = reader.GetDateTime(3)
+                        };
+                        users.Add(user);
                     }
-                    connection.Close();
-                    return users;
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+                connection.Close();
+                return users;
             }
         }
 
         public List<User> SearchUsers(string searchterm)
         {
-            try
+            using (var connection = new SqlConnection(connectionString))
             {
-                using (var connection = new SqlConnection(connectionString))
+                List<User> foundUsers = new List<User>();
+
+                SqlCommand sqlCommand = new SqlCommand
                 {
-                    List<User> foundUsers = new List<User>();
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = "SearchUsers"
+                };
+                sqlCommand.Parameters.AddWithValue("@SearchTerm", searchterm);
 
-                    SqlCommand sqlCommand = new SqlCommand
+                connection.Open();
+                using (SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    while (reader.Read())
                     {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "SearchUsers"
-                    };
-                    sqlCommand.Parameters.AddWithValue("@SearchTerm", searchterm);
-
-                    connection.Open();
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                    {
-                        while (reader.Read())
+                        User foundUser = new User
                         {
-                            User foundUser = new User
-                            {
-                                UserID = reader.GetInt32(0),
-                                Username = reader.GetString(1),
-                                IsOnline = reader.GetBoolean(2),
-                                LastOnline = reader.GetDateTime(3)
-                            };
-                            foundUsers.Add(foundUser);
-                        }
+                            UserID = reader.GetInt32(0),
+                            Username = reader.GetString(1),
+                            IsOnline = reader.GetBoolean(2),
+                            LastOnline = reader.GetDateTime(3)
+                        };
+                        foundUsers.Add(foundUser);
                     }
-                    connection.Close();
-                    return foundUsers;
                 }
-            }
-            catch (Exception)
-            {
-                throw;
+                connection.Close();
+                return foundUsers;
             }
         }
     }
