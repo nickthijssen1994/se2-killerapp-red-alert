@@ -5,23 +5,21 @@ using System.IO;
 
 namespace KillerAppASP
 {
-    public class Program
-    {
-        public static IConfiguration Configuration { get; set; }
+	public class Program
+	{
+		public static IConfiguration Configuration { get; set; }
 
-        public static void Main(string[] args)
-        {
-            var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json");
+		public static void Main(string[] args)
+		{
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(Directory.GetCurrentDirectory())
+				.AddJsonFile("appsettings.json");
+			Configuration = builder.Build();
+			CreateWebHostBuilder(args).Build().Run();
+		}
 
-            Configuration = builder.Build();
-
-            CreateWebHostBuilder(args).Build().Run();
-        }
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
-    }
+		public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+			WebHost.CreateDefaultBuilder(args)
+				.UseStartup<Startup>();
+	}
 }

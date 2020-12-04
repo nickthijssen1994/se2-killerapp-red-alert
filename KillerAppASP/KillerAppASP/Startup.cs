@@ -22,12 +22,12 @@ namespace KillerAppASP
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            // services.Configure<CookiePolicyOptions>(options =>
+            // {
+            //     // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            //     options.CheckConsentNeeded = context => true;
+            //     options.MinimumSameSitePolicy = SameSiteMode.None;
+            // });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>
@@ -63,8 +63,8 @@ namespace KillerAppASP
 
             app.UseRouting();
             app.UseAuthorization();
-            app.UseAuthentication();
-            app.UseCookiePolicy();
+            // app.UseAuthentication();
+            // app.UseCookiePolicy();
             app.UseSession();
 
             app.UseEndpoints(endpoints =>

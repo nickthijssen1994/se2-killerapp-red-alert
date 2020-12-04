@@ -5,67 +5,75 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace KillerAppASP.Datalayer
 {
-    public class UserMSSQLContext : IUserContext
+    public class UserMSSQLContext : DbContext, IUserContext
     {
-        
-        private MySqlConnection conn;
+        public DbSet<User> Users { get; set; }
         private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseMySQL(connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.UserID);
+                entity.Property(e => e.Username).IsRequired();
+                entity.Property(e => e.Email).IsRequired();
+                entity.Property(e => e.Password).IsRequired();
+            });
+        }
+        
         public int RegisterUser(User user)
         {
-            using (var connection = new SqlConnection(connectionString))
-            {
-                SqlCommand sqlCommand = new SqlCommand
-                {
-                    Connection = connection,
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "RegisterUser"
-
-                };
-                sqlCommand.Parameters.AddWithValue("@Email", user.Email);
-                sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-                sqlCommand.Parameters.AddWithValue("@Password", user.Password);
-                sqlCommand.Parameters.AddWithValue("@AutoLogin", user.IsOnline);
-
-                connection.Open();
-                int result = (int)sqlCommand.ExecuteScalar();
-                connection.Close();
-                return result;
-            }
+            user.LastOnline = DateTime.Now;
+            // Creates the database if not exists
+            Database.EnsureCreated();
+            Users.Add(user);
+            // Saves changes
+            SaveChanges();
+            return user.UserID;
         }
 
         public int LoginUser(User user)
         {
-            try
+            Database.EnsureCreated();
+            foreach (User registeredUser in Users)
             {
-                conn = new MySqlConnection();
-                conn.ConnectionString = connectionString;
-                conn.Open();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex);
-            }
-            using (var connection = new SqlConnection(connectionString))
-            {
-                SqlCommand sqlCommand = new SqlCommand
+                if (user.Username.Equals(registeredUser.Username) && user.Password.Equals(registeredUser.Username))
                 {
-                    Connection = connection,
-                    CommandType = CommandType.StoredProcedure,
-                    CommandText = "LoginUser"
-                };
-                sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-                sqlCommand.Parameters.AddWithValue("@Password", user.Password);
-
-                connection.Open();
-                int result = (int)sqlCommand.ExecuteScalar();
-                connection.Close();
-                return result;
+                    registeredUser.IsOnline = true;
+                    Users.Update(registeredUser);
+                    SaveChanges();
+                    return 0;
+                }
             }
+
+            return 0;
+            // using (var connection = new SqlConnection(connectionString))
+            // {
+            //     SqlCommand sqlCommand = new SqlCommand
+            //     {
+            //         Connection = connection,
+            //         CommandType = CommandType.StoredProcedure,
+            //         CommandText = "LoginUser"
+            //     };
+            //     sqlCommand.Parameters.AddWithValue("@Username", user.Username);
+            //     sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+            //
+            //     connection.Open();
+            //     int result = (int)sqlCommand.ExecuteScalar();
+            //     connection.Close();
+            //     return result;
+            // }
         }
 
         public void LogoutUser(User user)

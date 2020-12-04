@@ -2,6 +2,7 @@
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
 using System.Collections.Generic;
+using KillerAppASP.Datalayer;
 
 namespace KillerAppASP.Repositories
 {
@@ -12,6 +13,12 @@ namespace KillerAppASP.Repositories
         public UserRepository(IUserContext context)
         {
             this.context = context;
+            using(var mysqlContext = new UserMSSQLContext())
+            {
+                // Creates the database if not exists
+                mysqlContext.Database.EnsureCreated();
+                mysqlContext.SaveChanges();
+            }
         }
 
         public int RegisterUser(User user)
