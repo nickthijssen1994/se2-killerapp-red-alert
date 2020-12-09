@@ -11,7 +11,7 @@ namespace KillerAppASP.Datalayer
 {
 	public class UserMSSQLContext : DbContext, IUserContext
 	{
-		private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
+		private readonly string connectionString = "server=localhost;database=dbredalert;uid=redalert;pwd=redalert";
 		public DbSet<User> Users { get; set; }
 
 		public int RegisterUser(User user)

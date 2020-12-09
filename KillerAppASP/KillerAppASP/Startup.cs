@@ -20,13 +20,7 @@ namespace KillerAppASP
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddRazorPages();
-			// services.Configure<CookiePolicyOptions>(options =>
-			// {
-			//     // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-			//     options.CheckConsentNeeded = context => true;
-			//     options.MinimumSameSitePolicy = SameSiteMode.None;
-			// });
+			services.AddControllersWithViews();
 
 			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 				.AddCookie(options =>
@@ -36,7 +30,7 @@ namespace KillerAppASP
 				});
 
 			services.AddDistributedMemoryCache();
-			services.AddSession();
+		
 			services.AddSignalR()
 				.AddJsonProtocol(options => { options.PayloadSerializerOptions.WriteIndented = false; });
 		}
@@ -59,16 +53,12 @@ namespace KillerAppASP
 
 			app.UseRouting();
 			app.UseAuthorization();
-			// app.UseAuthentication();
-			// app.UseCookiePolicy();
-			app.UseSession();
+	
 
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapControllers();
-				endpoints.MapRazorPages();
-				endpoints.MapHub<ChatHub>("/chathub");
 				endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+				endpoints.MapHub<ChatHub>("/chathub");
 			});
 		}
 	}

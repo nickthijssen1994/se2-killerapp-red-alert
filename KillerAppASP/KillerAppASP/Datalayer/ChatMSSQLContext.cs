@@ -10,7 +10,7 @@ namespace KillerAppASP.Datalayer
 {
     public class ChatMSSQLContext : IChatContext
     {
-        private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
+        private readonly string connectionString = "server=localhost;database=dbredalert;uid=redalert;pwd=redalert";
 
         public void SendGlobalMessage(Message message)
         {

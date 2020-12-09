@@ -9,7 +9,7 @@ namespace KillerAppASP.Datalayer
 {
 	public class MapMSSQLContext : IMapContext
 	{
-		private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
+		private readonly string connectionString = "server=localhost;database=dbredalert;uid=redalert;pwd=redalert";
 
 		public int SaveMap(Map map, string username)
 		{
