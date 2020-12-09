@@ -7,13 +7,13 @@
 
 <div class="row no-gutter">
     <div class="col-sm-10">
-        <br />
+        <br/>
         <div class="worldmap">
             <canvas id="worldcanvas" width="@(Model.TileSize * Model.Size)" height="@(Model.TileSize * Model.Size)"></canvas>
         </div>
     </div>
     <div class="col-sm-2">
-        <br />
+        <br/>
         <div class="control-panel panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Resources: </h3>
@@ -46,25 +46,25 @@
 <script type="text/javascript">
     var canvas = document.getElementById("worldcanvas");
     var ctx = canvas.getContext("2d");
-    @for (int y = 0; y < Model.Size; y++)
+    @for (var y = 0; y < Model.Size; y++)
     {
-        for (int x = 0; x < Model.Size; x++)
+        for (var x = 0; x < Model.Size; x++)
         {
-            int Color = Model.HeightValues[x, y];
+            var Color = Model.HeightValues[x, y];
             <text>
                 ctx.beginPath();
                 ctx.lineWidth = "2";
                 ctx.strokeStyle = "black";
-                ctx.rect(@(x* Model.TileSize), @(y* Model.TileSize), @Model.TileSize, @Model.TileSize);
+                ctx.rect(@(x * Model.TileSize), @(y * Model.TileSize), @Model.TileSize, @Model.TileSize);
                 ctx.stroke();
                 ctx.beginPath();
                 ctx.fillStyle = 'rgb(0,@Color,0)';
-                ctx.fillRect(@(x* Model.TileSize), @(y* Model.TileSize), @Model.TileSize, @Model.TileSize);
+                ctx.fillRect(@(x * Model.TileSize), @(y * Model.TileSize), @Model.TileSize, @Model.TileSize);
                 ctx.stroke();
                 ctx.beginPath();
                 ctx.font = "12px Arial";
                 ctx.fillStyle = "red";
-                ctx.fillText("@x/@y", @(x* Model.TileSize), @(y * Model.TileSize + (Model.TileSize/2)));
+                ctx.fillText("@x/@y", @(x * Model.TileSize), @(y * Model.TileSize + Model.TileSize / 2));
                 ctx.stroke()
             </text>
         }

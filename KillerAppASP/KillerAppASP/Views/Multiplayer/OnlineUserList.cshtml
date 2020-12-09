@@ -4,7 +4,7 @@
     <div class="pre-scrollable">
         @if (Model.userModel != null && Model.userModel.Users.Count != 0)
         {
-            foreach (User user in Model.userModel.Users)
+            foreach (var user in Model.userModel.Users)
             {
                 if (user.Username != User.Identity.Name && user.IsOnline == true)
                 {

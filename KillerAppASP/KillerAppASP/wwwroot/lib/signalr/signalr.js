@@ -2647,7 +2647,7 @@ var ServerSentEventsTransport = /** @class */ (function () {
                                                 if (_this.onclose) {
                                                     _this.onclose(error);
                                                 }
-                                                return;
+                                                
                                             }
                                         }
                                     };

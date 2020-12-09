@@ -10,7 +10,7 @@
     @if (Model != null && Model.Maps.Count != 0)
     {
         <div class="pre-scrollable">
-            @foreach (string map in Model.Maps)
+            @foreach (var map in Model.Maps)
             {
                 <a class="list-group-item clearfix" id="@map" onclick="GetPreview('@map')">
                     @map

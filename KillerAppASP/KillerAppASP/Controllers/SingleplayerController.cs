@@ -7,27 +7,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KillerAppASP.Controllers
 {
-    [Authorize]
-    public class SingleplayerController : Controller
-    {
-        private MapRepository mapRepository;
+	[Authorize]
+	public class SingleplayerController : Controller
+	{
+		private MapRepository mapRepository;
 
-        public SingleplayerController()
-        {
-            IMapContext context = new MapMSSQLContext();
-            mapRepository = new MapRepository(context);
-        }
+		public SingleplayerController()
+		{
+			IMapContext context = new MapMSSQLContext();
+			mapRepository = new MapRepository(context);
+		}
 
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
+		[HttpGet]
+		public IActionResult Index()
+		{
+			return View();
+		}
 
-        [HttpPost]
-        public IActionResult StartGame(StartGameViewModel model)
-        {
-            return View("Index", model);
-        }
-    }
+		[HttpPost]
+		public IActionResult StartGame(StartGameViewModel model)
+		{
+			return View("Index", model);
+		}
+	}
 }

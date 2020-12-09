@@ -4,7 +4,7 @@
 
 <div class="row menu menu-big">
     <h1>Multiplayer</h1>
-    <hr />
+    <hr/>
     <div class="col-md-6">
         <div class="row">
             <div class="form-group col-md-6">
@@ -21,7 +21,7 @@
         <div class="row">
             @await Html.PartialAsync("_StartGameOptions")
         </div>
-        <br />
+        <br/>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 @await Html.PartialAsync("_ChatWindow")
@@ -33,14 +33,13 @@
         @await Html.PartialAsync("_MapList")
     </div>
     <div class="col-md-3">
-        <br />
+        <br/>
         @await Html.PartialAsync("_MapPreview")
-        <br />
+        <br/>
         <div class="btn-group btn-group-justified" role="group">
             <a asp-controller="Game" asp-action="Index">
-                <input type='button' class="btn btn-default" value='Start Game' />
+                <input type="button" class="btn btn-default" value="Start Game"/>
             </a>
         </div>
     </div>
 </div>
-

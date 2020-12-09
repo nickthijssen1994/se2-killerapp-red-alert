@@ -4,23 +4,23 @@ using System.Collections.Generic;
 
 namespace KillerAppASP.Repositories
 {
-    public class ChatRepository
-    {
-        private IChatContext context;
+	public class ChatRepository
+	{
+		private IChatContext context;
 
-        public ChatRepository(IChatContext context)
-        {
-            this.context = context;
-        }
+		public ChatRepository(IChatContext context)
+		{
+			this.context = context;
+		}
 
-        public void SendGlobalMessage(Message message)
-        {
-            context.SendGlobalMessage(message);
-        }
+		public void SendGlobalMessage(Message message)
+		{
+			context.SendGlobalMessage(message);
+		}
 
-        public List<Message> GetGlobalMessages()
-        {
-            return context.GetGlobalMessages();
-        }
-    }
+		public List<Message> GetGlobalMessages()
+		{
+			return context.GetGlobalMessages();
+		}
+	}
 }
