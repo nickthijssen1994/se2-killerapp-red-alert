@@ -2,12 +2,10 @@
 using KillerAppASP.Interfaces;
 using KillerAppASP.Repositories;
 using KillerAppASP.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KillerAppASP.Controllers
 {
-	[Authorize]
 	public class MultiplayerController : Controller
 	{
 		private readonly ChatRepository chatRepository;

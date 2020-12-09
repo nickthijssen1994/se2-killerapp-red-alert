@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KillerAppASP.Controllers
 {
-	[Authorize]
 	public class MainMenuController : Controller
 	{
 		[HttpGet]

@@ -3,12 +3,10 @@ using KillerAppASP.Helperclasses;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Repositories;
 using KillerAppASP.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KillerAppASP.Controllers.Game
 {
-	[Authorize]
 	public class GameController : Controller
 	{
 		private readonly MapRepository mapRepository;

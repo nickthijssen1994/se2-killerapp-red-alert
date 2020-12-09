@@ -30,7 +30,8 @@ namespace KillerAppASP
 				});
 
 			services.AddDistributedMemoryCache();
-		
+			services.AddMvc().AddSessionStateTempDataProvider();
+			services.AddSession();
 			services.AddSignalR()
 				.AddJsonProtocol(options => { options.PayloadSerializerOptions.WriteIndented = false; });
 		}
@@ -53,7 +54,7 @@ namespace KillerAppASP
 
 			app.UseRouting();
 			app.UseAuthorization();
-	
+			app.UseSession();
 
 			app.UseEndpoints(endpoints =>
 			{

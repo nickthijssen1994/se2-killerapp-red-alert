@@ -154,7 +154,6 @@ namespace KillerAppASP.Controllers
 		}
 
 		[HttpPost]
-		[Authorize]
 		[ValidateAntiForgeryToken]
 		public IActionResult ChangePassword(ChangePasswordViewModel model)
 		{
@@ -189,14 +188,12 @@ namespace KillerAppASP.Controllers
 		}
 
 		[HttpGet]
-		[Authorize]
 		public IActionResult Settings()
 		{
 			return View();
 		}
 
 		[HttpGet]
-		[Authorize]
 		public async Task<IActionResult> Logout()
 		{
 			var user = new User

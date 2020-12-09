@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KillerAppASP.Controllers
 {
-	[Authorize]
 	public class MapCreatorController : Controller
 	{
 		private readonly MapRepository mapRepository;
