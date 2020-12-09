@@ -1,36 +1,18 @@
 ﻿using System;
-using KillerAppASP.Interfaces;
-using KillerAppASP.Models;
-using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using KillerAppASP.Interfaces;
+using KillerAppASP.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace KillerAppASP.Datalayer
 {
 	public class UserMSSQLContext : DbContext, IUserContext
 	{
-		public DbSet<User> Users { get; set; }
 		private readonly string connectionString = Program.Configuration.GetConnectionString("DefaultConnection");
-
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			optionsBuilder.UseMySQL(connectionString);
-		}
-
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			base.OnModelCreating(modelBuilder);
-
-			modelBuilder.Entity<User>(entity =>
-			{
-				entity.HasKey(e => e.UserID);
-				entity.Property(e => e.Username).IsRequired();
-				entity.Property(e => e.Email).IsRequired();
-				entity.Property(e => e.Password).IsRequired();
-			});
-		}
+		public DbSet<User> Users { get; set; }
 
 		public int RegisterUser(User user)
 		{
@@ -202,6 +184,24 @@ namespace KillerAppASP.Datalayer
 				connection.Close();
 				return foundUsers;
 			}
+		}
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			optionsBuilder.UseMySQL(connectionString);
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+
+			modelBuilder.Entity<User>(entity =>
+			{
+				entity.HasKey(e => e.UserID);
+				entity.Property(e => e.Username).IsRequired();
+				entity.Property(e => e.Email).IsRequired();
+				entity.Property(e => e.Password).IsRequired();
+			});
 		}
 	}
 }

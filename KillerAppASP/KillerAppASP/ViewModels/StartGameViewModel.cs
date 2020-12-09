@@ -1,5 +1,5 @@
-﻿using KillerAppASP.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using KillerAppASP.Models;
 
 namespace KillerAppASP.ViewModels
 {

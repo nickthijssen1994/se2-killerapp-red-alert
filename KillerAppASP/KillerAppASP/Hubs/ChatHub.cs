@@ -1,17 +1,17 @@
-﻿using KillerAppASP.Datalayer;
+﻿using System;
+using System.Threading.Tasks;
+using KillerAppASP.Datalayer;
 using KillerAppASP.Helperclasses;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
 using KillerAppASP.Repositories;
 using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Threading.Tasks;
 
 namespace KillerAppASP.Hubs
 {
 	public class ChatHub : Hub
 	{
-		private ChatRepository chatRepository;
+		private readonly ChatRepository chatRepository;
 
 		public ChatHub()
 		{

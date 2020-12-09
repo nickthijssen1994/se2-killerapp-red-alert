@@ -1,4 +1,8 @@
-﻿using KillerAppASP.Datalayer;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using KillerAppASP.Datalayer;
 using KillerAppASP.Helperclasses;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
@@ -8,16 +12,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace KillerAppASP.Controllers
 {
 	public class AccountController : Controller
 	{
-		private UserRepository userRepository;
+		private readonly UserRepository userRepository;
 
 		public AccountController()
 		{
@@ -124,7 +124,7 @@ namespace KillerAppASP.Controllers
 							IsPersistent = model.RememberMe
 						};
 						Success = true;
-						if (model.AutoLogin == true)
+						if (model.AutoLogin)
 						{
 							Url = "/MainMenu";
 							await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,

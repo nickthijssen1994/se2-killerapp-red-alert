@@ -1,13 +1,13 @@
-﻿using KillerAppASP.Helperclasses;
+﻿using System.Collections.Generic;
+using KillerAppASP.Helperclasses;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
-using System.Collections.Generic;
 
 namespace KillerAppASP.Repositories
 {
 	public class MapRepository
 	{
-		private IMapContext context;
+		private readonly IMapContext context;
 
 		public MapRepository(IMapContext context)
 		{

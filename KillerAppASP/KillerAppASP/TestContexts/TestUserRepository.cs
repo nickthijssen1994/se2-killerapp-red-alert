@@ -4,10 +4,10 @@ namespace KillerAppASP.TestContexts
 {
 	public class TestUserRepository
 	{
-		public List<TestUser> Users;
+		private readonly ITestUserInterface context;
 		public List<TestUser> FoundUsers;
 		public TestUser User;
-		private ITestUserInterface context;
+		public List<TestUser> Users;
 
 		public TestUserRepository(ITestUserInterface context)
 		{

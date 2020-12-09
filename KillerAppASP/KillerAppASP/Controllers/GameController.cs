@@ -1,7 +1,6 @@
 ﻿using KillerAppASP.Datalayer;
 using KillerAppASP.Helperclasses;
 using KillerAppASP.Interfaces;
-using KillerAppASP.Models;
 using KillerAppASP.Repositories;
 using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +11,7 @@ namespace KillerAppASP.Controllers.Game
 	[Authorize]
 	public class GameController : Controller
 	{
-		private MapRepository mapRepository;
+		private readonly MapRepository mapRepository;
 
 		public GameController()
 		{

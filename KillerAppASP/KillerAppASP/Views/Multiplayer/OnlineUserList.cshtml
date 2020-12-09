@@ -6,7 +6,7 @@
         {
             foreach (var user in Model.userModel.Users)
             {
-                if (user.Username != User.Identity.Name && user.IsOnline == true)
+                if (user.Username != User.Identity.Name && user.IsOnline)
                 {
                     <a id='@user.UserID' class="list-group-item">@user.Username</a>
                 }

@@ -12,7 +12,7 @@ namespace KillerAppASP.Helperclasses
 				{
 					foreach (var item in key.Value.Errors)
 					{
-						var error = item.ErrorMessage.ToString();
+						var error = item.ErrorMessage;
 						errors += "<p>" + error + "</p>";
 					}
 				}

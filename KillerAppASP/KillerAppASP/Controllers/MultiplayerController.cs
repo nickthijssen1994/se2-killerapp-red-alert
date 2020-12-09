@@ -10,8 +10,8 @@ namespace KillerAppASP.Controllers
 	[Authorize]
 	public class MultiplayerController : Controller
 	{
-		private UserRepository userRepository;
-		private ChatRepository chatRepository;
+		private readonly ChatRepository chatRepository;
+		private readonly UserRepository userRepository;
 
 		public MultiplayerController()
 		{

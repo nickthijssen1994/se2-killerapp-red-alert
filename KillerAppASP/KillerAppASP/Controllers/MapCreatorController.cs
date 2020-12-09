@@ -1,4 +1,7 @@
-﻿using KillerAppASP.Datalayer;
+﻿using System;
+using System.IO;
+using System.Text.Json;
+using KillerAppASP.Datalayer;
 using KillerAppASP.Helperclasses;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
@@ -7,15 +10,13 @@ using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System;
 
 namespace KillerAppASP.Controllers
 {
 	[Authorize]
 	public class MapCreatorController : Controller
 	{
-		private MapRepository mapRepository;
+		private readonly MapRepository mapRepository;
 
 		public MapCreatorController()
 		{
@@ -142,7 +143,7 @@ namespace KillerAppASP.Controllers
 				TempData["SelectedMap"] = mapRepository.Map.Name;
 			}
 
-			var stream = new System.IO.MemoryStream(mapRepository.Map.Image);
+			var stream = new MemoryStream(mapRepository.Map.Image);
 			return new FileStreamResult(stream, "image/png");
 		}
 	}

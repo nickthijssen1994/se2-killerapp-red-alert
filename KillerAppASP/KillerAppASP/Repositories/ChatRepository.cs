@@ -1,12 +1,12 @@
-﻿using KillerAppASP.Interfaces;
+﻿using System.Collections.Generic;
+using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
-using System.Collections.Generic;
 
 namespace KillerAppASP.Repositories
 {
 	public class ChatRepository
 	{
-		private IChatContext context;
+		private readonly IChatContext context;
 
 		public ChatRepository(IChatContext context)
 		{

@@ -1,5 +1,5 @@
-﻿using KillerAppASP.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using KillerAppASP.Models;
 
 namespace KillerAppASP.ViewModels
 {

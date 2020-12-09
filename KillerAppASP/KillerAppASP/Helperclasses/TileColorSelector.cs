@@ -4,7 +4,7 @@ namespace KillerAppASP.Helperclasses
 {
 	public static class TileColorSelector
 	{
-		private static readonly Color[] GrassColors = new Color[]
+		private static readonly Color[] GrassColors =
 		{
 			Color.DodgerBlue,
 			Color.SkyBlue,
@@ -15,7 +15,7 @@ namespace KillerAppASP.Helperclasses
 			Color.White
 		};
 
-		private static readonly Color[] SnowColors = new Color[]
+		private static readonly Color[] SnowColors =
 		{
 			Color.DodgerBlue,
 			Color.SkyBlue,
@@ -26,7 +26,7 @@ namespace KillerAppASP.Helperclasses
 			Color.DimGray
 		};
 
-		private static readonly Color[] DesertColors = new Color[]
+		private static readonly Color[] DesertColors =
 		{
 			Color.SkyBlue,
 			Color.Green,

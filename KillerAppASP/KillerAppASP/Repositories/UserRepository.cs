@@ -1,14 +1,14 @@
-﻿using KillerAppASP.Helperclasses;
+﻿using System.Collections.Generic;
+using KillerAppASP.Datalayer;
+using KillerAppASP.Helperclasses;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
-using System.Collections.Generic;
-using KillerAppASP.Datalayer;
 
 namespace KillerAppASP.Repositories
 {
 	public class UserRepository
 	{
-		private IUserContext context;
+		private readonly IUserContext context;
 
 		public UserRepository(IUserContext context)
 		{

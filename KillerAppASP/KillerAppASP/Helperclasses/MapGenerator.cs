@@ -1,5 +1,5 @@
-﻿using KillerAppASP.Models;
-using System;
+﻿using System;
+using KillerAppASP.Models;
 
 namespace KillerAppASP.Helperclasses
 {

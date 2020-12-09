@@ -1,6 +1,6 @@
-﻿using KillerAppASP.ViewModels;
+﻿using System.Diagnostics;
+using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace KillerAppASP.Controllers
 {

@@ -7,7 +7,7 @@ namespace KillerAppASP.Helperclasses
 		/*
 		 * Original from https://github.com/WardBenjamin/SimplexNoise.git
 		*/
-		private static int seed = 1;
+		private static readonly int seed = 1;
 		private static byte[] noise;
 
 		public static int Seed
