@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KillerAppASP.Datalayer;
 using KillerAppASP.Helperclasses;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
@@ -12,6 +13,12 @@ namespace KillerAppASP.Repositories
 		public MapRepository(IMapContext context)
 		{
 			this.context = context;
+			using (var mysqlContext = new MapMSSQLContext())
+			{
+				// Creates the database if not exists
+				mysqlContext.Database.EnsureCreated();
+				mysqlContext.SaveChanges();
+			}
 		}
 
 		public List<string> Maps { get; set; }

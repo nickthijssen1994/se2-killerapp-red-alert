@@ -110,7 +110,7 @@ namespace KillerAppASP.Controllers
 		public IActionResult GetUserMaps()
 		{
 			var model = new MapListViewModel();
-			mapRepository.GetUserMaps(User.Identity.Name);
+			mapRepository.GetAllMaps();
 			model.Maps = mapRepository.Maps;
 			return PartialView("_MapList", model);
 		}
@@ -119,7 +119,7 @@ namespace KillerAppASP.Controllers
 		public IActionResult GetUserMapsWithDelete()
 		{
 			var model = new MapListViewModel();
-			mapRepository.GetUserMaps(User.Identity.Name);
+			mapRepository.GetAllMaps();
 			model.Maps = mapRepository.Maps;
 			return PartialView("MapListWithDelete", model);
 		}

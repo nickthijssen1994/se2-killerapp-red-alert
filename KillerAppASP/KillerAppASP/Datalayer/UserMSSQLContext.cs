@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace KillerAppASP.Datalayer
 {

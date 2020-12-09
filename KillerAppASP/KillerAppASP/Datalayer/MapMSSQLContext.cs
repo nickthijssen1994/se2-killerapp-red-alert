@@ -3,40 +3,25 @@ using System.Data;
 using System.Data.SqlClient;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace KillerAppASP.Datalayer
 {
-	public class MapMSSQLContext : IMapContext
+	public class MapMSSQLContext : DbContext, IMapContext
 	{
 		private readonly string connectionString = "server=localhost;database=dbredalert;uid=redalert;pwd=redalert";
 
+		public DbSet<Map> Maps { get; set; }
+		
 		public int SaveMap(Map map, string username)
 		{
-			using (var connection = new SqlConnection(connectionString))
-			{
-				var sqlCommand = new SqlCommand
-				{
-					Connection = connection,
-					CommandType = CommandType.StoredProcedure,
-					CommandText = "SaveMap"
-				};
-				sqlCommand.Parameters.AddWithValue("@Name", map.Name);
-				sqlCommand.Parameters.AddWithValue("@Size", map.Size);
-				sqlCommand.Parameters.AddWithValue("@Seed", map.Seed);
-				sqlCommand.Parameters.AddWithValue("@GroundType", map.GroundType);
-				sqlCommand.Parameters.AddWithValue("@MapType", map.MapType);
-				sqlCommand.Parameters.AddWithValue("@HasLakes", map.HasLakes);
-				sqlCommand.Parameters.AddWithValue("@HasRivers", map.HasRivers);
-				sqlCommand.Parameters.AddWithValue("@CreationDate", map.CreationDate);
-				sqlCommand.Parameters.AddWithValue("@CreatedBy", map.CreatedBy);
-				sqlCommand.Parameters.AddWithValue("@Image", map.Image);
-
-				connection.Open();
-				var result = (int) sqlCommand.ExecuteScalar();
-				connection.Close();
-				return result;
-			}
+			map.CreatedBy = username;
+			// Creates the database if not exists
+			Database.EnsureCreated();
+			Maps.Add(map);
+			// Saves changes
+			SaveChanges();
+			return map.MapID;
 		}
 
 		public int DeleteMap(string mapname, string username)
@@ -61,69 +46,26 @@ namespace KillerAppASP.Datalayer
 
 		public Map GetMap(string Name, string Username)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			foreach (Map map in Maps)
 			{
-				var map = new Map();
-
-				var sqlCommand = new SqlCommand
+				if (map.Name.Equals(Name))
 				{
-					Connection = connection,
-					CommandType = CommandType.StoredProcedure,
-					CommandText = "GetMap"
-				};
-				sqlCommand.Parameters.AddWithValue("@Name", Name);
-				sqlCommand.Parameters.AddWithValue("@Username", Username);
-
-				connection.Open();
-				using (var reader = sqlCommand.ExecuteReader())
-				{
-					while (reader.Read())
-					{
-						map.MapID = reader.GetInt32(0);
-						map.Name = reader.GetString(1);
-						map.Size = reader.GetInt32(2);
-						map.Seed = reader.GetInt32(3);
-						map.GroundType = reader.GetInt32(4);
-						map.MapType = reader.GetInt32(5);
-						map.HasLakes = reader.GetBoolean(6);
-						map.HasRivers = reader.GetBoolean(7);
-						map.CreationDate = reader.GetDateTime(8);
-						map.CreatedBy = reader.GetString(9);
-						map.Image = reader["Image"] as byte[] ?? null;
-					}
+					return map;
 				}
-
-				connection.Close();
-				return map;
 			}
+
+			return null;
 		}
 
 		public List<string> GetAllMaps()
 		{
-			using (var connection = new SqlConnection(connectionString))
+			
+			List<string> mapsString = new List<string>();
+			foreach (Map map in Maps)
 			{
-				var maps = new List<string>();
-
-				var sqlCommand = new SqlCommand
-				{
-					Connection = connection,
-					CommandType = CommandType.StoredProcedure,
-					CommandText = "GetAllMaps"
-				};
-
-				connection.Open();
-				using (var reader = sqlCommand.ExecuteReader())
-				{
-					while (reader.Read())
-					{
-						var name = reader.GetString(0);
-						maps.Add(name);
-					}
-				}
-
-				connection.Close();
-				return maps;
+				mapsString.Add(map.Name);
 			}
+			return mapsString;
 		}
 
 		public List<string> GetUserMaps(string username)
@@ -153,6 +95,24 @@ namespace KillerAppASP.Datalayer
 				connection.Close();
 				return maps;
 			}
+		}
+		
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			optionsBuilder.UseMySQL(connectionString);
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+
+			modelBuilder.Entity<Map>(entity =>
+			{
+				entity.HasKey(e => e.MapID);
+				entity.Property(e => e.Name).IsRequired();
+				entity.Property(e => e.Size).IsRequired();
+				entity.Property(e => e.Seed).IsRequired();
+			});
 		}
 	}
 }
