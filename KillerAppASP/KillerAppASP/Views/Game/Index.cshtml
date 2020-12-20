@@ -47,7 +47,15 @@
 </div>
 
 <script type="text/javascript">
+function getCursorPosition(canvas, event) {
+    const rect = canvas.getBoundingClientRect()
+    const x = Math.floor(((event.clientX - rect.left) / rect.width) * @Model.Size)
+    const y = Math.floor(((event.clientY - rect.top) / rect.height) * @Model.Size)
+    alert("x: " + x + " y: " + y);
+}
+
     var canvas = document.getElementById("worldcanvas");
+    canvas.addEventListener('click', function(e) { getCursorPosition(canvas, e) }, false);
     var ctx = canvas.getContext("2d");
     @for (var y = 0; y < Model.Size; y++)
     {
