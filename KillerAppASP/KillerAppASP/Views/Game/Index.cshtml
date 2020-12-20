@@ -50,7 +50,7 @@
     {
         for (var x = 0; x < Model.Size; x++)
         {
-            var Color = Model.HeightValues[x, y];
+            var Color = Model.TileColors[x, y];
             <text>
                 ctx.beginPath();
                 ctx.lineWidth = "2";
@@ -58,7 +58,7 @@
                 ctx.rect(@(x * Model.TileSize), @(y * Model.TileSize), @Model.TileSize, @Model.TileSize);
                 ctx.stroke();
                 ctx.beginPath();
-                ctx.fillStyle = 'rgb(@Color,@Color,@Color)';
+                ctx.fillStyle = 'rgb(@Color.R,@Color.G,@Color.B)';
                 ctx.fillRect(@(x * Model.TileSize), @(y * Model.TileSize), @Model.TileSize, @Model.TileSize);
                 ctx.stroke();
                 ctx.beginPath();

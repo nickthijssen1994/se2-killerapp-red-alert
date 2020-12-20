@@ -1,4 +1,5 @@
-﻿using KillerAppASP.Datalayer;
+﻿using System.Drawing;
+using KillerAppASP.Datalayer;
 using KillerAppASP.Helperclasses;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Repositories;
@@ -35,12 +36,27 @@ namespace KillerAppASP.Controllers.Game
 					IntegerArray[x, y] = (int) (FloatArray[x, y] * 256);
 				}
 			}
+			
+			var width = map.Size;
+			var height = map.Size;
+			var ColorArray = new Color[map.Size, map.Size];
+
+			for (var y = 0; y < height; y++)
+			{
+				for (var x = 0; x < width; x++)
+				{
+					var HeightValue = IntegerArray[x, y];
+					var color = TileColorSelector.SelectTileColor(HeightValue, map.GroundType);
+					ColorArray[x, y] = color;
+				}
+			}
 
 			var model = new WorldMapViewModel
 			{
 				Size = map.Size,
 				HeightValues = IntegerArray,
-				TileSize = 50
+				TileSize = 50,
+				TileColors = ColorArray
 			};
 			return View(model);
 		}
