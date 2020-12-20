@@ -53,6 +53,7 @@ namespace KillerAppASP.Controllers.Game
 
 			var model = new WorldMapViewModel
 			{
+				MapName = map.Name,
 				Size = map.Size,
 				HeightValues = IntegerArray,
 				TileSize = 50,
