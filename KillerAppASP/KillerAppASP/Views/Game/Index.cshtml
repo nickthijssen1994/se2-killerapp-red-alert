@@ -47,12 +47,12 @@
 </div>
 
 <script type="text/javascript">
-function getCursorPosition(canvas, event) {
-    const rect = canvas.getBoundingClientRect()
-    const x = Math.floor(((event.clientX - rect.left) / rect.width) * @Model.Size)
-    const y = Math.floor(((event.clientY - rect.top) / rect.height) * @Model.Size)
-    alert("x: " + x + " y: " + y);
-}
+    function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect()
+        const x = Math.floor(((event.clientX - rect.left) / rect.width) * @Model.Size)
+        const y = Math.floor(((event.clientY - rect.top) / rect.height) * @Model.Size)
+        alert("x: " + x + " y: " + y);
+    }
 
     var canvas = document.getElementById("worldcanvas");
     canvas.addEventListener('click', function(e) { getCursorPosition(canvas, e) }, false);
@@ -72,11 +72,6 @@ function getCursorPosition(canvas, event) {
                 ctx.fillStyle = 'rgb(@Color.R,@Color.G,@Color.B)';
                 ctx.fillRect(@(x * Model.TileSize), @(y * Model.TileSize), @Model.TileSize, @Model.TileSize);
                 ctx.stroke();
-                ctx.beginPath();
-                ctx.font = "12px Arial";
-                ctx.fillStyle = "red";
-                ctx.fillText("@x/@y", @(x * Model.TileSize), @(y * Model.TileSize + Model.TileSize / 2));
-                ctx.stroke()
             </text>
         }
     }

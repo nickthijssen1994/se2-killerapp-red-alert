@@ -56,7 +56,7 @@ namespace KillerAppASP.Controllers.Game
 				MapName = map.Name,
 				Size = map.Size,
 				HeightValues = IntegerArray,
-				TileSize = 50,
+				TileSize = 40,
 				TileColors = ColorArray
 			};
 			return View(model);
