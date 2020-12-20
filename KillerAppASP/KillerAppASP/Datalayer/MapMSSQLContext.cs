@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
 using Microsoft.EntityFrameworkCore;
@@ -10,45 +8,37 @@ namespace KillerAppASP.Datalayer
 	public class MapMSSQLContext : DbContext, IMapContext
 	{
 		private readonly string connectionString = "server=localhost;database=dbredalert;uid=redalert;pwd=redalert";
-
 		public DbSet<Map> Maps { get; set; }
-		
+
 		public int SaveMap(Map map, string username)
 		{
 			map.CreatedBy = username;
-			// Creates the database if not exists
 			Database.EnsureCreated();
 			Maps.Add(map);
-			// Saves changes
 			SaveChanges();
 			return map.MapID;
 		}
 
 		public int DeleteMap(string mapname, string username)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			foreach (Map map in Maps)
 			{
-				var sqlCommand = new SqlCommand
+				if (map.Name.Equals(mapname) && map.CreatedBy.Equals(username))
 				{
-					Connection = connection,
-					CommandType = CommandType.StoredProcedure,
-					CommandText = "DeleteMap"
-				};
-				sqlCommand.Parameters.AddWithValue("@Name", mapname);
-				sqlCommand.Parameters.AddWithValue("@Username", username);
-
-				connection.Open();
-				var result = (int) sqlCommand.ExecuteScalar();
-				connection.Close();
-				return result;
+					Maps.Remove(map);
+					SaveChanges();
+					break;
+				}
 			}
+
+			return 1;
 		}
 
 		public Map GetMap(string Name, string Username)
 		{
 			foreach (Map map in Maps)
 			{
-				if (map.Name.Equals(Name))
+				if (map.Name.Equals(Name) && map.CreatedBy.Equals(Username))
 				{
 					return map;
 				}
@@ -59,44 +49,29 @@ namespace KillerAppASP.Datalayer
 
 		public List<string> GetAllMaps()
 		{
-			
 			List<string> mapsString = new List<string>();
 			foreach (Map map in Maps)
 			{
 				mapsString.Add(map.Name);
 			}
+
 			return mapsString;
 		}
 
 		public List<string> GetUserMaps(string username)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			List<string> mapsString = new List<string>();
+			foreach (Map map in Maps)
 			{
-				var maps = new List<string>();
-
-				var sqlCommand = new SqlCommand
+				if (map.CreatedBy.Equals(username))
 				{
-					Connection = connection,
-					CommandType = CommandType.StoredProcedure,
-					CommandText = "GetUserMaps"
-				};
-				sqlCommand.Parameters.AddWithValue("@Username", username);
-
-				connection.Open();
-				using (var reader = sqlCommand.ExecuteReader())
-				{
-					while (reader.Read())
-					{
-						var name = reader.GetString(0);
-						maps.Add(name);
-					}
+					mapsString.Add(map.Name);
 				}
-
-				connection.Close();
-				return maps;
 			}
+
+			return mapsString;
 		}
-		
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseMySQL(connectionString);

@@ -19,7 +19,7 @@
                 <h3 class="panel-title">Resources: </h3>
             </div>
             <div class="panel-body">
-                @Html.PartialAsync("_MapPreview")
+                @await Html.PartialAsync("_MapPreview")
                 <div class="btn-group btn-group-justified" role="group">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default">Repair</button>
@@ -31,11 +31,11 @@
                 <div class="row no-gutter">
                     <div class="col-sm-6">
                         <h3>Buildings</h3>
-                        @Html.PartialAsync("BuildingList")
+                        @await Html.PartialAsync("BuildingList")
                     </div>
                     <div class="col-sm-6">
                         <h3>Units</h3>
-                        @Html.PartialAsync("UnitList")
+                        @await Html.PartialAsync("UnitList")
                     </div>
                 </div>
             </div>
