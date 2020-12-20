@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using KillerAppASP.Interfaces;
 using KillerAppASP.Models;
 using Microsoft.EntityFrameworkCore;
@@ -37,41 +38,21 @@ namespace KillerAppASP.Datalayer
 					return 0;
 				}
 			}
-
 			return 0;
-			// using (var connection = new SqlConnection(connectionString))
-			// {
-			//     SqlCommand sqlCommand = new SqlCommand
-			//     {
-			//         Connection = connection,
-			//         CommandType = CommandType.StoredProcedure,
-			//         CommandText = "LoginUser"
-			//     };
-			//     sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-			//     sqlCommand.Parameters.AddWithValue("@Password", user.Password);
-			//
-			//     connection.Open();
-			//     int result = (int)sqlCommand.ExecuteScalar();
-			//     connection.Close();
-			//     return result;
-			// }
 		}
 
 		public void LogoutUser(User user)
 		{
-			using (var connection = new SqlConnection(connectionString))
+			Database.EnsureCreated();
+			foreach (var registeredUser in Users)
 			{
-				var sqlCommand = new SqlCommand
+				if (user.Username.Equals(registeredUser.Username) && user.Password.Equals(registeredUser.Username))
 				{
-					Connection = connection,
-					CommandType = CommandType.StoredProcedure,
-					CommandText = "LogoutUser"
-				};
-				sqlCommand.Parameters.AddWithValue("@Username", user.Username);
-
-				connection.Open();
-				sqlCommand.ExecuteScalar();
-				connection.Close();
+					registeredUser.IsOnline = false;
+					registeredUser.LastOnline = DateTime.Now;
+					Users.Update(registeredUser);
+					SaveChanges();
+				}
 			}
 		}
 
@@ -118,36 +99,7 @@ namespace KillerAppASP.Datalayer
 
 		public List<User> GetUsers()
 		{
-			using (var connection = new SqlConnection(connectionString))
-			{
-				var users = new List<User>();
-
-				var sqlCommand = new SqlCommand
-				{
-					Connection = connection,
-					CommandType = CommandType.StoredProcedure,
-					CommandText = "GetUsers"
-				};
-
-				connection.Open();
-				using (var reader = sqlCommand.ExecuteReader())
-				{
-					while (reader.Read())
-					{
-						var user = new User
-						{
-							UserID = reader.GetInt32(0),
-							Username = reader.GetString(1),
-							IsOnline = reader.GetBoolean(2),
-							LastOnline = reader.GetDateTime(3)
-						};
-						users.Add(user);
-					}
-				}
-
-				connection.Close();
-				return users;
-			}
+			return Users.ToList();
 		}
 
 		public List<User> SearchUsers(string searchterm)

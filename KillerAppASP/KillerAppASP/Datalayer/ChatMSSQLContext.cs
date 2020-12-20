@@ -5,77 +5,45 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace KillerAppASP.Datalayer
 {
-    public class ChatMSSQLContext : IChatContext
+    public class ChatMSSQLContext : DbContext, IChatContext
     {
         private readonly string connectionString = "server=localhost;database=dbredalert;uid=redalert;pwd=redalert";
+        
+        public DbSet<Message> Messages { get; set; }
 
         public void SendGlobalMessage(Message message)
         {
-            try
-            {
-                using (var connection = new SqlConnection(connectionString))
-                {
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "SendGlobalMessage"
-                    };
-                    sqlCommand.Parameters.AddWithValue("@SendBy", message.SendBy);
-                    sqlCommand.Parameters.AddWithValue("@Text", message.Text);
-                    sqlCommand.Parameters.AddWithValue("@TimeStamp", message.TimeStamp);
-                    connection.Open();
-                    sqlCommand.ExecuteScalar();
-                    connection.Close();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            Database.EnsureCreated();
+            Messages.Add(message);
+            SaveChanges();
         }
 
         public List<Message> GetGlobalMessages()
         {
-            try
-            {
-                using (var connection = new SqlConnection(connectionString))
-                {
-                    List<Message> globalMessages = new List<Message>();
+            return Messages.ToList();
+        }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseMySQL(connectionString);
+        }
 
-                    SqlCommand sqlCommand = new SqlCommand
-                    {
-                        Connection = connection,
-                        CommandType = CommandType.StoredProcedure,
-                        CommandText = "GetGlobalMessages"
-                    };
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-                    connection.Open();
-                    using (SqlDataReader reader = sqlCommand.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Message message = new Message
-                            {
-                                MessageID = reader.GetInt32(0),
-                                SendBy = reader.GetString(1),
-                                Text = reader.GetString(2),
-                                TimeStamp = reader.GetDateTime(3)
-                            };
-                            globalMessages.Add(message);
-                        }
-                    }
-                    connection.Close();
-                    return globalMessages;
-                }
-            }
-            catch (Exception)
+            modelBuilder.Entity<Message>(entity =>
             {
-                throw;
-            }
+                entity.HasKey(e => e.MessageID);
+                entity.Property(e => e.SendBy).IsRequired();
+                entity.Property(e => e.Text).IsRequired();
+                entity.Property(e => e.TimeStamp).IsRequired();
+            });
         }
     }
 }
