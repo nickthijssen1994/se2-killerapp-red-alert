@@ -10,17 +10,13 @@ using KillerAppASP.Repositories;
 using KillerAppASP.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KillerAppASP.Controllers
-{
-	public class AccountController : Controller
-	{
+namespace KillerAppASP.Controllers {
+	public class AccountController : Controller {
 		private readonly UserRepository userRepository;
 
-		public AccountController()
-		{
+		public AccountController() {
 			IUserContext context = new UserMSSQLContext();
 			userRepository = new UserRepository(context);
 		}
@@ -30,39 +26,32 @@ namespace KillerAppASP.Controllers
 		[Route("Account")]
 		[Route("Account/Login")]
 		[Route("Account/Register")]
-		public IActionResult Index()
-		{
+		public IActionResult Index() {
 			if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "MainMenu");
 			return View();
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Login(LoginViewModel model)
-		{
+		public async Task<IActionResult> Login(LoginViewModel model) {
 			var Success = false;
 			var Message = "";
 			var Url = "";
 
-			if (ModelState.IsValid)
-			{
-				var user = new User
-				{
+			if (ModelState.IsValid) {
+				var user = new User {
 					Username = model.Username,
 					Password = model.Password
 				};
-				switch (userRepository.LoginUser(user))
-				{
+				switch (userRepository.LoginUser(user)) {
 					case 0:
-						var claims = new List<Claim>
-						{
+						var claims = new List<Claim> {
 							new Claim(ClaimTypes.Name, user.Username)
 						};
 
 						var userIdentity =
 							new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-						var authProperties = new AuthenticationProperties
-						{
+						var authProperties = new AuthenticationProperties {
 							AllowRefresh = true,
 							IssuedUtc = DateTimeOffset.UtcNow,
 							IsPersistent = model.RememberMe
@@ -81,8 +70,7 @@ namespace KillerAppASP.Controllers
 						break;
 				}
 			}
-			else
-			{
+			else {
 				Message = ModelState.ErrorsToHTML();
 			}
 
@@ -91,47 +79,39 @@ namespace KillerAppASP.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Register(RegisterViewModel model)
-		{
+		public async Task<IActionResult> Register(RegisterViewModel model) {
 			var Success = false;
 			var Message = "";
 			var Url = "";
 			var Login = model.AutoLogin;
 
-			if (ModelState.IsValid)
-			{
-				var user = new User
-				{
+			if (ModelState.IsValid) {
+				var user = new User {
 					Email = model.Email,
 					Username = model.Username,
 					Password = model.Password,
 					IsOnline = model.AutoLogin
 				};
 
-				switch (userRepository.RegisterUser(user))
-				{
+				switch (userRepository.RegisterUser(user)) {
 					case 0:
-						var claims = new List<Claim>
-						{
+						var claims = new List<Claim> {
 							new Claim(ClaimTypes.Name, user.Username)
 						};
 
 						var claimsIdentity =
 							new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-						var authProperties = new AuthenticationProperties
-						{
+						var authProperties = new AuthenticationProperties {
 							AllowRefresh = true,
 							IsPersistent = model.RememberMe
 						};
 						Success = true;
-						if (model.AutoLogin)
-						{
+						if (model.AutoLogin) {
 							Url = "/MainMenu";
 							await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
 								new ClaimsPrincipal(claimsIdentity), authProperties);
 						}
-						else
-						{
+						else {
 							Url = "/Account";
 							Message = "Registration Successfull";
 						}
@@ -145,8 +125,7 @@ namespace KillerAppASP.Controllers
 						break;
 				}
 			}
-			else
-			{
+			else {
 				Message = ModelState.ErrorsToHTML();
 			}
 
@@ -155,21 +134,17 @@ namespace KillerAppASP.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult ChangePassword(ChangePasswordViewModel model)
-		{
+		public IActionResult ChangePassword(ChangePasswordViewModel model) {
 			var Success = false;
 			var Message = "";
 
-			if (ModelState.IsValid)
-			{
-				var user = new User
-				{
+			if (ModelState.IsValid) {
+				var user = new User {
 					Username = User.Identity.Name,
 					Password = model.OldPassword
 				};
 
-				switch (userRepository.ChangePassword(user, model.NewPassword))
-				{
+				switch (userRepository.ChangePassword(user, model.NewPassword)) {
 					case 0:
 						Success = true;
 						Message = "Password Changed";
@@ -179,8 +154,7 @@ namespace KillerAppASP.Controllers
 						break;
 				}
 			}
-			else
-			{
+			else {
 				Message = ModelState.ErrorsToHTML();
 			}
 
@@ -188,16 +162,13 @@ namespace KillerAppASP.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Settings()
-		{
+		public IActionResult Settings() {
 			return View();
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Logout()
-		{
-			var user = new User
-			{
+		public async Task<IActionResult> Logout() {
+			var user = new User {
 				Username = User.Identity.Name
 			};
 			userRepository.LogoutUser(user);
