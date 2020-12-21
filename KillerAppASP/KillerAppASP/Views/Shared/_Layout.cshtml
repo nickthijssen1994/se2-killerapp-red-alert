@@ -12,15 +12,16 @@
 
     <audio src="~/music/soviet_march.mp3" autoplay loop></audio>
 
-    @if (User.Identity.IsAuthenticated)
-    {
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    @if ((string)ViewData["Title"] != "Main Menu")
-                    {
-                        <a class="navbar-brand" asp-controller="MainMenu" asp-action="Index">Main Menu</a>}
-                </div>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                @if ((string)ViewData["Title"] != "Main Menu")
+                {
+                    <a class="navbar-brand" asp-controller="MainMenu" asp-action="Index">Main Menu</a>}
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
@@ -35,8 +36,13 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
-        </nav>}
+            }
+            else
+            {
+                <partial name="_LoginPartial" />
+            }
+        </div>
+    </nav>
     <div class="container-fluid body-content">
         @RenderBody()
     </div>
