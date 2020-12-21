@@ -12,45 +12,33 @@
 
     <audio src="~/music/soviet_march.mp3" autoplay loop></audio>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                @if ((string)ViewData["Title"] != "Main Menu")
-                {
-                    <a class="navbar-brand" asp-controller="MainMenu" asp-action="Index">Main Menu</a>
-                }
-                else
-                {
-                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">Home</a>
-                }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    @if ((string)ViewData["Title"] != "Main Menu")
+                    {
+                        <a class="navbar-brand" asp-controller="MainMenu" asp-action="Index">Main Menu</a>}
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a asp-controller="Account" asp-action="Settings">Settings</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <partial name="_LoginPartial" />
-                @*@if (User.Identity.IsAuthenticated)
-                {
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a asp-controller="Account" asp-action="Settings">Settings</a>
-                                </li>
-                                <li role="separator" class="divider"></li>
-                                <li>
-                                    <a asp-controller="Account" asp-action="Logout">Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                }*@
-            </div>  
-        </div>
-    </nav>
-
-    <div class="container container-fluid body-content">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </nav>}
+    <div class="container-fluid body-content">
+        @RenderBody()
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
