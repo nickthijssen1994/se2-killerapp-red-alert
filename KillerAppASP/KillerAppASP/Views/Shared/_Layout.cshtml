@@ -12,36 +12,21 @@
 
     <audio src="~/music/soviet_march.mp3" autoplay loop></audio>
 
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RedAlert</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                @if ((string)ViewData["Title"] != "Main Menu")
+                {
+                    <a class="navbar-brand" asp-controller="MainMenu" asp-action="Index">Main Menu</a>
+                }
+                else
+                {
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">Home</a>
+                }
             </div>
-        </nav>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    @if ((string)ViewData["Title"] != "Main Menu")
-                    {
-                        <a class="navbar-brand" asp-controller="MainMenu" asp-action="Index">Main Menu</a>
-                    }
-                </div>
-                @if (User.Identity.IsAuthenticated)
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_LoginPartial" />
+                @*@if (User.Identity.IsAuthenticated)
                 {
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -57,11 +42,10 @@
                             </ul>
                         </li>
                     </ul>
-                }
-            </div>
-        </nav>
-
-    </header>
+                }*@
+            </div>  
+        </div>
+    </nav>
 
     <div class="container container-fluid body-content">
         <main role="main" class="pb-3">
