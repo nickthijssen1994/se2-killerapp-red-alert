@@ -20,7 +20,7 @@
                 {
                     <a class="navbar-brand" asp-controller="MainMenu" asp-action="Index">Main Menu</a>}
             </div>
-            @if (User.Identity.IsAuthenticated)
+            @*@if (User.Identity.IsAuthenticated)
             {
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -36,11 +36,10 @@
                         </ul>
                     </li>
                 </ul>
-            }
-            @*else
-            {
-                <partial name="_LoginPartial" />
             }*@
+         
+                <partial name="_LoginPartial" />
+            
         </div>
     </nav>
     <div class="container-fluid body-content">

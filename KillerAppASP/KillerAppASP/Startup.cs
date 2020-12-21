@@ -23,25 +23,25 @@ namespace KillerAppASP
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			//services.AddDbContext<ApplicationDbContext>(options =>
-			//  options.UseMySql(
-			//	  Configuration.GetConnectionString("DefaultConnection")));
-			//services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-			//	.AddEntityFrameworkStores<ApplicationDbContext>();
-			services.AddControllersWithViews();
+            services.AddDbContext<ApplicationDbContext>(options =>
+              options.UseMySql(
+                  Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddControllersWithViews();
 			services.AddRazorPages();
 
-			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-				.AddCookie(options =>
-				{
-					options.LoginPath = "/Account";
-					options.LogoutPath = "/Account/Logout";
-				});
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //	.AddCookie(options =>
+            //	{
+            //		options.LoginPath = "/Account";
+            //		options.LogoutPath = "/Account/Logout";
+            //	});
 
-			services.AddDistributedMemoryCache();
-			services.AddMvc().AddSessionStateTempDataProvider();
-			services.AddSession();
-			services.AddSignalR()
+            services.AddDistributedMemoryCache();
+            //services.AddMvc().AddSessionStateTempDataProvider();
+            //services.AddSession();
+            services.AddSignalR()
 				.AddJsonProtocol(options => { options.PayloadSerializerOptions.WriteIndented = false; });
 		}
 
@@ -65,7 +65,7 @@ namespace KillerAppASP
 			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
-			app.UseSession();
+			//app.UseSession();
 
 			app.UseEndpoints(endpoints =>
 			{
